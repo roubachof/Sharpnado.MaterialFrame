@@ -1,0 +1,6 @@
+[submodule "Samples/Xamarin-Forms-Practices"]
+	path = Samples/Xamarin-Forms-Practices
+	url = https://github.com/roubachof/Xamarin-Forms-Practices.git
+[submodule "Samples/Sharpnado.Acrylic"]
+	path = Samples/Sharpnado.Acrylic
+	url = https://github.com/roubachof/Sharpnado.Acrylic.git
