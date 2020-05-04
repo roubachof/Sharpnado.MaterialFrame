@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Numerics;
 
-using Windows.UI.Composition;
-using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Shapes;
 
 using Sharpnado.MaterialFrame;
 using Sharpnado.MaterialFrame.UWP;
 
-using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.UWP;
 
@@ -23,7 +23,7 @@ namespace Sharpnado.MaterialFrame.UWP
     ///     Renderer to update all frames with better shadows matching material design standards.
     /// </summary>
     [Preserve]
-    public class UWPMaterialFrameRenderer : FrameRenderer
+    public class UWPMaterialFrameRenderer : ViewRenderer<MaterialFrame, Windows.UI.Xaml.Controls.Grid>
     {
         private static readonly Color DarkBlurOverlayColor = Color.FromHex("#80000000");
 
@@ -31,7 +31,12 @@ namespace Sharpnado.MaterialFrame.UWP
 
         private static readonly Color ExtraLightBlurOverlayColor = Color.FromHex("#B0FFFFFF");
 
-        private MaterialFrame MaterialFrame => Element as MaterialFrame;
+        private Rectangle _rectangle;
+
+        public UWPMaterialFrameRenderer()
+        {
+            AutoPackage = false;
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -42,17 +47,25 @@ namespace Sharpnado.MaterialFrame.UWP
             }
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<Frame> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<MaterialFrame> e)
         {
             base.OnElementChanged(e);
 
-            ((MaterialFrame)e.OldElement)?.Unsubscribe();
+            e.OldElement?.Unsubscribe();
 
             if (e.NewElement == null)
             {
                 return;
             }
 
+            if (Control == null)
+            {
+                SetNativeControl(new Grid());
+            }
+
+            PackChild();
+            UpdateBorder();
+            UpdateCornerRadius();
             UpdateMaterialTheme();
         }
 
@@ -61,8 +74,11 @@ namespace Sharpnado.MaterialFrame.UWP
             switch (e.PropertyName)
             {
                 case nameof(MaterialFrame.BorderColor):
+                    UpdateBorder();
+                    break;
+
                 case nameof(MaterialFrame.CornerRadius):
-                    base.OnElementPropertyChanged(sender, e);
+                    UpdateCornerRadius();
                     break;
 
                 case nameof(MaterialFrame.Elevation):
@@ -91,12 +107,64 @@ namespace Sharpnado.MaterialFrame.UWP
             }
         }
 
+        private void PackChild()
+        {
+            if (Element.Content == null)
+            {
+                return;
+            }
+
+            IVisualElementRenderer renderer = Element.Content.GetOrCreateRenderer();
+            FrameworkElement frameworkElement = renderer.ContainerElement;
+
+            _rectangle = new Rectangle();
+
+            Control.Children.Add(_rectangle);
+            Control.Children.Add(frameworkElement);
+        }
+
+        private void ToggleAcrylicRectangle(bool enable)
+        {
+            _rectangle.Margin = new Thickness(0, enable ? 2 : 0, 0, 0);
+            if (!enable)
+            {
+                _rectangle.Fill = Color.Transparent.ToBrush();
+            }
+        }
+
+        private void UpdateBorder()
+        {
+            if (Element.BorderColor != Color.Default)
+            {
+                Control.BorderBrush = Element.BorderColor.ToBrush();
+                Control.BorderThickness = new Thickness(1);
+            }
+            else
+            {
+                Control.BorderBrush = new Color(0, 0, 0, 0).ToBrush();
+            }
+        }
+
+        private void UpdateCornerRadius()
+        {
+            float cornerRadius = Element.CornerRadius;
+
+            if (cornerRadius == -1f)
+            {
+                cornerRadius = 5f; // default corner radius
+            }
+
+            Control.CornerRadius = new CornerRadius(cornerRadius);
+            _rectangle.RadiusX = cornerRadius;
+            _rectangle.RadiusY = cornerRadius;
+        }
+
         private void UpdateLightThemeBackgroundColor()
         {
-            switch (MaterialFrame.MaterialTheme)
+            switch (Element.MaterialTheme)
             {
                 case MaterialFrame.Theme.Acrylic:
-                    Control.Background = MaterialFrame.LightThemeBackgroundColor.ToBrush();
+                    _rectangle.Fill = Element.LightThemeBackgroundColor.ToBrush();
                     break;
 
                 case MaterialFrame.Theme.AcrylicBlur:
@@ -104,60 +172,56 @@ namespace Sharpnado.MaterialFrame.UWP
                     return;
 
                 case MaterialFrame.Theme.Light:
-                    Control.Background = MaterialFrame.LightThemeBackgroundColor.ToBrush();
+                    Control.Background = Element.LightThemeBackgroundColor.ToBrush();
                     break;
             }
         }
 
         private void UpdateAcrylicGlowColor()
         {
-            if (MaterialFrame.MaterialTheme != MaterialFrame.Theme.Acrylic)
+            if (Element.MaterialTheme != MaterialFrame.Theme.Acrylic)
             {
                 return;
             }
 
-            WarnNotImplemented(nameof(MaterialFrame.AcrylicGlowColor));
+            Control.Background = Element.AcrylicGlowColor.ToBrush();
         }
 
         private void UpdateElevation()
         {
-            if (MaterialFrame.MaterialTheme == MaterialFrame.Theme.AcrylicBlur)
+            if (!Element.IsShadowCompatible)
             {
+                // Translation = new Vector3(0, 0, 0);
+
+                if (Element.MaterialTheme == MaterialFrame.Theme.Dark)
+                {
+                    Control.Background = Element.ElevationToColor().ToBrush();
+                }
+
                 return;
             }
 
-            if (MaterialFrame.MaterialTheme == MaterialFrame.Theme.Dark)
-            {
-                Control.Shadow = null;
-                Control.Background = MaterialFrame.ElevationToColor().ToBrush();
-                return;
-            }
-
-            // TODO: composition with visual, needs a Rectangle and not a Border
-            // https://docs.microsoft.com/en-US/windows/uwp/composition/composition-shadows
-            //bool isAcrylicTheme = MaterialFrame.MaterialTheme == MaterialFrame.Theme.Acrylic;
-            //int elevation = isAcrylicTheme ? MaterialFrame.AcrylicElevation : MaterialFrame.Elevation;
+            // Can't do this since the shadow cannot cross the grid layout boundaries
+            // https://docs.microsoft.com/en-US/windows/uwp/composition/using-the-visual-layer-with-xaml
+            // https://github.com/xamarin/Xamarin.Forms/issues/7839
+            //bool isAcrylicTheme = Element.MaterialTheme == MaterialFrame.Theme.Acrylic;
+            //int elevation = isAcrylicTheme ? MaterialFrame.AcrylicElevation : Element.Elevation;
             //float opacity = isAcrylicTheme ? 0.12f : 0.24f;
 
-            //var compositor = new Compositor();
-            //var basicShadow = compositor.CreateDropShadow();
-            //basicShadow.BlurRadius = 25f;
-            //basicShadow.Opacity = opacity;
-            //basicShadow.Color = Color.Black.ToWindowsColor();
-            //basicShadow.Offset = new Vector3(0, 20, elevation);
+            // Translation = new Vector3(0, 0, elevation);
 
-            //Control.Shadow = basicShadow;
+            //var dropShadow = _compositor.CreateDropShadow();
+            //dropShadow.BlurRadius = 25f;
+            //dropShadow.Opacity = opacity;
+            //dropShadow.Color = Color.Black.ToWindowsColor();
+            //dropShadow.Offset = new Vector3(0, elevation, elevation);
 
             InternalLogger.Warn($"The {nameof(MaterialFrame.Elevation)} property is only implemented for dark mode on UWP");
         }
 
-        private void UpdateCornerRadius()
-        {
-        }
-
         private void UpdateMaterialTheme()
         {
-            switch (MaterialFrame.MaterialTheme)
+            switch (Element.MaterialTheme)
             {
                 case MaterialFrame.Theme.Acrylic:
                     SetAcrylicTheme();
@@ -175,42 +239,44 @@ namespace Sharpnado.MaterialFrame.UWP
                     SetLightTheme();
                     break;
             }
+
+            UpdateBorder();
+            UpdateCornerRadius();
+            UpdateElevation();
         }
 
         private void SetDarkTheme()
         {
-            UpdateCornerRadius();
-            UpdateElevation();
+            ToggleAcrylicRectangle(false);
         }
 
         private void SetLightTheme()
         {
+            ToggleAcrylicRectangle(false);
+
             UpdateLightThemeBackgroundColor();
-            UpdateCornerRadius();
-            UpdateElevation();
         }
 
         private void SetAcrylicTheme()
         {
+            ToggleAcrylicRectangle(true);
+
             UpdateLightThemeBackgroundColor();
             UpdateAcrylicGlowColor();
-
-            UpdateCornerRadius();
-            UpdateElevation();
         }
 
         private void SetAcrylicBlurTheme()
         {
+            ToggleAcrylicRectangle(false);
+
             UpdateBlur();
-            UpdateCornerRadius();
-            UpdateElevation();
         }
 
         private void UpdateMaterialBlurStyle()
         {
             var acrylicBrush = new AcrylicBrush { BackgroundSource = AcrylicBackgroundSource.Backdrop };
 
-            switch (MaterialFrame.MaterialBlurStyle)
+            switch (Element.MaterialBlurStyle)
             {
                 case MaterialFrame.BlurStyle.ExtraLight:
                     acrylicBrush.TintColor = ExtraLightBlurOverlayColor.ToWindowsColor();
@@ -229,12 +295,12 @@ namespace Sharpnado.MaterialFrame.UWP
 
         private void UpdateBlur()
         {
-            if (MaterialFrame.UwpBlurOverlayColor != Color.Default)
+            if (Element.UwpBlurOverlayColor != Color.Default)
             {
                 var acrylicBrush = new AcrylicBrush
                     {
                         BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                        TintColor = MaterialFrame.UwpBlurOverlayColor.ToWindowsColor(),
+                        TintColor = Element.UwpBlurOverlayColor.ToWindowsColor(),
                     };
 
                 Control.Background = acrylicBrush;

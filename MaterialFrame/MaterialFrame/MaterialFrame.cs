@@ -104,6 +104,8 @@ namespace Sharpnado.MaterialFrame
             Dark,
         }
 
+        public bool IsShadowCompatible => MaterialTheme == Theme.Acrylic || MaterialTheme == Theme.Light;
+
         public Theme MaterialTheme
         {
             get => (Theme)GetValue(MaterialThemeProperty);
