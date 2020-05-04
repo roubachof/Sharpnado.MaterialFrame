@@ -4,6 +4,7 @@ using System.Threading;
 
 [assembly:InternalsVisibleTo("Sharpnado.MaterialFrame.Android")]
 [assembly:InternalsVisibleTo("Sharpnado.MaterialFrame.iOS")]
+[assembly:InternalsVisibleTo("Sharpnado.MaterialFrame.UWP")]
 [assembly:InternalsVisibleTo("Sharpnado.Presentation.Forms")]
 
 namespace Sharpnado.MaterialFrame
@@ -67,7 +68,7 @@ namespace Sharpnado.MaterialFrame
             }
 
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString("MM-dd H:mm:ss.fff") + " | SharpnadoInternals | " + $"{Thread.CurrentThread.ManagedThreadId:000} | " + format, parameters);
+            System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString("MM-dd H:mm:ss.fff") + " | SharpnadoInternals | " + format, parameters);
 #else
             Console.WriteLine(DateTime.Now.ToString("MM-dd H:mm:ss.fff") + " | SharpnadoInternals | " + format, parameters);
 #endif
