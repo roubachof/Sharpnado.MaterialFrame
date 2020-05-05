@@ -6,6 +6,11 @@ Get it from NuGet:
 
 [![Nuget](https://img.shields.io/nuget/v/Sharpnado.MaterialFrame.svg)](https://www.nuget.org/packages/Sharpnado.MaterialFrame)
 
+Supported platform:
+* Android
+* iOS
+* UWP
+
 ![Presentation](Docs/github_banner.png)
 
 ## Initialization
@@ -70,6 +75,17 @@ You can set the `BlurStyle` property for both `Android` and `iOS`.
 
 <img src="Docs/frame_blur_dark.png" width="460" />
 
+
+#### UWP specific properties
+
+UWP is the home of the `Acrylic` effect \o/
+
+##### UwpBlurOverlayColor
+
+UWP only.
+
+Changes the overlay color over the blur (should be a transparent color, obviously).
+If not set, the different blur style styles take over.
 
 #### Android specific properties
 
@@ -266,7 +282,7 @@ You can change the `BlurStyle` dynamically, but a dynamic change from a not blur
 
 Sometimes the Android emulator can stall due to too many `AcrylicBlur` frames displaying at the same time.
 
-## Performance
+## Performance for Acrylic mode
 
 To achieve the nice white glow effect, the first idea was to use two `Xamarin.Forms` `Frame` stacked. The first one white, and the second one on top painted with the `LightThemeBackgroundColor`.
 This was quite hacky and not really stable (for example assigning `BindableProperty` inside of the object embedding those properties break the property changed events in the renderers).
