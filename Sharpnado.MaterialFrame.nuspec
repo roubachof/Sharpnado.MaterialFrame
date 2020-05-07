@@ -13,9 +13,9 @@
       <icon>images\material_frame.png</icon>
       <requireLicenseAcceptance>false</requireLicenseAcceptance>
       <repository url="https://github.com/roubachof/MaterialFrame" />
-      <summary>A modern Xamarin.Forms Frame component supporting blur, acrylic, dark mode. Implemented with RealtimeBlurView on Android (custom blurview) and UIVisualEffectView on iOS.</summary>
-      <tags>xamarin.forms android ios netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background</tags>
-      <releaseNotes>First release with blur support.</releaseNotes>
+      <summary>A modern Xamarin.Forms Frame component supporting blur, acrylic, dark mode. Implemented with RealtimeBlurView on Android (custom blurview), UIVisualEffectView on iOS and AcrylicBrush on UWP.</summary>
+      <tags>xamarin.forms android ios netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background AcrylicBrush</tags>
+      <releaseNotes>UWP support.</releaseNotes>
       <description>
 The Xamarin.Forms MaterialFrame aims at delivering out of the box modern popular theming such as:
   * Light
@@ -45,6 +45,11 @@ On Android, the blur is implemented thanks to the RealtimeBlurView from Tu Yimin
           <dependency id="Xamarin.Forms" version="3.4.0.1008975" exclude="Build,Analyzers"/>
         </group>
 
+        <group targetFramework="uap10.0.16299">
+          <dependency id="Xamarin.Forms" version="3.4.0.1008975" exclude="Build,Analyzers"/>
+          <dependency id="Microsoft.UI.Xaml" version="2.0.181018004" />
+        </group>
+
         <group targetFramework="MonoAndroid10.0">
           <dependency id="Xamarin.Forms" version="3.4.0.1008975" exclude="Build,Analyzers"/>
           <dependency id="Xamarin.AndroidX.Browser" version="1.0.0" />
@@ -64,7 +69,7 @@ On Android, the blur is implemented thanks to the RealtimeBlurView from Tu Yimin
         <file src="MaterialFrame\MaterialFrame\bin\Release\netstandard2.0\Sharpnado.MaterialFrame.dll" target="lib\netstandard2.0\Sharpnado.MaterialFrame.dll" />
         <file src="MaterialFrame\MaterialFrame\bin\Release\netstandard2.0\Sharpnado.MaterialFrame.pdb" target="lib\netstandard2.0\Sharpnado.MaterialFrame.pdb" />
 
-        <!--Xamarin.Android -->
+        <!--Xamarin.Android-->
         <file src="MaterialFrame\MaterialFrame.Android\bin\Release\monoandroid10\Sharpnado.MaterialFrame.Android.dll" target="lib\MonoAndroid10\Sharpnado.MaterialFrame.Android.dll" />
         <file src="MaterialFrame\MaterialFrame.Android\bin\Release\monoandroid10\Sharpnado.MaterialFrame.Android.pdb" target="lib\MonoAndroid10\Sharpnado.MaterialFrame.Android.pdb" />
         <file src="MaterialFrame\MaterialFrame.Android\bin\Release\monoandroid10\Sharpnado.MaterialFrame.dll" target="lib\MonoAndroid10\Sharpnado.MaterialFrame.dll" />
@@ -82,8 +87,14 @@ On Android, the blur is implemented thanks to the RealtimeBlurView from Tu Yimin
         <file src="MaterialFrame\MaterialFrame.iOS\bin\Release\Sharpnado.MaterialFrame.dll" target="lib\Xamarin.iOS10\Sharpnado.MaterialFrame.dll" />
         <file src="MaterialFrame\MaterialFrame.iOS\bin\Release\Sharpnado.MaterialFrame.pdb" target="lib\Xamarin.iOS10\Sharpnado.MaterialFrame.pdb" />
 
+        <!--Xamarin.UWP-->
+        <file src="MaterialFrame\MaterialFrame.UWP\bin\Release\Sharpnado.MaterialFrame.UWP.dll" target="lib\uap10.0.16299\Sharpnado.MaterialFrame.UWP.dll" />
+        <file src="MaterialFrame\MaterialFrame.UWP\bin\Release\Sharpnado.MaterialFrame.UWP.pdb" target="lib\uap10.0.16299\Sharpnado.MaterialFrame.UWP.pdb" />
+        <file src="MaterialFrame\MaterialFrame.UWP\bin\Release\Sharpnado.MaterialFrame.dll" target="lib\uap10.0.16299\Sharpnado.MaterialFrame.dll" />
+        <file src="MaterialFrame\MaterialFrame.UWP\bin\Release\Sharpnado.MaterialFrame.pdb" target="lib\uap10.0.16299\Sharpnado.MaterialFrame.pdb" />
 
-        <!-- Icon -->
+
+        <!--Icon-->
         <file src="Docs\material_frame.png" target="images\" />
 
         <!--License-->

@@ -5,15 +5,17 @@ echo "  <<<< WARNING >>>>> You need to launch 2 times this script to make sure X
 $netstandardProject = ".\MaterialFrame\MaterialFrame\MaterialFrame.csproj"
 $droidProject = ".\MaterialFrame\MaterialFrame.Android\MaterialFrame.Android.csproj"
 $iosProject = ".\MaterialFrame\MaterialFrame.iOS\MaterialFrame.iOS.csproj"
+$uwpProject = ".\MaterialFrame\MaterialFrame.UWP\MaterialFrame.UWP.csproj"
 
 echo "  Setting Xamarin.Forms version to $formsVersion"
 
 $findXFVersion = '(Xamarin.Forms">\s+<Version>)(.+)(</Version>)'
 $replaceString = "`$1 $formsVersion `$3"
 
-(Get-Content $netstandardProject -Raw)  -replace $findXFVersion, "$replaceString" | Out-File $netstandardProject
-(Get-Content $droidProject -Raw)  -replace $findXFVersion, "$replaceString" | Out-File $droidProject
-(Get-Content $iosProject -Raw)  -replace $findXFVersion, "$replaceString" | Out-File $iosProject
+(Get-Content $netstandardProject -Raw) -replace $findXFVersion, "$replaceString" | Out-File $netstandardProject
+(Get-Content $droidProject -Raw) -replace $findXFVersion, "$replaceString" | Out-File $droidProject
+(Get-Content $iosProject -Raw) -replace $findXFVersion, "$replaceString" | Out-File $iosProject
+(Get-Content $uwpProject -Raw) -replace $findXFVersion, "$replaceString" | Out-File $uwpProject
 
 echo "  building Sharpnado.MaterialFrame solution"
 msbuild .\MaterialFrame\MaterialFrame.sln /t:Clean,Restore,Build /p:Configuration=Release > build.txt
