@@ -118,10 +118,15 @@ The shorter the path, the better the performance. If no root element is set, the
 
 You can configure 2 different static properties on the `Android` renderer:
 
-##### AndroidMaterialFrameRenderer.BlurProcessDelayMilliseconds
+##### AndroidMaterialFrameRenderer.BlurAutoUpdateDelayMilliseconds
 
 When a page visibility changes we activate or deactivate blur updates.
 Setting a bigger delay could improve performance and rendering.
+
+##### AndroidMaterialFrameRenderer.BlurProcessingDelayMilliseconds
+
+Sometimes the computation of the background can take some times (svg images for example).
+Setting a bigger delay to be sure that the background is rendered first can fix some glitches.
 
 ##### AndroidMaterialFrameRenderer.ThrowStopExceptionOnDraw
 

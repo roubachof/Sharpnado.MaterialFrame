@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Android.OS;
 using Android.Views;
 using Android.Widget;
 
@@ -21,7 +22,8 @@ namespace Sharpnado.MaterialFrame.Droid
 
         private static readonly Color ExtraLightBlurOverlayColor = Color.FromHex("#B0FFFFFF");
 
-        private static int blurProcessDelayMilliseconds = 100;
+        private static int blurAutoUpdateDelayMilliseconds = 100;
+        private static int blurProcessingDelayMilliseconds = 10;
 
         private RealtimeBlurView _realtimeBlurView;
 
@@ -31,19 +33,39 @@ namespace Sharpnado.MaterialFrame.Droid
         /// When a page visibility changes we activate or deactivate blur updates.
         /// Setting a bigger delay could improve performance and rendering.
         /// </summary>
-        public static int BlurProcessDelayMilliseconds
+        public static int BlurAutoUpdateDelayMilliseconds
         {
-            get => blurProcessDelayMilliseconds;
+            get => blurAutoUpdateDelayMilliseconds;
             set
             {
                 if (value < 0)
                 {
                     throw new ArgumentException(
                         "The blur processing delay cannot be negative",
-                        nameof(BlurProcessDelayMilliseconds));
+                        nameof(BlurAutoUpdateDelayMilliseconds));
                 }
 
-                blurProcessDelayMilliseconds = value;
+                blurAutoUpdateDelayMilliseconds = value;
+            }
+        }
+
+        /// <summary>
+        /// Sometimes the computation of the background can take some times (svg images for example).
+        /// Setting a bigger delay to be sure that the background is rendered first can fix some glitches.
+        /// </summary>
+        public static int BlurProcessingDelayMilliseconds
+        {
+            get => blurProcessingDelayMilliseconds;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentException(
+                        "The blur processing delay cannot be negative",
+                        nameof(BlurProcessingDelayMilliseconds));
+                }
+
+                blurProcessingDelayMilliseconds = value;
             }
         }
 
@@ -141,46 +163,46 @@ namespace Sharpnado.MaterialFrame.Droid
             _realtimeBlurView?.SetRootView(_blurRootView);
         }
 
-        private void UpdateAndroidBlurOverlayColor()
+        private void UpdateAndroidBlurOverlayColor(bool invalidate = true)
         {
             if (IsAndroidBlurPropertySet)
             {
                 InternalLogger.Info(FormsId, "UpdateAndroidBlurOverlayColor()");
-                _realtimeBlurView?.SetOverlayColor(MaterialFrame.AndroidBlurOverlayColor.ToAndroid());
+                _realtimeBlurView?.SetOverlayColor(MaterialFrame.AndroidBlurOverlayColor.ToAndroid(), invalidate);
             }
         }
 
-        private void UpdateAndroidBlurRadius()
+        private void UpdateAndroidBlurRadius(bool invalidate = true)
         {
             if (IsAndroidBlurPropertySet)
             {
                 InternalLogger.Info(FormsId, "Renderer::UpdateAndroidBlurRadius()");
-                _realtimeBlurView?.SetBlurRadius(Context.ToPixels(MaterialFrame.AndroidBlurRadius));
+                _realtimeBlurView?.SetBlurRadius(Context.ToPixels(MaterialFrame.AndroidBlurRadius), invalidate);
             }
         }
 
-        private void UpdateMaterialBlurStyle()
+        private void UpdateMaterialBlurStyle(bool invalidate = true)
         {
             if (_realtimeBlurView == null || IsAndroidBlurPropertySet)
             {
                 return;
             }
 
-            InternalLogger.Info(FormsId, "Renderer::UpdateMaterialBlurStyle()");
+            InternalLogger.Info(FormsId, $"Renderer::UpdateMaterialBlurStyle({MaterialFrame.MaterialBlurStyle})");
 
-            _realtimeBlurView.SetBlurRadius(Context.ToPixels(StyledBlurRadius));
+            _realtimeBlurView.SetBlurRadius(Context.ToPixels(StyledBlurRadius), invalidate);
 
             switch (MaterialFrame.MaterialBlurStyle)
             {
                 case MaterialFrame.BlurStyle.ExtraLight:
-                    _realtimeBlurView.SetOverlayColor(ExtraLightBlurOverlayColor.ToAndroid());
+                    _realtimeBlurView.SetOverlayColor(ExtraLightBlurOverlayColor.ToAndroid(), invalidate);
                     break;
                 case MaterialFrame.BlurStyle.Dark:
-                    _realtimeBlurView.SetOverlayColor(DarkBlurOverlayColor.ToAndroid());
+                    _realtimeBlurView.SetOverlayColor(DarkBlurOverlayColor.ToAndroid(), invalidate);
                     break;
 
                 default:
-                    _realtimeBlurView.SetOverlayColor(LightBlurOverlayColor.ToAndroid());
+                    _realtimeBlurView.SetOverlayColor(LightBlurOverlayColor.ToAndroid(), invalidate);
                     break;
             }
         }

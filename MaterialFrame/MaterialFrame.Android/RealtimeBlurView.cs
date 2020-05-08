@@ -173,22 +173,28 @@ namespace Sharpnado.MaterialFrame.Droid
             mBlurImpl.Release();
         }
 
-        public void SetBlurRadius(float radius)
+        public void SetBlurRadius(float radius, bool invalidate = true)
         {
             if (mBlurRadius != radius)
             {
                 mBlurRadius = radius;
                 mDirty = true;
-                Invalidate();
+                if (invalidate)
+                {
+                    Invalidate();
+                }
             }
         }
 
-        public void SetOverlayColor(int color)
+        public void SetOverlayColor(int color, bool invalidate = true)
         {
             if (mOverlayColor != color)
             {
                 mOverlayColor = color;
-                Invalidate();
+                if (invalidate)
+                {
+                    Invalidate();
+                }
             }
         }
 
@@ -219,12 +225,18 @@ namespace Sharpnado.MaterialFrame.Droid
         {
             if (mDecorView != null)
             {
-                mDecorView.ViewTreeObserver.AddOnPreDrawListener(preDrawListener);
-                mDifferentRoot = mDecorView.RootView != RootView;
-                if (mDifferentRoot)
-                {
-                    mDecorView.PostInvalidate();
-                }
+                using var handler = new Handler();
+                handler.PostDelayed(
+                    () =>
+                        {
+                            mDecorView.ViewTreeObserver.AddOnPreDrawListener(preDrawListener);
+                            mDifferentRoot = mDecorView.RootView != RootView;
+                            if (mDifferentRoot)
+                            {
+                                mDecorView.PostInvalidate();
+                            }
+                        },
+                    AndroidMaterialFrameRenderer.BlurProcessingDelayMilliseconds);   
             }
             else
             {
@@ -276,7 +288,7 @@ namespace Sharpnado.MaterialFrame.Droid
 
                     mDecorView.ViewTreeObserver.AddOnPreDrawListener(preDrawListener);
                 },
-                AndroidMaterialFrameRenderer.BlurProcessDelayMilliseconds);
+                AndroidMaterialFrameRenderer.BlurAutoUpdateDelayMilliseconds);
         }
 
         private void DisableAutoUpdate()
