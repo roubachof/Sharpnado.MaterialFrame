@@ -238,7 +238,10 @@ namespace Sharpnado.MaterialFrame.Droid
             _mainDrawable.SetColor(MaterialFrame.LightThemeBackgroundColor.ToAndroid());
 
             LayerDrawable layer = new LayerDrawable(new Drawable[] { _acrylicLayer, _mainDrawable });
-            layer.SetLayerInsetTop(1, (int)Context.ToPixels(2));
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
+            {
+                layer.SetLayerInsetTop(1, (int)Context.ToPixels(2));
+            }
 
             this.SetBackground(layer);
 
