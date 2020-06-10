@@ -47,7 +47,13 @@ namespace Sharpnado.MaterialFrame.iOS
 
                 if (Layer.ShadowRadius > 0)
                 {
-                    Layer.ShadowPath = UIBezierPath.FromRect(Layer.Bounds).CGPath;
+                    float radius = Element.CornerRadius;
+                    if (radius == -1.0f)
+                    {
+                        radius = 5f;
+                    }
+
+                    Layer.ShadowPath = UIBezierPath.FromRoundedRect(Layer.Bounds, radius).CGPath;
                 }
             }
         }

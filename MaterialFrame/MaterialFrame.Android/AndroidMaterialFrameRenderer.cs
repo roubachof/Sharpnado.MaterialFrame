@@ -90,6 +90,9 @@ namespace Sharpnado.MaterialFrame.Droid
         {
             if (disposing)
             {
+                MaterialFrame?.Unsubscribe();
+                Destroy();
+
                 _mainDrawable = null;
 
                 _acrylicLayer?.Dispose();
@@ -104,7 +107,7 @@ namespace Sharpnado.MaterialFrame.Droid
             base.OnElementChanged(e);
 
             ((MaterialFrame)e.OldElement)?.Unsubscribe();
-            DestroyBlur();
+            Destroy();
 
             if (e.NewElement == null)
             {
@@ -114,6 +117,18 @@ namespace Sharpnado.MaterialFrame.Droid
             _mainDrawable = (GradientDrawable)Background;
 
             UpdateMaterialTheme();
+        }
+
+        private void Destroy()
+        {
+            InternalLogger.Debug("AndroidMaterialFrameRenderer", "Destroy()");
+
+            _mainDrawable = null;
+
+            DestroyBlur();
+
+            _acrylicLayer?.Dispose();
+            _acrylicLayer = null;
         }
 
         private void UpdateCornerRadius()

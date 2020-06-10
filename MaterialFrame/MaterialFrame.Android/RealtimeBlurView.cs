@@ -49,6 +49,9 @@ namespace Sharpnado.MaterialFrame.Droid
      */
     public class RealtimeBlurView : View
     {
+        private static int RealtimeBlurViewInstanceCount;
+
+        private int _subscriptionCount;
 
         private float mDownsampleFactor; // default 4
 
@@ -79,7 +82,6 @@ namespace Sharpnado.MaterialFrame.Droid
 
         private JniWeakReference<View> _weakDecorView;
 
-
         // If the view is on different root view (usually means we are on a PopupWindow),
         // we need to manually call invalidate() in onPreDraw(), otherwise we will not be able to see the changes
         private bool mDifferentRoot;
@@ -103,12 +105,23 @@ namespace Sharpnado.MaterialFrame.Droid
             _autoUpdate = true;
 
             preDrawListener = new PreDrawListener(this);
+
+            //RealtimeBlurViewInstanceCount++;
+            //InternalLogger.Debug("RealtimeBlurView", $"Constructor => Active instances: {RealtimeBlurViewInstanceCount}");
         }
 
         public RealtimeBlurView(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
+
+        //protected override void JavaFinalize()
+        //{
+        //    base.JavaFinalize();
+
+        //    RealtimeBlurViewInstanceCount--;
+        //    InternalLogger.Debug("RealtimeBlurView", $"JavaFinalize() => Active instances: {RealtimeBlurViewInstanceCount}");
+        //}
 
         protected IBlurImpl GetBlurImpl()
         {
@@ -166,6 +179,39 @@ namespace Sharpnado.MaterialFrame.Droid
             }
         }
 
+        private void SubscribeToPreDraw(View decorView)
+        {
+            if (decorView.IsNullOrDisposed() || decorView.ViewTreeObserver.IsNullOrDisposed())
+            {
+                return;
+            }
+
+            InternalLogger.Debug($"RealtimeBlurView{GetHashCode()}", $"SubscribeToPreDraw() => {++_subscriptionCount} subscriptions");
+            decorView.ViewTreeObserver.AddOnPreDrawListener(preDrawListener);
+        }
+
+        private void UnsubscribeToPreDraw(View decorView)
+        {
+            if (decorView.IsNullOrDisposed() || decorView.ViewTreeObserver.IsNullOrDisposed())
+            {
+                return;
+            }
+
+            InternalLogger.Debug($"RealtimeBlurView{GetHashCode()}", $"UnsubscribeToPreDraw() => {--_subscriptionCount} subscriptions");
+            decorView.ViewTreeObserver.RemoveOnPreDrawListener(preDrawListener);
+        }
+
+        public void Destroy()
+        {
+            if (_weakDecorView != null && _weakDecorView.TryGetTarget(out var mDecorView))
+            {
+                UnsubscribeToPreDraw(mDecorView);
+            }
+
+            Release();
+            _weakDecorView = null;
+        }
+
         public void Release()
         {
             SetRootView(null);
@@ -203,7 +249,7 @@ namespace Sharpnado.MaterialFrame.Droid
             var mDecorView = GetRootView();
             if (mDecorView != rootView)
             {
-                mDecorView?.ViewTreeObserver.RemoveOnPreDrawListener(preDrawListener);
+                UnsubscribeToPreDraw(mDecorView);
 
                 _weakDecorView = new JniWeakReference<View>(rootView);
 
@@ -229,7 +275,7 @@ namespace Sharpnado.MaterialFrame.Droid
                 handler.PostDelayed(
                     () =>
                         {
-                            mDecorView.ViewTreeObserver.AddOnPreDrawListener(preDrawListener);
+                            SubscribeToPreDraw(mDecorView);
                             mDifferentRoot = mDecorView.RootView != RootView;
                             if (mDifferentRoot)
                             {
@@ -286,7 +332,7 @@ namespace Sharpnado.MaterialFrame.Droid
                         return;
                     }
 
-                    mDecorView.ViewTreeObserver.AddOnPreDrawListener(preDrawListener);
+                    SubscribeToPreDraw(mDecorView);
                 },
                 AndroidMaterialFrameRenderer.BlurAutoUpdateDelayMilliseconds);
         }
@@ -307,7 +353,7 @@ namespace Sharpnado.MaterialFrame.Droid
                 return;
             }
 
-            mDecorView.ViewTreeObserver.RemoveOnPreDrawListener(preDrawListener);
+            UnsubscribeToPreDraw(mDecorView);
         }
 
         private void ReleaseBitmap()
@@ -554,7 +600,7 @@ namespace Sharpnado.MaterialFrame.Droid
             var mDecorView = GetRootView();
             if (mDecorView != null)
             {
-                mDecorView.ViewTreeObserver.RemoveOnPreDrawListener(preDrawListener);
+                UnsubscribeToPreDraw(mDecorView);
             }
 
             InternalLogger.Debug(_formsId, $"OnDetachedFromWindow()");
