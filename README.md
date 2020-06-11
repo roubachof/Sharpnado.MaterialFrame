@@ -6,10 +6,11 @@ Get it from NuGet:
 
 [![Nuget](https://img.shields.io/nuget/v/Sharpnado.MaterialFrame.svg)](https://www.nuget.org/packages/Sharpnado.MaterialFrame)
 
-Supported platform:
-* Android
-* iOS
-* UWP
+| Supported platforms        |
+|----------------------------|
+| :heavy_check_mark: Android | 
+| :heavy_check_mark: iOS     |
+| :heavy_check_mark: UWP     |
 
 ![Presentation](Docs/github_banner.png)
 
@@ -18,6 +19,10 @@ Supported platform:
 On `iOS` add this line after `Xamarin.Forms.Forms.Init()` and before `LoadApplication(new App())`.
 
 `iOSMaterialFrameRenderer.Init();`
+
+## Android Compatibility issues
+
+Warning, because of `LayerDrawable` the `Acrylic` glow effect (the white glow on the top of the `MaterialFrame` is only available on API 23+ (since Marshmallow).
 
 ## Presentation
 
