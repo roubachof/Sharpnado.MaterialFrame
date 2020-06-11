@@ -14,7 +14,7 @@
     "des for Xamarin.Forms (Android, iOS, UWP).")]
 [assembly: System.Reflection.AssemblyProduct("MaterialFrame")]
 [assembly: System.Reflection.AssemblyCopyright("Copyright © Sharpnado 2020")]
-[assembly: System.Reflection.AssemblyVersion("1.1.0")]
-[assembly: System.Reflection.AssemblyFileVersion("1.1.0")]
+[assembly: System.Reflection.AssemblyVersion("1.1.1")]
+[assembly: System.Reflection.AssemblyFileVersion("1.1.1")]
 
 

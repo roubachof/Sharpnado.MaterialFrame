@@ -186,7 +186,7 @@ namespace Sharpnado.MaterialFrame.Droid
                 return;
             }
 
-            InternalLogger.Debug($"RealtimeBlurView{GetHashCode()}", $"SubscribeToPreDraw() => {++_subscriptionCount} subscriptions");
+            InternalLogger.Debug($"BlurView@{GetHashCode()}", $"SubscribeToPreDraw() => {++_subscriptionCount} subscriptions");
             decorView.ViewTreeObserver.AddOnPreDrawListener(preDrawListener);
         }
 
@@ -197,7 +197,7 @@ namespace Sharpnado.MaterialFrame.Droid
                 return;
             }
 
-            InternalLogger.Debug($"RealtimeBlurView{GetHashCode()}", $"UnsubscribeToPreDraw() => {--_subscriptionCount} subscriptions");
+            InternalLogger.Debug($"BlurView@{GetHashCode()}", $"UnsubscribeToPreDraw() => {--_subscriptionCount} subscriptions");
             decorView.ViewTreeObserver.RemoveOnPreDrawListener(preDrawListener);
         }
 
@@ -319,7 +319,7 @@ namespace Sharpnado.MaterialFrame.Droid
                 return;
             }
 
-            InternalLogger.Debug(_formsId, $"EnableAutoUpdate()");
+            InternalLogger.Debug($"BlurView@{GetHashCode()}", $"EnableAutoUpdate()");
 
             _autoUpdate = true;
             using var handler = new Handler();
@@ -344,7 +344,7 @@ namespace Sharpnado.MaterialFrame.Droid
                 return;
             }
 
-            InternalLogger.Debug(_formsId, $"DisableAutoUpdate()");
+            InternalLogger.Debug($"BlurView@{GetHashCode()}", $"DisableAutoUpdate()");
 
             _autoUpdate = false;
             var mDecorView = GetRootView();
@@ -414,7 +414,7 @@ namespace Sharpnado.MaterialFrame.Droid
 
                     mBlurringCanvas = new Canvas(mBitmapToBlur);
 
-                    InternalLogger.Debug(_formsId, $"Prepare() => Bitmap.CreateBitmap()");
+                    InternalLogger.Debug($"BlurView@{GetHashCode()}", $"Prepare() => Bitmap.CreateBitmap()");
                     mBlurredBitmap = Bitmap.CreateBitmap(scaledWidth, scaledHeight, Bitmap.Config.Argb8888);
                     if (mBlurredBitmap == null)
                     {
@@ -445,7 +445,7 @@ namespace Sharpnado.MaterialFrame.Droid
 
             if (dirty)
             {
-                InternalLogger.Debug(_formsId, $"Prepare() => dirty: mBlurImpl.Prepare()");
+                InternalLogger.Debug($"BlurView@{GetHashCode()}", $"Prepare() => dirty: mBlurImpl.Prepare()");
                 if (mBlurImpl.Prepare(Context, mBitmapToBlur, radius))
                 {
                     mDirty = false;
@@ -494,14 +494,14 @@ namespace Sharpnado.MaterialFrame.Droid
 
                 var mDecorView = blurView.GetRootView();
 
-                InternalLogger.Debug(blurView._formsId, $"OnPreDraw()");
+                InternalLogger.Debug($"BlurView@{blurView.GetHashCode()}", $"OnPreDraw()");
 
                 int[] locations = new int[2];
                 Bitmap oldBmp = blurView.mBlurredBitmap;
                 View decor = mDecorView;
                 if (!decor.IsNullOrDisposed() && blurView.IsShown && blurView.Prepare())
                 {
-                    InternalLogger.Debug($"OnPreDraw(formsId: {blurView._formsId}) => calling draw on decor");
+                    InternalLogger.Debug($"BlurView@{blurView.GetHashCode()}", $"OnPreDraw(formsId: {blurView._formsId}) => calling draw on decor");
                     bool redrawBitmap = blurView.mBlurredBitmap != oldBmp;
                     oldBmp = null;
                     decor.GetLocationOnScreen(locations);
@@ -533,11 +533,11 @@ namespace Sharpnado.MaterialFrame.Droid
                     }
                     catch (StopException)
                     {
-                        InternalLogger.Debug($"OnPreDraw(formsId: {blurView._formsId}) => in catch StopException");
+                        InternalLogger.Debug($"BlurView@{blurView.GetHashCode()}", $"OnPreDraw(formsId: {blurView._formsId}) => in catch StopException");
                     }
                     catch (Exception)
                     {
-                        InternalLogger.Debug($"OnPreDraw(formsId: {blurView._formsId}) => in catch global exception");
+                        InternalLogger.Debug($"BlurView@{blurView.GetHashCode()}", $"OnPreDraw(formsId: {blurView._formsId}) => in catch global exception");
                     }
                     finally
                     {
@@ -546,12 +546,13 @@ namespace Sharpnado.MaterialFrame.Droid
                         blurView.mBlurringCanvas.RestoreToCount(rc);
                     }
 
-                    InternalLogger.Debug($"OnPreDraw(formsId: {blurView._formsId}) => blurView.Blur()");
+                    InternalLogger.Debug($"BlurView@{blurView.GetHashCode()}", $"OnPreDraw(formsId: {blurView._formsId}) => blurView.Blur()");
                     blurView.Blur(blurView.mBitmapToBlur, blurView.mBlurredBitmap);
 
                     if (redrawBitmap || blurView.mDifferentRoot)
                     {
                         InternalLogger.Debug(
+                            $"BlurView@{blurView.GetHashCode()}",
                             $"OnPreDraw(formsId: {blurView._formsId}, redrawBitmap: {redrawBitmap}, differentRoot: {blurView.mDifferentRoot}) => blurView.Invalidate()");
                         blurView.Invalidate();
                     }
@@ -581,7 +582,7 @@ namespace Sharpnado.MaterialFrame.Droid
 
         protected override void OnAttachedToWindow()
         {
-            InternalLogger.Debug(_formsId, $"OnAttachedToWindow()");
+            InternalLogger.Debug($"BlurView@{GetHashCode()}", $"OnAttachedToWindow()");
             base.OnAttachedToWindow();
 
             var mDecorView = GetRootView();
@@ -603,7 +604,7 @@ namespace Sharpnado.MaterialFrame.Droid
                 UnsubscribeToPreDraw(mDecorView);
             }
 
-            InternalLogger.Debug(_formsId, $"OnDetachedFromWindow()");
+            InternalLogger.Debug($"BlurView@{GetHashCode()}", $"OnDetachedFromWindow()");
             Release();
             base.OnDetachedFromWindow();
         }
@@ -612,7 +613,7 @@ namespace Sharpnado.MaterialFrame.Droid
         {
             if (mIsRendering)
             {
-                InternalLogger.Debug(_formsId, $"Draw() => throwing stop exception");
+                InternalLogger.Debug($"BlurView@{GetHashCode()}", $"Draw() => throwing stop exception");
 
                 // Quit here, don't draw views above me
                 if (AndroidMaterialFrameRenderer.ThrowStopExceptionOnDraw)
@@ -625,13 +626,13 @@ namespace Sharpnado.MaterialFrame.Droid
 
             if (RENDERING_COUNT > 0)
             {
-                InternalLogger.Debug(_formsId, $"Draw() => Doesn't support blurview overlap on another blurview");
+                InternalLogger.Debug($"BlurView@{GetHashCode()}", $"Draw() => Doesn't support blurview overlap on another blurview");
 
                 // Doesn't support blurview overlap on another blurview
             }
             else
             {
-                InternalLogger.Debug(_formsId, $"Draw() => calling base draw");
+                InternalLogger.Debug($"BlurView@{GetHashCode()}", $"Draw() => calling base draw");
                 base.Draw(canvas);
             }
         }
@@ -640,7 +641,7 @@ namespace Sharpnado.MaterialFrame.Droid
         {
             base.OnDraw(canvas);
 
-            InternalLogger.Debug(_formsId, $"OnDraw(formsId: {_formsId})");
+            InternalLogger.Debug($"BlurView@{GetHashCode()}", $"OnDraw(formsId: {_formsId})");
             DrawRoundedBlurredBitmap(canvas, mBlurredBitmap, mOverlayColor);
 
             // DrawBlurredBitmap(canvas, mBlurredBitmap, mOverlayColor);
@@ -672,7 +673,7 @@ namespace Sharpnado.MaterialFrame.Droid
             if (blurredBitmap != null)
             {
                 InternalLogger.Debug(
-                    _formsId, $"DrawRoundedBlurredBitmap( mCornerRadius: {mCornerRadius}, mOverlayColor: {mOverlayColor} )");
+                    $"BlurView@{GetHashCode()}", $"DrawRoundedBlurredBitmap( mCornerRadius: {mCornerRadius}, mOverlayColor: {mOverlayColor} )");
 
                 var mRectF = new RectF { Right = Width, Bottom = Height };
 
