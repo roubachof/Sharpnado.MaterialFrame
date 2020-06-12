@@ -3,7 +3,7 @@ using AndroidX.Core.View;
 #else
 using Android.Support.V4.View;
 #endif
-
+using System;
 using System.ComponentModel;
 
 using Android.Content;
@@ -17,6 +17,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 using FrameRenderer = Xamarin.Forms.Platform.Android.AppCompat.FrameRenderer;
+using Java.IO;
 
 [assembly: ExportRenderer(typeof(MaterialFrame), typeof(AndroidMaterialFrameRenderer))]
 
@@ -241,6 +242,11 @@ namespace Sharpnado.MaterialFrame.Droid
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
             {
                 layer.SetLayerInsetTop(1, (int)Context.ToPixels(2));
+            }
+            else
+            {
+                System.Console.WriteLine(
+                    $"{DateTime.Now:MM-dd H:mm:ss.fff} | Sharpnado.MaterialFrame | WARNING | The Acrylic glow is only supported on android API 23 or greater (starting from Marshmallow)");
             }
 
             this.SetBackground(layer);
