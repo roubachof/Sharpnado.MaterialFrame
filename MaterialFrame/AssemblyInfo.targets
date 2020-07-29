@@ -3,7 +3,7 @@
 
   <PropertyGroup>
     <Copyright>Copyright © Sharpnado 2020</Copyright>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <Company>Sharpnado</Company>
     <Product>MaterialFrame</Product>
     <Description>Modern Frame supporting theming such as Blur styles, Acrylic style, Dark/Light modes for Xamarin.Forms (Android, iOS, UWP).</Description>

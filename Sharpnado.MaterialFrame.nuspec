@@ -15,7 +15,7 @@
       <repository url="https://github.com/roubachof/Sharpnado.MaterialFrame" />
       <summary>A modern Xamarin.Forms Frame component supporting blur, acrylic, dark mode. Implemented with RealtimeBlurView on Android (custom blurview), UIVisualEffectView on iOS and AcrylicBrush on UWP.</summary>
       <tags>xamarin.forms android ios uwp netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background AcrylicBrush</tags>
-      <releaseNotes>Fix crash on Android devices older than Marshmallow.</releaseNotes>
+      <releaseNotes>Fix UWP AnyCPU builds.</releaseNotes>
       <description>
 The Xamarin.Forms MaterialFrame aims at delivering out of the box modern popular theming such as:
   * Light
@@ -34,24 +34,24 @@ On Android, the blur is implemented thanks to the RealtimeBlurView from Tu Yimin
       <dependencies>
 
         <group targetFramework=".NETStandard2.0">
-          <dependency id="Xamarin.Forms" version="3.4.0.1008975" exclude="Build,Analyzers"/>
+          <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers"/>
         </group>
 
         <group targetFramework="Xamarin.iOS10">
-          <dependency id="Xamarin.Forms" version="3.4.0.1008975" exclude="Build,Analyzers"/>
+          <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers"/>
         </group>
 
         <group targetFramework="MonoAndroid10">
-          <dependency id="Xamarin.Forms" version="3.4.0.1008975" exclude="Build,Analyzers"/>
+          <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers"/>
         </group>
 
         <group targetFramework="uap10.0.16299">
-          <dependency id="Xamarin.Forms" version="3.4.0.1008975" exclude="Build,Analyzers"/>
-          <dependency id="Microsoft.UI.Xaml" version="2.0.181018004" />
+          <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers"/>
+          <dependency id="Microsoft.UI.Xaml" version="2.1.190606001" />
         </group>
 
         <group targetFramework="MonoAndroid10.0">
-          <dependency id="Xamarin.Forms" version="3.4.0.1008975" exclude="Build,Analyzers"/>
+          <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers"/>
           <dependency id="Xamarin.AndroidX.Browser" version="1.0.0" />
           <dependency id="Xamarin.AndroidX.Legacy.Support.V4" version="1.0.0" />
           <dependency id="Xamarin.AndroidX.Lifecycle.LiveData" version="2.1.0" />

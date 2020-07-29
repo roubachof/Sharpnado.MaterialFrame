@@ -1,6 +1,4 @@
-$formsVersion = "3.4.0.1008975"
-
-echo "  <<<< WARNING >>>>> You need to launch 2 times this script to make sure Xamarin.Forms version was correctly resolved..."
+$formsVersion = "3.6.0.220655"
 
 $netstandardProject = ".\MaterialFrame\MaterialFrame\MaterialFrame.csproj"
 $droidProject = ".\MaterialFrame\MaterialFrame.Android\MaterialFrame.Android.csproj"
@@ -17,11 +15,46 @@ $replaceString = "`$1 $formsVersion `$3"
 (Get-Content $iosProject -Raw) -replace $findXFVersion, "$replaceString" | Out-File $iosProject
 (Get-Content $uwpProject -Raw) -replace $findXFVersion, "$replaceString" | Out-File $uwpProject
 
+echo "  cleaning Sharpnado.MaterialFrame solution"
+$errorCode = msbuild .\MaterialFrame\MaterialFrame.sln /t:Clean /p:Configuration=Release
+if ($errorCode -gt 0)
+{
+    echo "  Error while cleaning solution"
+    return 1
+}
+
+echo "  restoring Sharpnado.MaterialFrame solution"
+$errorCode = msbuild .\MaterialFrame\MaterialFrame.sln /t:Restore /p:Configuration=Release
+if ($errorCode -gt 0)
+{
+    echo "  Error while restoring solution"
+    return 1
+}
+
 echo "  building Sharpnado.MaterialFrame solution"
-msbuild .\MaterialFrame\MaterialFrame.sln /t:Clean,Restore,Build /p:Configuration=Release > build.txt
+$errorCode = msbuild .\MaterialFrame\MaterialFrame.sln /t:Build /p:Configuration=Release
+if ($errorCode -gt 0)
+{
+    echo "  Error while building solution"
+    return 1
+}
+
+
+echo "  cleaning Android9"
+$errorCode = msbuild .\MaterialFrame\MaterialFrame.Android\MaterialFrame.Android.csproj /t:Clean /p:Configuration=ReleaseAndroid9.0
+if ($errorCode -gt 0)
+{
+    echo "  Error while cleaning Android9"
+    return 1
+}
 
 echo "  building Android9"
-msbuild .\MaterialFrame\MaterialFrame.Android\MaterialFrame.Android.csproj /t:Clean,Restore,Build /p:Configuration=ReleaseAndroid9.0 > build.Android9.txt
+$errorCode = msbuild .\MaterialFrame\MaterialFrame.Android\MaterialFrame.Android.csproj /t:Build /p:Configuration=ReleaseAndroid9.0
+if ($errorCode -gt 0)
+{
+    echo "  Error while building Android9"
+    return 1
+}
 
 $version = (Get-Item MaterialFrame\MaterialFrame\bin\Release\netstandard2.0\Sharpnado.MaterialFrame.dll).VersionInfo.FileVersion
 
