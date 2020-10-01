@@ -216,7 +216,8 @@ namespace Sharpnado.MaterialFrame.Droid
         {
             SetRootView(null);
             ReleaseBitmap();
-            mBlurImpl.Release();
+
+            mBlurImpl?.Release();
         }
 
         public void SetBlurRadius(float radius, bool invalidate = true)
@@ -358,13 +359,13 @@ namespace Sharpnado.MaterialFrame.Droid
 
         private void ReleaseBitmap()
         {
-            if (mBitmapToBlur != null)
+            if (!mBitmapToBlur.IsNullOrDisposed())
             {
                 mBitmapToBlur.Recycle();
                 mBitmapToBlur = null;
             }
 
-            if (mBlurredBitmap != null)
+            if (!mBlurredBitmap.IsNullOrDisposed())
             {
                 mBlurredBitmap.Recycle();
                 mBlurredBitmap = null;
@@ -618,7 +619,7 @@ namespace Sharpnado.MaterialFrame.Droid
                 // Quit here, don't draw views above me
                 if (AndroidMaterialFrameRenderer.ThrowStopExceptionOnDraw)
                 {
-                    throw STOP_EXCEPTION;
+                    throw new StopException();
                 }
 
                 return;
@@ -696,7 +697,5 @@ namespace Sharpnado.MaterialFrame.Droid
         private class StopException : Exception
         {
         }
-
-        private static StopException STOP_EXCEPTION = new StopException();
     }
 }

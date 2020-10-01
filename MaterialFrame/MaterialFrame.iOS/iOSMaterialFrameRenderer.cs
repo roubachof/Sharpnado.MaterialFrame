@@ -68,18 +68,6 @@ namespace Sharpnado.MaterialFrame.iOS
             }
         }
 
-        private void UpdateLayerBounds()
-        {
-            _intermediateLayer.Frame = new CGRect(0, 2, Bounds.Width, Bounds.Height - 2);
-        }
-
-        private void UpdateBlurViewBounds()
-        {
-            if (_blurView != null)
-            {
-                _blurView.Frame = new CGRect(0, 0, Bounds.Width, Bounds.Height);
-            }
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -278,7 +266,7 @@ namespace Sharpnado.MaterialFrame.iOS
 
             DisableBlur();
 
-            SetNeedsDisplay();
+            LayoutIfNeeded();
         }
 
         private void SetAcrylicBlurTheme()
@@ -291,7 +279,7 @@ namespace Sharpnado.MaterialFrame.iOS
             UpdateCornerRadius();
             UpdateElevation();
 
-            LayoutSubviews();
+            LayoutIfNeeded();
         }
 
         private void UpdateMaterialBlurStyle()
@@ -323,6 +311,19 @@ namespace Sharpnado.MaterialFrame.iOS
         private void DisableBlur()
         {
             _blurView?.RemoveFromSuperview();
+        }
+
+        private void UpdateLayerBounds()
+        {
+            _intermediateLayer.Frame = new CGRect(0, 2, Bounds.Width, Bounds.Height - 2);
+        }
+
+        private void UpdateBlurViewBounds()
+        {
+            if (_blurView != null)
+            {
+                _blurView.Frame = new CGRect(0, 0, Bounds.Width, Bounds.Height);
+            }
         }
 
         private UIBlurEffectStyle ConvertBlurStyle()

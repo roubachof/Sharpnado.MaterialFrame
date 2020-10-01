@@ -89,16 +89,8 @@ namespace Sharpnado.MaterialFrame.Droid
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                MaterialFrame?.Unsubscribe();
-                Destroy();
-
-                _mainDrawable = null;
-
-                _acrylicLayer?.Dispose();
-                _acrylicLayer = null;
-            }
+            MaterialFrame?.Unsubscribe();
+            Destroy();
 
             base.Dispose(disposing);
         }
@@ -128,8 +120,11 @@ namespace Sharpnado.MaterialFrame.Droid
 
             DestroyBlur();
 
-            _acrylicLayer?.Dispose();
-            _acrylicLayer = null;
+            if (!_acrylicLayer.IsNullOrDisposed())
+            {
+                _acrylicLayer.Dispose();
+                _acrylicLayer = null;
+            }
         }
 
         private void UpdateCornerRadius()

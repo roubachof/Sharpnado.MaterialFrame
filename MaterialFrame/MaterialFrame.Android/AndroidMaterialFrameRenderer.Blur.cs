@@ -118,12 +118,14 @@ namespace Sharpnado.MaterialFrame.Droid
 
         private void DestroyBlur()
         {
-            if (!_realtimeBlurView.IsNullOrDisposed())
+            if (_realtimeBlurView.IsNullOrDisposed())
             {
-                RemoveView(_realtimeBlurView);
+                return;
             }
 
-            _realtimeBlurView?.Destroy();
+            RemoveView(_realtimeBlurView);
+
+            _realtimeBlurView.Destroy();
             _realtimeBlurView = null;
         }
 

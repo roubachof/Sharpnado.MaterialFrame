@@ -82,25 +82,25 @@ namespace Sharpnado.MaterialFrame.Droid
 
         public void Release()
         {
-            if (_mBlurInput != null)
+            if (!_mBlurInput.IsNullOrDisposed())
             {
                 _mBlurInput.Destroy();
                 _mBlurInput = null;
             }
 
-            if (_mBlurOutput != null)
+            if (!_mBlurOutput.IsNullOrDisposed())
             {
                 _mBlurOutput.Destroy();
                 _mBlurOutput = null;
             }
 
-            if (_mBlurScript != null)
+            if (!_mBlurScript.IsNullOrDisposed())
             {
                 _mBlurScript.Destroy();
                 _mBlurScript = null;
             }
 
-            if (_mRenderScript != null)
+            if (!_mRenderScript.IsNullOrDisposed())
             {
                 _mRenderScript.Destroy();
                 _mRenderScript = null;

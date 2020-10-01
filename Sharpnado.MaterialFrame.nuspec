@@ -15,7 +15,7 @@
       <repository url="https://github.com/roubachof/Sharpnado.MaterialFrame" />
       <summary>A modern Xamarin.Forms Frame component supporting blur, acrylic, dark mode. Implemented with RealtimeBlurView on Android (custom blurview), UIVisualEffectView on iOS and AcrylicBrush on UWP.</summary>
       <tags>xamarin.forms android ios uwp netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background AcrylicBrush</tags>
-      <releaseNotes>Fix UWP AnyCPU builds.</releaseNotes>
+      <releaseNotes>Fix iOS weird background animation for AcrylicBlur and performance issues on Android when setting ThrowStopExceptionOnDraw to True.</releaseNotes>
       <description>
 The Xamarin.Forms MaterialFrame aims at delivering out of the box modern popular theming such as:
   * Light
@@ -29,6 +29,16 @@ The AcrylicBlur theme also provides three different blur styles inherited from t
   * Dark
 
 On Android, the blur is implemented thanks to the RealtimeBlurView from Tu Yimin (mmin18).
+
+Mandatory initialization on iOS:
+
+    Xamarin.Forms.Forms.Init();
+    MaterialFrame.iOS.iOSMaterialFrameRenderer.Init();
+
+Mandatory initialization on UWP:
+
+    var rendererAssemblies = new[] { typeof(UWPMaterialFrameRenderer).GetTypeInfo().Assembly };
+    Xamarin.Forms.Forms.Init(e, rendererAssemblies);
       </description>
 
       <dependencies>

@@ -20,6 +20,10 @@ On `iOS` add this line after `Xamarin.Forms.Forms.Init()` and before `LoadApplic
 
 `iOSMaterialFrameRenderer.Init();`
 
+On `UWP`, you must register the renderers assembly like this, before `Xamarin.Forms.Forms.Init()`:
+
+`var rendererAssemblies = new[] { typeof(UWPMaterialFrameRenderer).GetTypeInfo().Assembly }; `
+
 ## Android Compatibility issues
 
 Warning, because of `LayerDrawable` the `Acrylic` glow effect (the white glow on the top of the `MaterialFrame` is only available on API 23+ (since Marshmallow).
