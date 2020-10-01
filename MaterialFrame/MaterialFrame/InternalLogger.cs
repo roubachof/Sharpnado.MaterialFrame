@@ -15,6 +15,16 @@ namespace Sharpnado.MaterialFrame
 
         public static bool EnableDebug { get; set; } = false;
 
+        public static void Debug(string tag, Func<string> message)
+        {
+            if (!EnableDebug)
+            {
+                return;
+            }
+
+            Debug(tag, message());
+        }
+
         public static void Debug(string tag, string format, params object[] parameters)
         {
             if (!EnableDebug)

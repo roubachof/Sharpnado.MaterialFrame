@@ -27,6 +27,8 @@ namespace Sharpnado.MaterialFrame.iOS
     [Preserve]
     public class iOSMaterialFrameRenderer : VisualElementRenderer<MaterialFrame>
     {
+        private const string Tag = nameof(iOSMaterialFrameRenderer);
+
         private CALayer _intermediateLayer;
 
         private UIVisualEffectView _blurView;
@@ -41,20 +43,16 @@ namespace Sharpnado.MaterialFrame.iOS
         {
             base.LayoutSublayersOfLayer(layer);
 
-            if (Layer.Bounds.Width > 0)
+            if (Layer.Bounds.Width > 0 && Layer.ShadowRadius > 0)
             {
-                UpdateLayerBounds();
-
-                if (Layer.ShadowRadius > 0)
+                float radius = Element.CornerRadius;
+                if (radius == -1.0f)
                 {
-                    float radius = Element.CornerRadius;
-                    if (radius == -1.0f)
-                    {
-                        radius = 5f;
-                    }
-
-                    Layer.ShadowPath = UIBezierPath.FromRoundedRect(Layer.Bounds, radius).CGPath;
+                    radius = 5f;
                 }
+
+                Layer.ShadowPath = UIBezierPath.FromRoundedRect(Layer.Bounds, radius)
+                    .CGPath;
             }
         }
 
@@ -62,16 +60,14 @@ namespace Sharpnado.MaterialFrame.iOS
         {
             base.LayoutSubviews();
 
-            if (Bounds.Width > 0)
-            {
-                UpdateBlurViewBounds();
-            }
+            InternalLogger.Debug(Tag, () => $"LayoutSubviews()");
         }
-
 
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
+
+            InternalLogger.Debug(Tag, () => $"Dispose( disposing: {disposing} )");
 
             if (disposing)
             {
@@ -95,6 +91,8 @@ namespace Sharpnado.MaterialFrame.iOS
             {
                 return;
             }
+
+            InternalLogger.Debug(Tag, () => "OnElementChanged()");
 
             _intermediateLayer = new CALayer { BackgroundColor = Color.Transparent.ToCGColor() };
 
@@ -130,11 +128,23 @@ namespace Sharpnado.MaterialFrame.iOS
                 case nameof(MaterialFrame.MaterialBlurStyle):
                     UpdateMaterialBlurStyle();
                     break;
+
+                case nameof(MaterialFrame.Height):
+                case nameof(MaterialFrame.Width):
+                    UpdateBlurViewBounds();
+                    UpdateLayerBounds();
+                    break;
             }
+        }
+
+        private static bool SizeAreEqual(CGRect frame, MaterialFrame element)
+        {
+            return frame.Width == element.Width && frame.Height == element.Height;
         }
 
         private void UpdateLightThemeBackgroundColor()
         {
+            InternalLogger.Debug(Tag, () => $"UpdateLightThemeBackgroundColor() => LightThemeBackgroundColor: {Element.LightThemeBackgroundColor}");
             switch (Element.MaterialTheme)
             {
                 case MaterialFrame.Theme.Acrylic:
@@ -158,11 +168,14 @@ namespace Sharpnado.MaterialFrame.iOS
                 return;
             }
 
+            InternalLogger.Debug(Tag, () => "UpdateAcrylicGlowColor()");
             Layer.BackgroundColor = Element.AcrylicGlowColor.ToCGColor();
         }
 
         private void UpdateElevation()
         {
+            InternalLogger.Debug(Tag, () => "UpdateElevation()");
+
             if (Element.MaterialTheme == MaterialFrame.Theme.AcrylicBlur)
             {
                 Layer.ShadowOpacity = 0.0f;
@@ -194,6 +207,8 @@ namespace Sharpnado.MaterialFrame.iOS
 
         private void UpdateCornerRadius()
         {
+            InternalLogger.Debug(Tag, () => "UpdateCornerRadius()");
+
             float radius = Element.CornerRadius;
             if (radius == -1.0f)
             {
@@ -211,6 +226,7 @@ namespace Sharpnado.MaterialFrame.iOS
 
         private void UpdateMaterialTheme()
         {
+            InternalLogger.Debug(Tag, () => $"UpdateMaterialTheme() => MaterialTheme: {Element.MaterialTheme}");
             switch (Element.MaterialTheme)
             {
                 case MaterialFrame.Theme.Acrylic:
@@ -233,6 +249,8 @@ namespace Sharpnado.MaterialFrame.iOS
 
         private void SetDarkTheme()
         {
+            InternalLogger.Debug(Tag, () => "SetDarkTheme()");
+
             _intermediateLayer.BackgroundColor = Color.Transparent.ToCGColor();
 
             Layer.BackgroundColor = Element.ElevationToColor().ToCGColor();
@@ -245,6 +263,8 @@ namespace Sharpnado.MaterialFrame.iOS
 
         private void SetLightTheme()
         {
+            InternalLogger.Debug(Tag, () => "SetLightTheme()");
+
             _intermediateLayer.BackgroundColor = Color.Transparent.ToCGColor();
 
             Layer.BackgroundColor = Element.LightThemeBackgroundColor.ToCGColor();
@@ -257,6 +277,8 @@ namespace Sharpnado.MaterialFrame.iOS
 
         private void SetAcrylicTheme()
         {
+            InternalLogger.Debug(Tag, () => "SetAcrylicTheme()");
+
             _intermediateLayer.BackgroundColor = Element.LightThemeBackgroundColor.ToCGColor();
 
             UpdateAcrylicGlowColor();
@@ -265,12 +287,12 @@ namespace Sharpnado.MaterialFrame.iOS
             UpdateElevation();
 
             DisableBlur();
-
-            LayoutIfNeeded();
         }
 
         private void SetAcrylicBlurTheme()
         {
+            InternalLogger.Debug(Tag, () => "SetAcrylicBlurTheme()");
+
             _intermediateLayer.BackgroundColor = Color.Transparent.ToCGColor();
             Layer.BackgroundColor = Color.Transparent.ToCGColor();
 
@@ -278,12 +300,12 @@ namespace Sharpnado.MaterialFrame.iOS
 
             UpdateCornerRadius();
             UpdateElevation();
-
-            LayoutIfNeeded();
         }
 
         private void UpdateMaterialBlurStyle()
         {
+            InternalLogger.Debug(Tag, () => "UpdateMaterialBlurStyle()");
+
             if (_blurView != null)
             {
                 _blurView.Effect = UIBlurEffect.FromStyle(ConvertBlurStyle());
@@ -292,6 +314,8 @@ namespace Sharpnado.MaterialFrame.iOS
 
         private void EnableBlur()
         {
+            InternalLogger.Debug(Tag, () => "EnableBlur()");
+
             if (_blurView == null)
             {
                 _blurView = new UIVisualEffectView() { ClipsToBounds = true, BackgroundColor = UIColor.Clear };
@@ -304,25 +328,34 @@ namespace Sharpnado.MaterialFrame.iOS
                 return;
             }
 
-            _blurView.Frame = new CGRect(0, 0, Bounds.Width, Bounds.Height);
+            UpdateBlurViewBounds();
             InsertSubview(_blurView, 0);
         }
 
         private void DisableBlur()
         {
+            InternalLogger.Debug(Tag, () => "DisableBlur()");
+
             _blurView?.RemoveFromSuperview();
         }
 
         private void UpdateLayerBounds()
         {
-            _intermediateLayer.Frame = new CGRect(0, 2, Bounds.Width, Bounds.Height - 2);
+            if (Element.Width > 0 && Element.Height > 0 && !SizeAreEqual(_intermediateLayer.Frame, Element))
+            {
+                InternalLogger.Debug(Tag, () => "UpdateLayerBounds()");
+
+                _intermediateLayer.Frame = new CGRect(0, 2, Element.Width, Element.Height - 2);
+            }
         }
 
         private void UpdateBlurViewBounds()
         {
-            if (_blurView != null)
+            if (_blurView != null && Element.Width > 0 && Element.Height > 0 && !SizeAreEqual(_blurView.Frame, Element))
             {
-                _blurView.Frame = new CGRect(0, 0, Bounds.Width, Bounds.Height);
+                InternalLogger.Debug(Tag, () => "UpdateBlurViewBounds()");
+
+                _blurView.Frame = new CGRect(0, 0, Element.Width, Element.Height);
             }
         }
 
