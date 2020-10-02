@@ -346,6 +346,7 @@ namespace Sharpnado.MaterialFrame.iOS
                 InternalLogger.Debug(Tag, () => "UpdateLayerBounds()");
 
                 _intermediateLayer.Frame = new CGRect(0, 2, Element.Width, Element.Height - 2);
+                _intermediateLayer.RemoveAllAnimations();
             }
         }
 

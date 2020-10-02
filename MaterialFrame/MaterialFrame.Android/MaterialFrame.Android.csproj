@@ -120,7 +120,7 @@
     <Compile Include="JniExtensions.cs" />
     <Compile Include="JniWeakReference.cs" />
     <Compile Include="RealtimeBlurView.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -132,3 +132,5 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\AssemblyInfo.targets" />
 </Project>
+
+
