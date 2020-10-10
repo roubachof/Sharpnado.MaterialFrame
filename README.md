@@ -149,6 +149,12 @@ The background color in `Light` and `Acrylic` themes. In `Dark` theme, this valu
 In `AcrylicBlur`, the value is discarded cause `iOS` doesn't allow you to control the overlay color. 
 Note that setting the `BackgroundColor` property has no effect with the `MaterialFrame`.
 
+### AcrylicGlowColor
+
+You can change the "glow" of a `MaterialFrame` with an acrylic theme (the thin top white glow).
+Default is white.
+This property is ignored is the theme is not set to Acrylic.
+
 ### Elevation
 
 This property semantic changes according to the theme currently set:
@@ -174,7 +180,6 @@ Property is ignored, no shadow is cast.
 ### CornerRadius
 
 Same as the `Xamarin.Forms` `Frame` here.
-
 
 ## Changing theme for every frames
 
