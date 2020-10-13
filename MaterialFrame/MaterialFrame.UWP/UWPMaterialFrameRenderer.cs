@@ -161,6 +161,11 @@ namespace Sharpnado.MaterialFrame.UWP
 
         private void UpdateBorder()
         {
+            if (_grid == null)
+            {
+                return;
+            }
+
             if (Element.BorderColor != Color.Default)
             {
                 _grid.BorderBrush = Element.BorderColor.ToBrush();
@@ -174,6 +179,11 @@ namespace Sharpnado.MaterialFrame.UWP
 
         private void UpdateCornerRadius()
         {
+            if (_grid == null)
+            {
+                return;
+            }
+
             float cornerRadius = Element.CornerRadius;
 
             if (cornerRadius == -1f)
@@ -192,6 +202,11 @@ namespace Sharpnado.MaterialFrame.UWP
 
         private void UpdateLightThemeBackgroundColor()
         {
+            if (_grid == null)
+            {
+                return;
+            }
+
             switch (Element.MaterialTheme)
             {
                 case MaterialFrame.Theme.Acrylic:
@@ -210,7 +225,7 @@ namespace Sharpnado.MaterialFrame.UWP
 
         private void UpdateAcrylicGlowColor()
         {
-            if (Element.MaterialTheme != MaterialFrame.Theme.Acrylic)
+            if (_grid == null || Element.MaterialTheme != MaterialFrame.Theme.Acrylic)
             {
                 return;
             }
@@ -220,6 +235,11 @@ namespace Sharpnado.MaterialFrame.UWP
 
         private void UpdateElevation()
         {
+            if (_grid == null)
+            {
+                return;
+            }
+
             if (!Element.IsShadowCompatible)
             {
                 _shadowHost.Fill = Color.Transparent.ToBrush();
@@ -280,6 +300,11 @@ namespace Sharpnado.MaterialFrame.UWP
 
         private void UpdateMaterialTheme()
         {
+            if (_grid == null)
+            {
+                return;
+            }
+
             switch (Element.MaterialTheme)
             {
                 case MaterialFrame.Theme.Acrylic:
@@ -333,7 +358,7 @@ namespace Sharpnado.MaterialFrame.UWP
 
         private void UpdateMaterialBlurStyle()
         {
-            if (Element.MaterialTheme != MaterialFrame.Theme.AcrylicBlur)
+            if (_grid == null || Element.MaterialTheme != MaterialFrame.Theme.AcrylicBlur)
             {
                 return;
             }
@@ -359,6 +384,11 @@ namespace Sharpnado.MaterialFrame.UWP
 
         private void UpdateBlur()
         {
+            if (_grid == null)
+            {
+                return;
+            }
+
             if (Element.UwpBlurOverlayColor != Color.Default)
             {
                 var acrylicBrush = new AcrylicBrush
