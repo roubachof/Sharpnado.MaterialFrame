@@ -16,11 +16,25 @@ Get it from NuGet:
 
 ## Initialization
 
-On `iOS` add this line after `Xamarin.Forms.Forms.Init()` and before `LoadApplication(new App())`.
+* On Core project in `App.xaml.cs`:
+
+For the namespace xaml schema to work (remove duplicates xml namespace: [see this xamarin doc](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/xaml/custom-namespace-schemas)), you need to call tabs and shadows initializers from the `App.xaml.cs` file like this:
+
+```csharp
+public App()
+{
+    InitializeComponent();
+
+    Sharpnado.MaterialFrame.Initializer.Initialize(loggerEnable: false);
+    ...
+}
+```
+
+* On `iOS` add this line after `Xamarin.Forms.Forms.Init()` and before `LoadApplication(new App())`.
 
 `iOSMaterialFrameRenderer.Init();`
 
-On `UWP`, you must register the renderers assembly like this, before `Xamarin.Forms.Forms.Init()`:
+* On `UWP`, you must register the renderers assembly like this, before `Xamarin.Forms.Forms.Init()`:
 
 `var rendererAssemblies = new[] { typeof(UWPMaterialFrameRenderer).GetTypeInfo().Assembly }; `
 
