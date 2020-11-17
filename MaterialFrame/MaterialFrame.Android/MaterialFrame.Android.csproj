@@ -76,13 +76,13 @@
     </PackageReference>
   </ItemGroup>
   <Choose>
-  	<When Condition=" '$(Configuration)|$(TargetFrameworkVersion)' == 'Debug|v10.0' ">
+    <When Condition=" '$(Configuration)|$(TargetFrameworkVersion)' == 'Debug|v10.0' ">
       <PropertyGroup>
         <OutputPath>$(OutputPath)\monoandroid10.0\</OutputPath>
       </PropertyGroup>
       <ItemGroup>
         <PackageReference Include="Xamarin.Forms">
-          <Version>4.7.0.1351</Version>
+          <Version>4.8.0.1687</Version>
         </PackageReference>
         <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0" />
       </ItemGroup>
