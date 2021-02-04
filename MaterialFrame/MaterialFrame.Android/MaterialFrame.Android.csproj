@@ -82,9 +82,10 @@
       </PropertyGroup>
       <ItemGroup>
         <PackageReference Include="Xamarin.Forms">
-          <Version>4.8.0.1687</Version>
+          <Version>5.0.0.1931</Version>
         </PackageReference>
-        <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0" />
+        <PackageReference Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.2.0.6" />
+        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0" />
       </ItemGroup>
     </When>
     <When Condition=" '$(Configuration)|$(TargetFrameworkVersion)' == 'Release|v10.0' ">
@@ -93,7 +94,7 @@
       </PropertyGroup>
       <ItemGroup>
         <PackageReference Include="Xamarin.Forms">
-          <Version>4.7.0.1351</Version>
+          <Version>5.0.0.1931</Version>
         </PackageReference>
         <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0" />
         <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.1.0" />

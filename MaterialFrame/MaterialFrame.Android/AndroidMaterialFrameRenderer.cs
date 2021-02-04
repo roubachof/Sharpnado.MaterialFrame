@@ -46,7 +46,6 @@ namespace Sharpnado.MaterialFrame.Droid
             {
                 case nameof(MaterialFrame.CornerRadius):
                     UpdateCornerRadius();
-                    base.OnElementPropertyChanged(sender, e);
                     break;
 
                 case nameof(MaterialFrame.Elevation):
@@ -129,6 +128,7 @@ namespace Sharpnado.MaterialFrame.Droid
 
         private void UpdateCornerRadius()
         {
+            _mainDrawable?.SetCornerRadius(Context.ToPixels(MaterialFrame.CornerRadius));
             _acrylicLayer?.SetCornerRadius(Context.ToPixels(MaterialFrame.CornerRadius));
             _realtimeBlurView?.SetCornerRadius(Context.ToPixels(MaterialFrame.CornerRadius));
         }
@@ -185,14 +185,18 @@ namespace Sharpnado.MaterialFrame.Droid
                     SetAcrylicBlurTheme();
                     break;
             }
+
+            Invalidate();
         }
 
         private void SetAcrylicBlurTheme()
         {
+            _mainDrawable = new GradientDrawable();
             _mainDrawable.SetColor(Color.Transparent.ToAndroid());
 
             this.SetBackground(_mainDrawable);
 
+            UpdateCornerRadius();
             UpdateElevation();
 
             EnableBlur();
@@ -202,10 +206,12 @@ namespace Sharpnado.MaterialFrame.Droid
         {
             DisableBlur();
 
+            _mainDrawable = new GradientDrawable();
             _mainDrawable.SetColor(MaterialFrame.ElevationToColor().ToAndroid());
 
             this.SetBackground(_mainDrawable);
 
+            UpdateCornerRadius();
             UpdateElevation();
         }
 
@@ -213,10 +219,12 @@ namespace Sharpnado.MaterialFrame.Droid
         {
             DisableBlur();
 
+            _mainDrawable = new GradientDrawable();
             _mainDrawable.SetColor(MaterialFrame.LightThemeBackgroundColor.ToAndroid());
 
             this.SetBackground(_mainDrawable);
 
+            UpdateCornerRadius();
             UpdateElevation();
         }
 
