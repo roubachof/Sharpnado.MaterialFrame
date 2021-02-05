@@ -12,9 +12,9 @@
     "des for Xamarin.Forms (Android, iOS, UWP).")]
 [assembly: System.Reflection.AssemblyCompany("Sharpnado")]
 [assembly: System.Reflection.AssemblyProduct("MaterialFrame")]
-[assembly: System.Reflection.AssemblyCopyright("Copyright © Sharpnado 2020")]
-[assembly: System.Reflection.AssemblyFileVersion("1.1.3")]
-[assembly: System.Reflection.AssemblyVersion("1.1.3")]
+[assembly: System.Reflection.AssemblyCopyright("Copyright © Sharpnado 2021")]
+[assembly: System.Reflection.AssemblyFileVersion("1.1.4")]
+[assembly: System.Reflection.AssemblyVersion("1.1.4")]
 [assembly: System.Reflection.AssemblyTitle("Sharpnado.MaterialFrame.Android")]
 
 
