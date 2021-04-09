@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Reflection.AssemblyDescription("Modern Frame supporting theming such as Blur styles, Acrylic style, Dark/Light mo" +
-    "des for Xamarin.Forms (Android, iOS, UWP).")]
+    "des for Xamarin.Forms (Android, iOS, macOS, UWP).")]
 [assembly: System.Reflection.AssemblyCompany("Sharpnado")]
 [assembly: System.Reflection.AssemblyProduct("MaterialFrame")]
 [assembly: System.Reflection.AssemblyCopyright("Copyright © Sharpnado 2020")]
