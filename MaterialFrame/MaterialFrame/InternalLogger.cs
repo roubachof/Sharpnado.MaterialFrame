@@ -4,6 +4,7 @@ using System.Threading;
 
 [assembly:InternalsVisibleTo("Sharpnado.MaterialFrame.Android")]
 [assembly:InternalsVisibleTo("Sharpnado.MaterialFrame.iOS")]
+[assembly:InternalsVisibleTo("Sharpnado.MaterialFrame.macOS")]
 [assembly:InternalsVisibleTo("Sharpnado.MaterialFrame.UWP")]
 [assembly:InternalsVisibleTo("Sharpnado.Presentation.Forms")]
 
