@@ -10,6 +10,7 @@ Get it from NuGet:
 |----------------------------|
 | :heavy_check_mark: Android | 
 | :heavy_check_mark: iOS     |
+| :heavy_check_mark: macOS   |
 | :heavy_check_mark: UWP     |
 
 ![Presentation](Docs/github_banner.png)
