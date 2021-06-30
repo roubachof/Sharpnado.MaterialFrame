@@ -35,6 +35,10 @@ public App()
 
 `iOSMaterialFrameRenderer.Init();`
 
+* On `macOS` add this line after `Xamarin.Forms.Forms.Init()` and before `LoadApplication(new App())`.
+
+`macOSMaterialFrameRenderer.Init();`
+
 * On `UWP`, you must register the renderers assembly like this, before `Xamarin.Forms.Forms.Init()`:
 
 `var rendererAssemblies = new[] { typeof(UWPMaterialFrameRenderer).GetTypeInfo().Assembly }; `
