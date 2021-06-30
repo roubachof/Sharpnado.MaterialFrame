@@ -51,6 +51,10 @@ Mandatory initialization on UWP:
           <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers"/>
         </group>
 
+        <group targetFramework="Xamarin.Mac">
+          <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers" />
+        </group>
+
         <group targetFramework="MonoAndroid10">
           <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers"/>
         </group>
@@ -96,6 +100,12 @@ Mandatory initialization on UWP:
         <file src="MaterialFrame\MaterialFrame.iOS\bin\Release\Sharpnado.MaterialFrame.iOS.pdb" target="lib\Xamarin.iOS10\Sharpnado.MaterialFrame.iOS.pdb" />
         <file src="MaterialFrame\MaterialFrame.iOS\bin\Release\Sharpnado.MaterialFrame.dll" target="lib\Xamarin.iOS10\Sharpnado.MaterialFrame.dll" />
         <file src="MaterialFrame\MaterialFrame.iOS\bin\Release\Sharpnado.MaterialFrame.pdb" target="lib\Xamarin.iOS10\Sharpnado.MaterialFrame.pdb" />
+
+        <!--Xamarin.Mac-->
+        <file src="MaterialFrame\MaterialFrame.macOS\bin\Release\Sharpnado.MaterialFrame.macOS.dll" target="lib\Xamarin.Mac\Sharpnado.MaterialFrame.macOS.dll" />
+        <file src="MaterialFrame\MaterialFrame.macOS\bin\Release\Sharpnado.MaterialFrame.macOS.pdb" target="lib\Xamarin.Mac\Sharpnado.MaterialFrame.macOS.pdb" />
+        <file src="MaterialFrame\MaterialFrame.macOS\bin\Release\Sharpnado.MaterialFrame.dll" target="lib\Xamarin.Mac\Sharpnado.MaterialFrame.dll" />
+        <file src="MaterialFrame\MaterialFrame.macOS\bin\Release\Sharpnado.MaterialFrame.pdb" target="lib\Xamarin.Mac\Sharpnado.MaterialFrame.pdb" />
 
         <!--Xamarin.UWP-->
         <file src="MaterialFrame\MaterialFrame.UWP\bin\Release\Sharpnado.MaterialFrame.UWP.dll" target="lib\uap10.0.16299\Sharpnado.MaterialFrame.UWP.dll" />
