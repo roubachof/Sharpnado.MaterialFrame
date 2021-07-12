@@ -197,7 +197,7 @@ namespace Sharpnado.MaterialFrame.macOS
 
             Layer.ShadowColor = NSColor.Black.CGColor;
             Layer.ShadowRadius = Math.Abs(adaptedElevation);
-            Layer.ShadowOffset = new CGSize(0, adaptedElevation);
+            Layer.ShadowOffset = new CGSize(0, -adaptedElevation);
             Layer.ShadowOpacity = opacity;
 
             Layer.MasksToBounds = false;
