@@ -197,7 +197,7 @@ namespace Sharpnado.MaterialFrame.macOS
 
             Layer.ShadowColor = NSColor.Black.CGColor;
             Layer.ShadowRadius = Math.Abs(adaptedElevation);
-            Layer.ShadowOffset = new CGSize(0, adaptedElevation);
+            Layer.ShadowOffset = new CGSize(0, -adaptedElevation);
             Layer.ShadowOpacity = opacity;
 
             Layer.MasksToBounds = false;
@@ -346,7 +346,7 @@ namespace Sharpnado.MaterialFrame.macOS
             {
                 InternalLogger.Debug(Tag, () => "UpdateLayerBounds()");
 
-                _intermediateLayer.Frame = new CGRect(0, 2, Element.Width, Element.Height - 2);
+                _intermediateLayer.Frame = new CGRect(0, 0, Element.Width, Element.Height - 2);
                 _intermediateLayer.RemoveAllAnimations();
             }
         }

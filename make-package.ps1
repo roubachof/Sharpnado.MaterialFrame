@@ -3,6 +3,7 @@ $formsVersion = "3.6.0.220655"
 $netstandardProject = ".\MaterialFrame\MaterialFrame\MaterialFrame.csproj"
 $droidProject = ".\MaterialFrame\MaterialFrame.Android\MaterialFrame.Android.csproj"
 $iosProject = ".\MaterialFrame\MaterialFrame.iOS\MaterialFrame.iOS.csproj"
+$macOSProject = ".\MaterialFrame\MaterialFrame.macOS\MaterialFrame.macOS.csproj"
 $uwpProject = ".\MaterialFrame\MaterialFrame.UWP\MaterialFrame.UWP.csproj"
 
 $droidBin = ".\MaterialFrame\MaterialFrame.Android\bin\Release"
@@ -16,6 +17,7 @@ $replaceString = "`$1 $formsVersion `$3"
 (Get-Content $netstandardProject -Raw) -replace $findXFVersion, "$replaceString" | Out-File $netstandardProject
 (Get-Content $droidProject -Raw) -replace $findXFVersion, "$replaceString" | Out-File $droidProject
 (Get-Content $iosProject -Raw) -replace $findXFVersion, "$replaceString" | Out-File $iosProject
+(Get-Content $macOSProject -Raw) -replace $findXFVersion, "$replaceString" | Out-File $macOSProject
 (Get-Content $uwpProject -Raw) -replace $findXFVersion, "$replaceString" | Out-File $uwpProject
 
 rm *.txt
