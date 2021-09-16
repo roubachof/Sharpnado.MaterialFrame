@@ -363,7 +363,7 @@ namespace Sharpnado.MaterialFrame.UWP
                 return;
             }
 
-            var acrylicBrush = new AcrylicBrush { BackgroundSource = AcrylicBackgroundSource.Backdrop };
+            var acrylicBrush = new AcrylicBrush { BackgroundSource = Element.UwpHostBackdropBlur ? AcrylicBackgroundSource.HostBackdrop : AcrylicBackgroundSource.Backdrop };
 
             switch (Element.MaterialBlurStyle)
             {
@@ -388,22 +388,11 @@ namespace Sharpnado.MaterialFrame.UWP
                 return;
             }
 
-            if (Element.UwpBlurOverlayColor != Color.Default && Element.UwpHostBackdropBlur != true)
-            {
-                var acrylicBrush = new AcrylicBrush
-                    {
-                        BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                        TintColor = Element.UwpBlurOverlayColor.ToWindowsColor(),
-                    };
-
-                _grid.Background = acrylicBrush;
-                return;
-            }
-            else if (Element.UwpBlurOverlayColor != Color.Default && Element.UwpHostBackdropBlur == true)
+            if (Element.UwpBlurOverlayColor != Color.Default)
             {
                 var acrylicBrush = new AcrylicBrush
                 {
-                    BackgroundSource = AcrylicBackgroundSource.HostBackdrop,
+                    BackgroundSource = Element.UwpHostBackdropBlur ? AcrylicBackgroundSource.HostBackdrop : AcrylicBackgroundSource.Backdrop,
                     TintColor = Element.UwpBlurOverlayColor.ToWindowsColor(),
                 };
 
