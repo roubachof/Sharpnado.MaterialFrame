@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AppKit;
+
+using System;
 using System.ComponentModel;
 
 using CoreAnimation;
@@ -9,8 +11,6 @@ using Foundation;
 
 using Sharpnado.MaterialFrame;
 using Sharpnado.MaterialFrame.macOS;
-
-using AppKit;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.MacOS;
@@ -308,7 +308,7 @@ namespace Sharpnado.MaterialFrame.macOS
 
             if (_blurView != null)
             {
-                _blurView.BlendingMode = NSVisualEffectBlendingMode.WithinWindow;
+                _blurView.BlendingMode = Element.macOSBehindWindowBlur ? NSVisualEffectBlendingMode.BehindWindow : NSVisualEffectBlendingMode.WithinWindow;
                 _blurView.Material = ConvertBlurStyle();
             }
         }
