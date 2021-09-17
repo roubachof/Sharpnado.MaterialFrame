@@ -30,10 +30,13 @@ namespace Sharpnado.MaterialFrame.UWP
     public class UWPMaterialFrameRenderer : ViewRenderer<MaterialFrame, Grid>
     {
         private static readonly Color DarkBlurOverlayColor = Color.FromHex("#80000000");
+        private static readonly Color DarkFallBackColor = Color.FromHex("#333333");
 
         private static readonly Color LightBlurOverlayColor = Color.FromHex("#40FFFFFF");
+        private static readonly Color LightFallBackColor = Color.FromHex("#F3F3F3");
 
         private static readonly Color ExtraLightBlurOverlayColor = Color.FromHex("#B0FFFFFF");
+        private static readonly Color ExtraLightFallBackColor = Color.FromHex("#FBFBFB");
 
         private Rectangle _acrylicRectangle;
         private Rectangle _shadowHost;
@@ -369,12 +372,15 @@ namespace Sharpnado.MaterialFrame.UWP
             {
                 case MaterialFrame.BlurStyle.ExtraLight:
                     acrylicBrush.TintColor = ExtraLightBlurOverlayColor.ToWindowsColor();
+                    acrylicBrush.FallbackColor = ExtraLightFallBackColor.ToWindowsColor();
                     break;
                 case MaterialFrame.BlurStyle.Dark:
                     acrylicBrush.TintColor = DarkBlurOverlayColor.ToWindowsColor();
+                    acrylicBrush.FallbackColor = DarkFallBackColor.ToWindowsColor();
                     break;
                 default:
                     acrylicBrush.TintColor = LightBlurOverlayColor.ToWindowsColor();
+                    acrylicBrush.FallbackColor = LightFallBackColor.ToWindowsColor();
                     break;
             }
 
