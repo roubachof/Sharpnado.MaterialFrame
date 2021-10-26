@@ -1,23 +1,20 @@
-﻿using System.Numerics;
-using System.ComponentModel;
-
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Shapes;
-using Windows.UI.Composition;
-using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Automation.Peers;
-
+﻿using System.ComponentModel;
+using System.Numerics;
 using Sharpnado.MaterialFrame;
 using Sharpnado.MaterialFrame.UWP;
-
+using Windows.UI.Composition;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Automation.Peers;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Hosting;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Shapes;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.UWP;
 
-using Color = Xamarin.Forms.Color;
-using AcrylicBrush = Microsoft.UI.Xaml.Media.AcrylicBrush;
 using AcrylicBackgroundSource = Microsoft.UI.Xaml.Media.AcrylicBackgroundSource;
+using AcrylicBrush = Microsoft.UI.Xaml.Media.AcrylicBrush;
+using Color = Xamarin.Forms.Color;
 
 [assembly: ExportRenderer(typeof(MaterialFrame), typeof(UWPMaterialFrameRenderer))]
 

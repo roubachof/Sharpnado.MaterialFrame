@@ -40,17 +40,6 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseAndroid9.0|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AndroidManagedSymbols>true</AndroidManagedSymbols>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
@@ -75,50 +64,17 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-  <Choose>
-    <When Condition=" '$(Configuration)|$(TargetFrameworkVersion)' == 'Debug|v10.0' ">
-      <PropertyGroup>
-        <OutputPath>$(OutputPath)\monoandroid10.0\</OutputPath>
-      </PropertyGroup>
-      <ItemGroup>
-        <PackageReference Include="Xamarin.Forms">
-          <Version>5.0.0.2012</Version>
-        </PackageReference>
-        <PackageReference Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.2.0.6" />
-        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0" />
-      </ItemGroup>
-    </When>
-    <When Condition=" '$(Configuration)|$(TargetFrameworkVersion)' == 'Release|v10.0' ">
-      <PropertyGroup>
-        <OutputPath>$(OutputPath)\monoandroid10.0\</OutputPath>
-      </PropertyGroup>
-      <ItemGroup>
-        <PackageReference Include="Xamarin.Forms">
-          <Version>5.0.0.1931</Version>
-        </PackageReference>
-        <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0" />
-        <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.1.0" />
-        <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.1.0" />
-        <PackageReference Include="Xamarin.AndroidX.Browser" Version="1.0.0" />
-        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0" />
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <PropertyGroup>
-        <OutputPath>$(OutputPath)\monoandroid10\</OutputPath>
-      </PropertyGroup>
-      <ItemGroup>
-        <PackageReference Include="Xamarin.Forms">
-          <Version>4.7.0.1351</Version>
-        </PackageReference>
-        <PackageReference Include="Xamarin.Android.Support.Compat">
-          <Version>28.0.0.1</Version>
-        </PackageReference>
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
   <ItemGroup>
-    <Compile Include="AndroidMaterialFrameRenderer.Shadow.cs" />
+    <PackageReference Include="Xamarin.Forms">
+      <Version> 4.5.0.356 </Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0" />
+    <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.1.0" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.1.0" />
+    <PackageReference Include="Xamarin.AndroidX.Browser" Version="1.0.0" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="AndroidMaterialFrameRenderer.cs" />
     <None Include="BlurView\AndroidMaterialFrameRenderer.Blur.cs" />
     <Compile Include="BlurView\BlockingBlurController.cs" />
@@ -142,6 +98,3 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\AssemblyInfo.targets" />
 </Project>
-
-
-

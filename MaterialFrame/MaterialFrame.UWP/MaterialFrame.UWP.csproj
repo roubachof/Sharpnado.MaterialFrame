@@ -51,7 +51,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.1.190606001</Version>
+      <Version>2.3.191211002</Version>
     </PackageReference>
     <PackageReference Include="MSBuildTasks">
       <Version>1.5.0.235</Version>
@@ -68,7 +68,7 @@
       <Version>6.2.11</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.1931</Version>
+      <Version> 4.5.0.356 </Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +90,3 @@
   </Target>
   -->
 </Project>
-
-
-

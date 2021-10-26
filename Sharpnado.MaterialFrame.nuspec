@@ -15,7 +15,7 @@
       <repository url="https://github.com/roubachof/Sharpnado.MaterialFrame" />
       <summary>A modern Xamarin.Forms Frame component supporting blur, acrylic, dark mode. Implemented with RealtimeBlurView on Android (custom blurview), UIVisualEffectView on iOS and AcrylicBrush on UWP.</summary>
       <tags>xamarin.forms android ios uwp netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background AcrylicBrush</tags>
-      <releaseNotes>Add support for MacOS thanks to @nor0x.</releaseNotes>
+      <releaseNotes>Add support for blur on uwp and macos windows by @mhrastegary77</releaseNotes>
       <description>
 The Xamarin.Forms MaterialFrame aims at delivering out of the box modern popular theming such as:
   * Light
@@ -49,28 +49,24 @@ Mandatory initialization on UWP:
       <dependencies>
 
         <group targetFramework=".NETStandard2.0">
-          <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers"/>
+          <dependency id="Xamarin.Forms" version="4.5.0.356" exclude="Build,Analyzers"/>
         </group>
 
         <group targetFramework="Xamarin.iOS10">
-          <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers"/>
+          <dependency id="Xamarin.Forms" version="4.5.0.356" exclude="Build,Analyzers"/>
         </group>
 
         <group targetFramework="Xamarin.Mac">
-          <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers" />
-        </group>
-
-        <group targetFramework="MonoAndroid10">
-          <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers"/>
+          <dependency id="Xamarin.Forms" version="4.5.0.356" exclude="Build,Analyzers" />
         </group>
 
         <group targetFramework="uap10.0.16299">
-          <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers"/>
-          <dependency id="Microsoft.UI.Xaml" version="2.1.190606001" />
+          <dependency id="Xamarin.Forms" version="4.5.0.356" exclude="Build,Analyzers"/>
+          <dependency id="Microsoft.UI.Xaml" version="2.3.191211002" />
         </group>
 
         <group targetFramework="MonoAndroid10.0">
-          <dependency id="Xamarin.Forms" version="3.6.0.220655" exclude="Build,Analyzers"/>
+          <dependency id="Xamarin.Forms" version="4.5.0.356" exclude="Build,Analyzers"/>
           <dependency id="Xamarin.AndroidX.Browser" version="1.0.0" />
           <dependency id="Xamarin.AndroidX.Legacy.Support.V4" version="1.0.0" />
           <dependency id="Xamarin.AndroidX.Lifecycle.LiveData" version="2.1.0" />
@@ -87,18 +83,12 @@ Mandatory initialization on UWP:
         <!--Net Standard-->
         <file src="MaterialFrame\MaterialFrame\bin\Release\netstandard2.0\Sharpnado.MaterialFrame.dll" target="lib\netstandard2.0\Sharpnado.MaterialFrame.dll" />
         <file src="MaterialFrame\MaterialFrame\bin\Release\netstandard2.0\Sharpnado.MaterialFrame.pdb" target="lib\netstandard2.0\Sharpnado.MaterialFrame.pdb" />
-
-        <!--Xamarin.Android-->
-        <file src="MaterialFrame\MaterialFrame.Android\bin\Release\monoandroid10\Sharpnado.MaterialFrame.Android.dll" target="lib\MonoAndroid10\Sharpnado.MaterialFrame.Android.dll" />
-        <file src="MaterialFrame\MaterialFrame.Android\bin\Release\monoandroid10\Sharpnado.MaterialFrame.Android.pdb" target="lib\MonoAndroid10\Sharpnado.MaterialFrame.Android.pdb" />
-        <file src="MaterialFrame\MaterialFrame.Android\bin\Release\monoandroid10\Sharpnado.MaterialFrame.dll" target="lib\MonoAndroid10\Sharpnado.MaterialFrame.dll" />
-        <file src="MaterialFrame\MaterialFrame.Android\bin\Release\monoandroid10\Sharpnado.MaterialFrame.pdb" target="lib\MonoAndroid10\Sharpnado.MaterialFrame.pdb" />
-
+        
         <!--Xamarin.Android 10.0-->
-        <file src="MaterialFrame\MaterialFrame.Android\bin\Release\monoandroid10.0\Sharpnado.MaterialFrame.Android.dll" target="lib\MonoAndroid10.0\Sharpnado.MaterialFrame.Android.dll" />
-        <file src="MaterialFrame\MaterialFrame.Android\bin\Release\monoandroid10.0\Sharpnado.MaterialFrame.Android.pdb" target="lib\MonoAndroid10.0\Sharpnado.MaterialFrame.Android.pdb" />
-        <file src="MaterialFrame\MaterialFrame.Android\bin\Release\monoandroid10.0\Sharpnado.MaterialFrame.dll" target="lib\MonoAndroid10.0\Sharpnado.MaterialFrame.dll" />
-        <file src="MaterialFrame\MaterialFrame.Android\bin\Release\monoandroid10.0\Sharpnado.MaterialFrame.pdb" target="lib\MonoAndroid10.0\Sharpnado.MaterialFrame.pdb" />
+        <file src="MaterialFrame\MaterialFrame.Android\bin\Release\Sharpnado.MaterialFrame.Android.dll" target="lib\MonoAndroid10.0\Sharpnado.MaterialFrame.Android.dll" />
+        <file src="MaterialFrame\MaterialFrame.Android\bin\Release\Sharpnado.MaterialFrame.Android.pdb" target="lib\MonoAndroid10.0\Sharpnado.MaterialFrame.Android.pdb" />
+        <file src="MaterialFrame\MaterialFrame.Android\bin\Release\Sharpnado.MaterialFrame.dll" target="lib\MonoAndroid10.0\Sharpnado.MaterialFrame.dll" />
+        <file src="MaterialFrame\MaterialFrame.Android\bin\Release\Sharpnado.MaterialFrame.pdb" target="lib\MonoAndroid10.0\Sharpnado.MaterialFrame.pdb" />
 
         <!--Xamarin.iOS-->
         <file src="MaterialFrame\MaterialFrame.iOS\bin\Release\Sharpnado.MaterialFrame.iOS.dll" target="lib\Xamarin.iOS10\Sharpnado.MaterialFrame.iOS.dll" />

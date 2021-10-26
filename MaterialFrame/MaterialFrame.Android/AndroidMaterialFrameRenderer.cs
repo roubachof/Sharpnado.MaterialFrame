@@ -1,14 +1,10 @@
-﻿#if __ANDROID_29__
-using AndroidX.Core.View;
-#else
-using Android.Support.V4.View;
-#endif
-using System;
+﻿using System;
 using System.ComponentModel;
 
 using Android.Content;
 using Android.Graphics.Drawables;
 using Android.Runtime;
+using AndroidX.Core.View;
 
 using Sharpnado.MaterialFrame;
 using Sharpnado.MaterialFrame.Droid;
@@ -17,7 +13,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 using FrameRenderer = Xamarin.Forms.Platform.Android.AppCompat.FrameRenderer;
-using Java.IO;
 
 [assembly: ExportRenderer(typeof(MaterialFrame), typeof(AndroidMaterialFrameRenderer))]
 

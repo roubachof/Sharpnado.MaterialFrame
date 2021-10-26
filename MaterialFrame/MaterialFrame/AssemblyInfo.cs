@@ -13,8 +13,8 @@
 [assembly: System.Reflection.AssemblyCompany("Sharpnado")]
 [assembly: System.Reflection.AssemblyProduct("MaterialFrame")]
 [assembly: System.Reflection.AssemblyCopyright("Copyright © Sharpnado 2021")]
-[assembly: System.Reflection.AssemblyFileVersion("1.2.0")]
-[assembly: System.Reflection.AssemblyVersion("1.2.0")]
+[assembly: System.Reflection.AssemblyFileVersion("1.3.0")]
+[assembly: System.Reflection.AssemblyVersion("1.3.0")]
 [assembly: System.Reflection.AssemblyTitle("Sharpnado.MaterialFrame")]
 
 

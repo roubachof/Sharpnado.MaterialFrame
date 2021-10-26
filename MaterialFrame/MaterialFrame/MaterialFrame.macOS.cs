@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Sharpnado.MaterialFrame
 {
     public partial class MaterialFrame
     {
-        public static readonly BindableProperty macOSBehindWindowBlurProperty = BindableProperty.Create(
-            nameof(macOSBehindWindowBlur),
+        public static readonly BindableProperty MacOSBehindWindowBlurProperty = BindableProperty.Create(
+            nameof(MacOSBehindWindowBlur),
             typeof(bool),
             typeof(MaterialFrame),
             defaultValueCreator: _ => false);
@@ -18,10 +15,10 @@ namespace Sharpnado.MaterialFrame
         /// BehindWindow reveals the desktop wallpaper and other windows that are behind the currently active app.
         /// If not set, the default in app WithinWindow take over.
         /// </summary>
-        public bool macOSBehindWindowBlur
+        public bool MacOSBehindWindowBlur
         {
-            get => (bool)GetValue(macOSBehindWindowBlurProperty);
-            set => SetValue(macOSBehindWindowBlurProperty, value);
+            get => (bool)GetValue(MacOSBehindWindowBlurProperty);
+            set => SetValue(MacOSBehindWindowBlurProperty, value);
         }
     }
 }

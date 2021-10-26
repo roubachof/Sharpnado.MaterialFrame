@@ -83,7 +83,7 @@ namespace Sharpnado.MaterialFrame.macOS
         protected override void OnElementChanged(ElementChangedEventArgs<MaterialFrame> e)
         {
             base.OnElementChanged(e);
-        
+
             e.OldElement?.Unsubscribe();
 
             if (e.NewElement == null)
@@ -308,7 +308,9 @@ namespace Sharpnado.MaterialFrame.macOS
 
             if (_blurView != null)
             {
-                _blurView.BlendingMode = Element.macOSBehindWindowBlur ? NSVisualEffectBlendingMode.BehindWindow : NSVisualEffectBlendingMode.WithinWindow;
+                _blurView.BlendingMode = Element.MacOSBehindWindowBlur
+                                             ? NSVisualEffectBlendingMode.BehindWindow
+                                             : NSVisualEffectBlendingMode.WithinWindow;
                 _blurView.Material = ConvertBlurStyle();
             }
         }
