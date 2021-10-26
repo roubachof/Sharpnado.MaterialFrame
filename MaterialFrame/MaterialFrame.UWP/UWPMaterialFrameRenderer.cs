@@ -1,13 +1,13 @@
-﻿using System.ComponentModel;
-using System.Numerics;
+﻿using System.Numerics;
+using System.ComponentModel;
 
-using Windows.UI.Composition;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Automation.Peers;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
+using Windows.UI.Composition;
+using Windows.UI.Xaml.Hosting;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Automation.Peers;
 
 using Sharpnado.MaterialFrame;
 using Sharpnado.MaterialFrame.UWP;
@@ -15,9 +15,9 @@ using Sharpnado.MaterialFrame.UWP;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.UWP;
 
-using AcrylicBackgroundSource = Microsoft.UI.Xaml.Media.AcrylicBackgroundSource;
-using AcrylicBrush = Microsoft.UI.Xaml.Media.AcrylicBrush;
 using Color = Xamarin.Forms.Color;
+using AcrylicBrush = Microsoft.UI.Xaml.Media.AcrylicBrush;
+using AcrylicBackgroundSource = Microsoft.UI.Xaml.Media.AcrylicBackgroundSource;
 
 [assembly: ExportRenderer(typeof(MaterialFrame), typeof(UWPMaterialFrameRenderer))]
 
@@ -30,10 +30,13 @@ namespace Sharpnado.MaterialFrame.UWP
     public class UWPMaterialFrameRenderer : ViewRenderer<MaterialFrame, Grid>
     {
         private static readonly Color DarkBlurOverlayColor = Color.FromHex("#80000000");
+        private static readonly Color DarkFallBackColor = Color.FromHex("#333333");
 
         private static readonly Color LightBlurOverlayColor = Color.FromHex("#40FFFFFF");
+        private static readonly Color LightFallBackColor = Color.FromHex("#F3F3F3");
 
         private static readonly Color ExtraLightBlurOverlayColor = Color.FromHex("#B0FFFFFF");
+        private static readonly Color ExtraLightFallBackColor = Color.FromHex("#FBFBFB");
 
         private Rectangle _acrylicRectangle;
         private Rectangle _shadowHost;
@@ -363,19 +366,21 @@ namespace Sharpnado.MaterialFrame.UWP
                 return;
             }
 
-            var acrylicBrush = new AcrylicBrush { BackgroundSource = AcrylicBackgroundSource.Backdrop };
+            var acrylicBrush = new AcrylicBrush { BackgroundSource = Element.UwpHostBackdropBlur ? AcrylicBackgroundSource.HostBackdrop : AcrylicBackgroundSource.Backdrop };
 
             switch (Element.MaterialBlurStyle)
             {
                 case MaterialFrame.BlurStyle.ExtraLight:
                     acrylicBrush.TintColor = ExtraLightBlurOverlayColor.ToWindowsColor();
+                    acrylicBrush.FallbackColor = ExtraLightFallBackColor.ToWindowsColor();
                     break;
                 case MaterialFrame.BlurStyle.Dark:
                     acrylicBrush.TintColor = DarkBlurOverlayColor.ToWindowsColor();
+                    acrylicBrush.FallbackColor = DarkFallBackColor.ToWindowsColor();
                     break;
-
                 default:
                     acrylicBrush.TintColor = LightBlurOverlayColor.ToWindowsColor();
+                    acrylicBrush.FallbackColor = LightFallBackColor.ToWindowsColor();
                     break;
             }
 
@@ -392,10 +397,10 @@ namespace Sharpnado.MaterialFrame.UWP
             if (Element.UwpBlurOverlayColor != Color.Default)
             {
                 var acrylicBrush = new AcrylicBrush
-                    {
-                        BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                        TintColor = Element.UwpBlurOverlayColor.ToWindowsColor(),
-                    };
+                {
+                    BackgroundSource = Element.UwpHostBackdropBlur ? AcrylicBackgroundSource.HostBackdrop : AcrylicBackgroundSource.Backdrop,
+                    TintColor = Element.UwpBlurOverlayColor.ToWindowsColor(),
+                };
 
                 _grid.Background = acrylicBrush;
                 return;
