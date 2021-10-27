@@ -17,6 +17,7 @@
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <CodeAnalysisRuleSet>..\StyleCopRules.ruleset</CodeAnalysisRuleSet>
+    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,11 +69,6 @@
     <PackageReference Include="Xamarin.Forms">
       <Version>5.0.0.2196</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Browser" Version="1.0.0" />
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.4.0.4" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidMaterialFrameRenderer.cs" />
