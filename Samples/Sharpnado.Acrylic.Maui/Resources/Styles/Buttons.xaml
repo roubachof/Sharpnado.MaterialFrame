@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:system="clr-namespace:System;assembly=netstandard">
+
+    <Style x:Key="SwitchStyle" TargetType="Switch">
+        <Setter Property="Scale">
+            <OnPlatform x:TypeArguments="system:Double">
+                <OnPlatform.Platforms>
+                    <On Platform="Android" Value="0.8" />
+                    <On Platform="iOS" Value="0.8" />
+                    <On Platform="MacCatalyst" Value="0.8" />
+                    <On Platform="WinUI" Value="1" />
+                </OnPlatform.Platforms>
+            </OnPlatform>
+        </Setter>
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="OnColor" Value="Black" />
+        <Setter Property="ThumbColor" Value="White" />
+        <Setter Property="TranslationX">
+            <OnPlatform x:TypeArguments="system:Double">
+                <OnPlatform.Platforms>
+                    <On Platform="Android" Value="-5" />
+                    <On Platform="iOS" Value="-5" />
+                    <On Platform="MacCatalyst" Value="-5" />
+                    <On Platform="WinUI" Value="0" />
+                </OnPlatform.Platforms>
+            </OnPlatform>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RadioButton" TargetType="Button">
+        <Setter Property="BorderColor" Value="{DynamicResource DynamicPrimaryColor}" />
+        <Setter Property="BorderWidth" Value="2" />
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="HeightRequest">
+            <OnPlatform x:TypeArguments="system:Double">
+                <OnPlatform.Platforms>
+                    <On Platform="Android" Value="30" />
+                    <On Platform="iOS" Value="30" />
+                    <On Platform="MacCatalyst" Value="30" />
+                    <On Platform="WinUI" Value="30" />
+                </OnPlatform.Platforms>
+            </OnPlatform>
+        </Setter>
+        <Setter Property="Padding">
+            <OnPlatform x:TypeArguments="Thickness">
+                <OnPlatform.Platforms>
+                    <On Platform="Android" Value="10,0" />
+                    <On Platform="iOS" Value="10" />
+                    <On Platform="MacCatalyst" Value="10" />
+                    <On Platform="WinUI" Value="10,0" />
+                </OnPlatform.Platforms>
+            </OnPlatform>
+        </Setter>
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextPrimaryColor}" />
+        <Setter Property="FontFamily" Value="{StaticResource FontRegular}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeBody}" />
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,141 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net7.0;net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+        <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+        <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
+        <UseMaui>true</UseMaui>
+        <SingleProject>true</SingleProject>
+        <ImplicitUsings>enable</ImplicitUsings>
+
+        <RootNamespace>Sharpnado.MaterialFrame</RootNamespace>
+
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+        <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+
+        <CodeAnalysisRuleSet>StyleCopRules.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+
+    <!-- Android -->
+    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-android')) != true">
+        <Compile Remove="**\**\*.Android.cs" />
+        <None Include="**\**\*.Android.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+
+    <!-- Both iOS and Mac Catalyst -->
+    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-ios')) != true AND $(TargetFramework.StartsWith('net7.0-maccatalyst')) != true">
+        <Compile Remove="**\**\*.MaciOS.cs" />
+        <None Include="**\**\*.MaciOS.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+
+    <!-- iOS -->
+    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-ios')) != true">
+        <Compile Remove="**\**\*.iOS.cs" />
+        <None Include="**\**\*.iOS.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+
+    <!-- Mac Catalyst -->
+    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-maccatalyst')) != true">
+        <Compile Remove="**\**\*.MacCatalyst.cs" />
+        <None Include="**\**\*.MacCatalyst.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+
+    <!-- Windows -->
+    <ItemGroup Condition="$(TargetFramework.Contains('-windows')) != true">
+        <Compile Remove="**\*.Windows.cs" />
+        <None Include="**\*.Windows.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <Product>$(AssemblyName) ($(TargetFramework))</Product>
+        <AssemblyVersion>2.0.0</AssemblyVersion>
+        <AssemblyFileVersion>2.0.0</AssemblyFileVersion>
+        <Version>2.0.0</Version>
+        <PackOnBuild>true</PackOnBuild>
+        <NeutralLanguage>en</NeutralLanguage>
+
+        <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>Sharpnado.MaterialFrame.Maui</PackageId>
+        <PackageProjectUrl>https://github.com/roubachof/Sharpnado.MaterialFrame</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/roubachof/Sharpnado.MaterialFrame</RepositoryUrl>
+        <PackageIcon>images/material_frame.png</PackageIcon>
+        <PackageReadmeFile>docs/ReadMe.md</PackageReadmeFile>
+        <PackageTags>maui android ios uwp netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background AcrylicBrush</PackageTags>
+        <PackageReleaseNotes>
+            First MAUI release \o/
+        </PackageReleaseNotes>
+
+        <Title>A modern MAUI Frame component supporting blur, acrylic, dark mode.</Title>
+        <Summary>A modern .Net MAUI Frame component supporting blur, acrylic, dark mode. Implemented with RealtimeBlurView on Android (custom blurview), UIVisualEffectView on iOS and AcrylicBrush on WinUI.</Summary>
+        <Description>
+The MAUI MaterialFrame aims at delivering out of the box modern popular theming such as:
+* Light
+* Dark
+* Acrylic
+* AcrylicBlur
+
+The AcrylicBlur theme also provides three different blur styles inherited from the iOS UIVisualEffectView:
+* Light
+* ExtraLight
+* Dark
+
+On Android, the blur is implemented thanks to the RealtimeBlurView from Tu Yimin (mmin18).
+## Installation
+
+* In Core project, in `MauiProgram.cs`:
+
+```csharp
+public static MauiApp CreateMauiApp()
+{
+    var builder = MauiApp.CreateBuilder();
+    builder
+        .UseMauiApp()
+        .UseSharpnadoMaterialFrame(loggerEnabled: false);
+}
+```
+        </Description>
+
+        <Owners>Jean-Marie Alfonsi</Owners>
+        <Authors>Jean-Marie Alfonsi</Authors>
+        <Copyright>Copyright 2023 Sharpnado</Copyright>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <FileVersion>2.0.0</FileVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../Docs/material_frame.png" Pack="true" PackagePath="/images/" />
+        <None Include="ReadMe.md" Pack="true" PackagePath="/docs/" />
+        <Compile Remove="Platforms\MacCatalyst\macOSMaterialFrameRenderer.cs" />
+        <None Include="Platforms\MacCatalyst\macOSMaterialFrameRenderer.cs" />
+        <Compile Update="Platforms\MacCatalyst\MacCatalystMaterialFrameRenderer.cs">
+          <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
+        </Compile>
+        <Compile Remove="Platforms\Windows\UWPMaterialFrameRenderer.cs" />
+        <None Include="Platforms\Windows\UWPMaterialFrameRenderer.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Sharpnado.TaskMonitor" Version="1.0.2" />
+        <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <x:Double x:Key="SpacingTiny">5</x:Double>
+    <x:Double x:Key="SpacingSmall">10</x:Double>
+    <x:Double x:Key="SpacingMedium">20</x:Double>
+    <x:Double x:Key="SpacingLarge">30</x:Double>
+
+    <Thickness x:Key="ThicknessTiny">5</Thickness>
+    <Thickness x:Key="ThicknessSmall">10</Thickness>
+    <Thickness x:Key="ThicknessMedium">20</Thickness>
+    <Thickness x:Key="ThicknessLarge">35</Thickness>
+
+    <Thickness x:Key="MenuMargin"
+               Bottom="10"
+               Left="5"
+               Right="5"
+               Top="5" />
+
+    <Thickness x:Key="HeaderMargin"
+               Bottom="5"
+               Left="5"
+               Right="5"
+               Top="0" />
+
+</ResourceDictionary>

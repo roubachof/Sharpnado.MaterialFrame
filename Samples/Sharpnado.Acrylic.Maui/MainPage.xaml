@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Sharpnado.Acrylic.Maui.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rv="http://sharpnado.com"
+             BackgroundColor="{DynamicResource DynamicBackgroundColor}"
+             BackgroundImageSource="{DynamicResource DynamicBackgroundImageSource}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary />
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Spacing="10">
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <OnPlatform.Platforms>
+                        <On Platform="Android" Value="20,60,20,60" />
+                        <On Platform="iOS" Value="20,40,20,60" />
+                        <On Platform="WinUI" Value="20,60,20,20" />
+                    </OnPlatform.Platforms>
+                </OnPlatform>
+            </StackLayout.Padding>
+
+            <rv:MaterialFrame x:Name="SettingsFrame"
+                              IsVisible="True"
+                              StyleId="1111">
+                <Grid x:Name="SettingsGrid"
+                      ColumnSpacing="20"
+                      RowSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition x:Name="SwitchRow" Height="40" />
+                        <RowDefinition x:Name="BlurStyleRow" Height="40" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Switch x:Name="BlurSwitch"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Style="{StaticResource SwitchStyle}"
+                            Toggled="SwitchOnToggled" />
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Style="{StaticResource TextBody}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           Text="Enable Acrylic Blur" />
+
+                    <Button x:Name="LightButton"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Style="{StaticResource RadioButton}"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            Clicked="BlurStyleButtonOnClicked"
+                            Text="Light" />
+                    <Button x:Name="DarkButton"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Style="{StaticResource RadioButton}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Clicked="BlurStyleButtonOnClicked"
+                            Text="Dark" />
+                    <Button x:Name="ExtraLightButton"
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Style="{StaticResource RadioButton}"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            Clicked="BlurStyleButtonOnClicked"
+                            Text="ExtraLight" />
+                </Grid>
+            </rv:MaterialFrame>
+
+            <Grid Margin="{StaticResource MenuMargin}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="30" />
+                </Grid.ColumnDefinitions>
+
+                <Frame x:Name="ImageFrame"
+                       Grid.RowSpan="2"
+                       Grid.Column="0"
+                       WidthRequest="40"
+                       HeightRequest="40"
+                       Padding="0"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       CornerRadius="20"
+                       HasShadow="False"
+                       IsClippedToBounds="True">
+                    <Image Source="me.jpg" />
+                </Frame>
+
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Style="{StaticResource TextTitle}"
+                       VerticalOptions="End"
+                       Text="Good Afternoon, JM"
+                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
+
+                <Image Grid.Row="1"
+                       Grid.Column="1"
+                       VerticalOptions="Center"
+                       Source="{StaticResource IconSun}" />
+
+                <Label Grid.Row="1"
+                       Grid.Column="2"
+                       Style="{StaticResource TextSubtitleSecondary}"
+                       Margin="0,4.5,0,0"
+                       VerticalOptions="Start"
+                       Text="   11°C  Paris"
+                       TextColor="{DynamicResource DynamicSecondaryOnBackgroundColor}" />
+
+                <Image Grid.Row="0"
+                       Grid.RowSpan="2"
+                       Grid.Column="3"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       Source="{StaticResource IconCog}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SettingsButtonOnClicked" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+
+            <rv:MaterialFrame x:Name="Search"
+                              Padding="20,5"
+                              StyleId="2222">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image HorizontalOptions="Start" Source="{StaticResource IconSearch}" />
+
+                    <Label Grid.Column="1"
+                           Style="{StaticResource TextBodyTernary}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           Text="Type here to search" />
+
+                    <Image Grid.Column="2"
+                           HorizontalOptions="End"
+                           Source="{StaticResource IconMic}" />
+                </Grid>
+            </rv:MaterialFrame>
+
+            <Grid Margin="{StaticResource HeaderMargin}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0"
+                       Style="{StaticResource TextHeadline}"
+                       Text="Tasks"
+                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
+                <Image Grid.Column="1"
+                       HorizontalOptions="End"
+                       VerticalOptions="End"
+                       Source="{StaticResource IconDots}" />
+            </Grid>
+
+            <rv:MaterialFrame StyleId="3333">
+                <Grid RowSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image HorizontalOptions="Start" Source="{StaticResource IconPlus}" />
+
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Style="{StaticResource TextBodyTernary}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           Text="Create a task" />
+
+                    <Image Grid.Row="0"
+                           Grid.Column="2"
+                           HorizontalOptions="End"
+                           Source="{StaticResource IconMic}" />
+
+                    <Image Grid.Row="1"
+                           Grid.Column="0"
+                           HorizontalOptions="Start"
+                           Source="{StaticResource IconSquare}" />
+
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Style="{StaticResource TextBody}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           Text="Dota 2 game at 21:30" />
+
+                    <Label Grid.Row="1"
+                           Grid.Column="2"
+                           Style="{StaticResource TextHour}"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center"
+                           Text="in 3h" />
+                </Grid>
+            </rv:MaterialFrame>
+
+            <Grid Margin="{StaticResource HeaderMargin}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0"
+                       Style="{StaticResource TextHeadline}"
+                       Text="Pinned"
+                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
+                <Image Grid.Column="1"
+                       HorizontalOptions="End"
+                       VerticalOptions="End"
+                       Source="{StaticResource IconDots}" />
+            </Grid>
+
+            <rv:MaterialFrame Padding="10,20" StyleId="4444">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Row="0"
+                           Grid.Column="0"
+                           Style="{StaticResource ImageApps}"
+                           Source="dota.png" />
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           Style="{StaticResource LabelApps}"
+                           Text="Dota 2" />
+
+                    <Image Grid.Row="0"
+                           Grid.Column="1"
+                           Style="{StaticResource ImageApps}"
+                           Source="word.png" />
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Style="{StaticResource LabelApps}"
+                           Text="Word" />
+
+                    <Image Grid.Row="0"
+                           Grid.Column="2"
+                           Style="{StaticResource ImageApps}"
+                           Source="powerpoint.png" />
+                    <Label Grid.Row="1"
+                           Grid.Column="2"
+                           Style="{StaticResource LabelApps}"
+                           Text="Power Point" />
+
+                    <Image Grid.Row="0"
+                           Grid.Column="3"
+                           Style="{StaticResource ImageApps}"
+                           Source="piedpiper.png" />
+                    <Label Grid.Row="1"
+                           Grid.Column="3"
+                           Style="{StaticResource LabelApps}"
+                           Text="Pied Piper" />
+
+                    <Image Grid.Row="3"
+                           Grid.Column="0"
+                           Style="{StaticResource ImageApps}"
+                           Source="ableton.png" />
+                    <Label Grid.Row="4"
+                           Grid.Column="0"
+                           Style="{StaticResource LabelApps}"
+                           Text="Live 10" />
+
+                    <Image Grid.Row="3"
+                           Grid.Column="1"
+                           Style="{StaticResource ImageApps}"
+                           Source="visualstudio.png" />
+                    <Label Grid.Row="4"
+                           Grid.Column="1"
+                           Style="{StaticResource LabelApps}"
+                           Text="VS 2019" />
+
+                    <Image Grid.Row="3"
+                           Grid.Column="2"
+                           Style="{StaticResource ImageApps}"
+                           Source="duckduckgo.png" />
+                    <Label Grid.Row="4"
+                           Grid.Column="2"
+                           Style="{StaticResource LabelApps}"
+                           Text="Coin-Coin" />
+
+                    <Image Grid.Row="3"
+                           Grid.Column="3"
+                           Style="{StaticResource ImageApps}"
+                           Source="azure.png" />
+                    <Label Grid.Row="4"
+                           Grid.Column="3"
+                           Style="{StaticResource LabelApps}"
+                           Text="Azure" />
+
+                </Grid>
+            </rv:MaterialFrame>
+
+            <Grid Margin="{StaticResource HeaderMargin}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0"
+                       Style="{StaticResource TextHeadline}"
+                       Text="Recent"
+                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
+                <Image Grid.Column="1"
+                       HorizontalOptions="End"
+                       VerticalOptions="End"
+                       Source="{StaticResource IconDots}" />
+            </Grid>
+
+            <rv:MaterialFrame StyleId="9999">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Style="{StaticResource ImageRecent}"
+                           Source="file_pdf.png" />
+
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Style="{StaticResource LabelApps}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="End"
+                           Text="Attestation de déplacement" />
+
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Style="{StaticResource TextHour}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           Text="Downloads" />
+
+                    <Label Grid.Row="0"
+                           Grid.Column="2"
+                           Style="{StaticResource TextHour}"
+                           HorizontalOptions="End"
+                           VerticalOptions="End"
+                           Text="1h ago" />
+
+
+                    <Image Grid.Row="3"
+                           Grid.RowSpan="2"
+                           Style="{StaticResource ImageRecent}"
+                           Source="file_gpx.png" />
+
+                    <Label Grid.Row="3"
+                           Grid.Column="1"
+                           Style="{StaticResource LabelApps}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="End"
+                           Text="Col de Joux Plane data" />
+
+                    <Label Grid.Row="4"
+                           Grid.Column="1"
+                           Style="{StaticResource TextHour}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           Text="SkiaSharpnado" />
+
+                    <Label Grid.Row="3"
+                           Grid.Column="2"
+                           Style="{StaticResource TextHour}"
+                           HorizontalOptions="End"
+                           VerticalOptions="End"
+                           Text="5h ago" />
+
+
+                    <Image Grid.Row="6"
+                           Grid.RowSpan="2"
+                           Style="{StaticResource ImageRecent}"
+                           Source="file_mp3.png" />
+
+                    <Label Grid.Row="6"
+                           Grid.Column="1"
+                           Style="{StaticResource LabelApps}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="End"
+                           Text="Don't Fear The Ripper" />
+
+                    <Label Grid.Row="7"
+                           Grid.Column="1"
+                           Style="{StaticResource TextHour}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           Text="More Cowbell" />
+
+                    <Label Grid.Row="6"
+                           Grid.Column="2"
+                           Style="{StaticResource TextHour}"
+                           HorizontalOptions="End"
+                           VerticalOptions="End"
+                           Text="12h ago" />
+
+
+                    <Image Grid.Row="9"
+                           Grid.RowSpan="2"
+                           Style="{StaticResource ImageRecent}"
+                           Source="file_pdf.png" />
+
+                    <Label Grid.Row="9"
+                           Grid.Column="1"
+                           Style="{StaticResource LabelApps}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="End"
+                           Text="Attestation de déplacement" />
+
+                    <Label Grid.Row="10"
+                           Grid.Column="1"
+                           Style="{StaticResource TextHour}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           Text="Downloads" />
+
+                    <Label Grid.Row="9"
+                           Grid.Column="2"
+                           Style="{StaticResource TextHour}"
+                           HorizontalOptions="End"
+                           VerticalOptions="End"
+                           Text="1d ago" />
+
+
+                    <Image Grid.Row="12"
+                           Grid.RowSpan="2"
+                           Style="{StaticResource ImageRecent}"
+                           Source="file_pdf.png" />
+
+                    <Label Grid.Row="12"
+                           Grid.Column="1"
+                           Style="{StaticResource LabelApps}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="End"
+                           Text="Attestation de déplacement" />
+
+                    <Label Grid.Row="13"
+                           Grid.Column="1"
+                           Style="{StaticResource TextHour}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           Text="Downloads" />
+
+                    <Label Grid.Row="12"
+                           Grid.Column="2"
+                           Style="{StaticResource TextHour}"
+                           HorizontalOptions="End"
+                           VerticalOptions="End"
+                           Text="2d ago" />
+                </Grid>
+            </rv:MaterialFrame>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

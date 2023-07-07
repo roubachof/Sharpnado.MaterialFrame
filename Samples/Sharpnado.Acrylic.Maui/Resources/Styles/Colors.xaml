@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="DarkSurface">#121212</Color>
+    <Color x:Key="AcrylicSurface">#E6E6E6</Color>
+
+    <Color x:Key="AcrylicFrameBackgroundColor">#F1F1F1</Color>
+
+    <Color x:Key="AccentColor">#00E000</Color>
+
+    <Color x:Key="PrimaryColor">Black</Color>
+    <Color x:Key="SecondaryColor">#60000000</Color>
+    <Color x:Key="TernaryColor">#30000000</Color>
+
+    <Color x:Key="PrimaryDarkColor">White</Color>
+    <Color x:Key="SecondaryDarkColor">#80FFFFFF</Color>
+    <Color x:Key="TernaryDarkColor">#50FFFFFF</Color>
+
+    <Color x:Key="TextPrimaryColor">Black</Color>
+    <Color x:Key="TextSecondaryColor">#60000000</Color>
+    <Color x:Key="TextTernaryColor">#40000000</Color>
+
+    <Color x:Key="TextPrimaryDarkColor">White</Color>
+    <Color x:Key="TextSecondaryDarkColor">#80FFFFFF</Color>
+    <Color x:Key="TextTernaryDarkColor">#50FFFFFF</Color>
+
+</ResourceDictionary>

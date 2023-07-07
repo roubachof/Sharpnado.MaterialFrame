@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <x:Double x:Key="TextSizeHuge">32</x:Double>
+    <x:Double x:Key="TextSizeHeadline">17</x:Double>
+    <x:Double x:Key="TextSizeTitle">15</x:Double>
+    <x:Double x:Key="TextSizeSubhead">14</x:Double>
+    <x:Double x:Key="TextSizeBody">13</x:Double>
+    <x:Double x:Key="TextSizeSubBody">12</x:Double>
+    <x:Double x:Key="TextSizeCaption">11</x:Double>
+    <x:Double x:Key="TextSizeSmallCaption">10</x:Double>
+
+    <x:String x:Key="FontBold">OpenSansBold</x:String>
+    <x:String x:Key="FontExtraBold">OpenSansExtraBold</x:String>
+    <x:String x:Key="FontBoldItalic">OpenSansBoldItalic</x:String>
+    <x:String x:Key="FontRegular">OpenSansRegular</x:String>
+    <x:String x:Key="FontItalic">OpenSansItalic</x:String>
+    <x:String x:Key="FontSemiBold">OpenSansSemibold</x:String>
+    <x:String x:Key="FontLight">OpenSansLight</x:String>
+
+    <Style x:Key="TextHuge" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontBold}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextPrimaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeHuge}" />
+    </Style>
+
+    <Style x:Key="TextHeadline" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontExtraBold}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextPrimaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeHeadline}" />
+    </Style>
+
+    <Style x:Key="TextTitle" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontBold}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextPrimaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeTitle}" />
+    </Style>
+
+    <Style x:Key="TextSubHeadline" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontBold}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextPrimaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeSubhead}" />
+    </Style>
+
+    <Style x:Key="TextSubhead" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextPrimaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeSubhead}" />
+    </Style>
+
+    <Style x:Key="TextSubheadSecondary" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextSecondaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeSubhead}" />
+    </Style>
+
+    <Style x:Key="TextSubtitle" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextPrimaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeSubBody}" />
+    </Style>
+
+    <Style x:Key="TextSubtitleSecondary" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextSecondaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeSubBody}" />
+    </Style>
+
+    <Style x:Key="TextBody" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontRegular}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextPrimaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeBody}" />
+    </Style>
+
+    <Style x:Key="TextBodySecondary" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontRegular}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextSecondaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeBody}" />
+    </Style>
+
+    <Style x:Key="TextBodyTernary" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontRegular}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextTernaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeBody}" />
+    </Style>
+
+    <Style x:Key="TextHour" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextSecondaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeSmallCaption}" />
+    </Style>
+
+    <Style x:Key="TextCaption" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontRegular}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextPrimaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeCaption}" />
+    </Style>
+
+    <Style x:Key="TextSmallCaption"
+           BasedOn="{StaticResource TextCaption}"
+           TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource TextSizeSmallCaption}" />
+    </Style>
+
+    <Style x:Key="TextSmallCaptionSecondary"
+           BasedOn="{StaticResource TextCaption}"
+           TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextSecondaryColor}" />
+    </Style>
+
+    <Style x:Key="TextSmallCaptionTernary"
+           BasedOn="{StaticResource TextCaption}"
+           TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextTernaryColor}" />
+    </Style>
+
+    <Style x:Key="TextCaptionSecondary" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontRegular}" />
+        <Setter Property="TextColor" Value="{DynamicResource DynamicTextSecondaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource TextSizeCaption}" />
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:rv="http://sharpnado.com">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="rv:MaterialFrame">
+        <Setter Property="Margin" Value="5, 5, 5, 10" />
+        <Setter Property="Padding" Value="20,15" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="LightThemeBackgroundColor" Value="{StaticResource AcrylicFrameBackgroundColor}" />
+        <Setter Property="MaterialTheme" Value="{DynamicResource DynamicMaterialTheme}" />
+        <Setter Property="MaterialBlurStyle" Value="{DynamicResource DynamicBlurStyle}" />
+        <Setter Property="Elevation" Value="{DynamicResource DynamicElevation}" />
+    </Style>
+
+</ResourceDictionary>
