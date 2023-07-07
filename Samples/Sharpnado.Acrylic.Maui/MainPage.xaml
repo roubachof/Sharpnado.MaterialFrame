@@ -137,32 +137,32 @@
                 </Image>
             </Grid>
 
-            <rv:MaterialFrame x:Name="Search"
-                              Padding="20,5"
-                              StyleId="2222">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="40" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image HorizontalOptions="Start" Source="{StaticResource IconSearch}" />
-
-                    <Label Grid.Column="1"
-                           Style="{StaticResource TextBodyTernary}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Center"
-                           Text="Type here to search" />
-
-                    <Image Grid.Column="2"
-                           HorizontalOptions="End"
-                           Source="{StaticResource IconMic}" />
-                </Grid>
-            </rv:MaterialFrame>
+            <!-- <rv:MaterialFrame x:Name="Search" -->
+            <!--                   Padding="20,5" -->
+            <!--                   StyleId="2222"> -->
+            <!--     <Grid> -->
+            <!--         <Grid.RowDefinitions> -->
+            <!--             <RowDefinition Height="30" /> -->
+            <!--         </Grid.RowDefinitions> -->
+            <!--         <Grid.ColumnDefinitions> -->
+            <!--             <ColumnDefinition Width="30" /> -->
+            <!--             <ColumnDefinition Width="*" /> -->
+            <!--             <ColumnDefinition Width="40" /> -->
+            <!--         </Grid.ColumnDefinitions> -->
+            <!-- -->
+            <!--         <Image HorizontalOptions="Start" Source="{StaticResource IconSearch}" /> -->
+            <!-- -->
+            <!--         <Label Grid.Column="1" -->
+            <!--                Style="{StaticResource TextBodyTernary}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="Center" -->
+            <!--                Text="Type here to search" /> -->
+            <!-- -->
+            <!--         <Image Grid.Column="2" -->
+            <!--                HorizontalOptions="End" -->
+            <!--                Source="{StaticResource IconMic}" /> -->
+            <!--     </Grid> -->
+            <!-- </rv:MaterialFrame> -->
 
             <Grid Margin="{StaticResource HeaderMargin}">
                 <Grid.ColumnDefinitions>
@@ -180,52 +180,52 @@
                        Source="{StaticResource IconDots}" />
             </Grid>
 
-            <rv:MaterialFrame StyleId="3333">
-                <Grid RowSpacing="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30" />
-                        <RowDefinition Height="30" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="40" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image HorizontalOptions="Start" Source="{StaticResource IconPlus}" />
-
-                    <Label Grid.Row="0"
-                           Grid.Column="1"
-                           Style="{StaticResource TextBodyTernary}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Center"
-                           Text="Create a task" />
-
-                    <Image Grid.Row="0"
-                           Grid.Column="2"
-                           HorizontalOptions="End"
-                           Source="{StaticResource IconMic}" />
-
-                    <Image Grid.Row="1"
-                           Grid.Column="0"
-                           HorizontalOptions="Start"
-                           Source="{StaticResource IconSquare}" />
-
-                    <Label Grid.Row="1"
-                           Grid.Column="1"
-                           Style="{StaticResource TextBody}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Center"
-                           Text="Dota 2 game at 21:30" />
-
-                    <Label Grid.Row="1"
-                           Grid.Column="2"
-                           Style="{StaticResource TextHour}"
-                           HorizontalOptions="End"
-                           VerticalOptions="Center"
-                           Text="in 3h" />
-                </Grid>
-            </rv:MaterialFrame>
+            <!-- <rv:MaterialFrame StyleId="3333"> -->
+            <!--     <Grid RowSpacing="10"> -->
+            <!--         <Grid.RowDefinitions> -->
+            <!--             <RowDefinition Height="30" /> -->
+            <!--             <RowDefinition Height="30" /> -->
+            <!--         </Grid.RowDefinitions> -->
+            <!--         <Grid.ColumnDefinitions> -->
+            <!--             <ColumnDefinition Width="30" /> -->
+            <!--             <ColumnDefinition Width="*" /> -->
+            <!--             <ColumnDefinition Width="40" /> -->
+            <!--         </Grid.ColumnDefinitions> -->
+            <!-- -->
+            <!--         <Image HorizontalOptions="Start" Source="{StaticResource IconPlus}" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="0" -->
+            <!--                Grid.Column="1" -->
+            <!--                Style="{StaticResource TextBodyTernary}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="Center" -->
+            <!--                Text="Create a task" /> -->
+            <!-- -->
+            <!--         <Image Grid.Row="0" -->
+            <!--                Grid.Column="2" -->
+            <!--                HorizontalOptions="End" -->
+            <!--                Source="{StaticResource IconMic}" /> -->
+            <!-- -->
+            <!--         <Image Grid.Row="1" -->
+            <!--                Grid.Column="0" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                Source="{StaticResource IconSquare}" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="1" -->
+            <!--                Grid.Column="1" -->
+            <!--                Style="{StaticResource TextBody}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="Center" -->
+            <!--                Text="Dota 2 game at 21:30" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="1" -->
+            <!--                Grid.Column="2" -->
+            <!--                Style="{StaticResource TextHour}" -->
+            <!--                HorizontalOptions="End" -->
+            <!--                VerticalOptions="Center" -->
+            <!--                Text="in 3h" /> -->
+            <!--     </Grid> -->
+            <!-- </rv:MaterialFrame> -->
 
             <Grid Margin="{StaticResource HeaderMargin}">
                 <Grid.ColumnDefinitions>
@@ -350,165 +350,165 @@
                        Source="{StaticResource IconDots}" />
             </Grid>
 
-            <rv:MaterialFrame StyleId="9999">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="10" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="40" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image Grid.Row="0"
-                           Grid.RowSpan="2"
-                           Style="{StaticResource ImageRecent}"
-                           Source="file_pdf.png" />
-
-                    <Label Grid.Row="0"
-                           Grid.Column="1"
-                           Style="{StaticResource LabelApps}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="End"
-                           Text="Attestation de déplacement" />
-
-                    <Label Grid.Row="1"
-                           Grid.Column="1"
-                           Style="{StaticResource TextHour}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Text="Downloads" />
-
-                    <Label Grid.Row="0"
-                           Grid.Column="2"
-                           Style="{StaticResource TextHour}"
-                           HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Text="1h ago" />
-
-
-                    <Image Grid.Row="3"
-                           Grid.RowSpan="2"
-                           Style="{StaticResource ImageRecent}"
-                           Source="file_gpx.png" />
-
-                    <Label Grid.Row="3"
-                           Grid.Column="1"
-                           Style="{StaticResource LabelApps}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="End"
-                           Text="Col de Joux Plane data" />
-
-                    <Label Grid.Row="4"
-                           Grid.Column="1"
-                           Style="{StaticResource TextHour}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Text="SkiaSharpnado" />
-
-                    <Label Grid.Row="3"
-                           Grid.Column="2"
-                           Style="{StaticResource TextHour}"
-                           HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Text="5h ago" />
-
-
-                    <Image Grid.Row="6"
-                           Grid.RowSpan="2"
-                           Style="{StaticResource ImageRecent}"
-                           Source="file_mp3.png" />
-
-                    <Label Grid.Row="6"
-                           Grid.Column="1"
-                           Style="{StaticResource LabelApps}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="End"
-                           Text="Don't Fear The Ripper" />
-
-                    <Label Grid.Row="7"
-                           Grid.Column="1"
-                           Style="{StaticResource TextHour}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Text="More Cowbell" />
-
-                    <Label Grid.Row="6"
-                           Grid.Column="2"
-                           Style="{StaticResource TextHour}"
-                           HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Text="12h ago" />
-
-
-                    <Image Grid.Row="9"
-                           Grid.RowSpan="2"
-                           Style="{StaticResource ImageRecent}"
-                           Source="file_pdf.png" />
-
-                    <Label Grid.Row="9"
-                           Grid.Column="1"
-                           Style="{StaticResource LabelApps}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="End"
-                           Text="Attestation de déplacement" />
-
-                    <Label Grid.Row="10"
-                           Grid.Column="1"
-                           Style="{StaticResource TextHour}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Text="Downloads" />
-
-                    <Label Grid.Row="9"
-                           Grid.Column="2"
-                           Style="{StaticResource TextHour}"
-                           HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Text="1d ago" />
-
-
-                    <Image Grid.Row="12"
-                           Grid.RowSpan="2"
-                           Style="{StaticResource ImageRecent}"
-                           Source="file_pdf.png" />
-
-                    <Label Grid.Row="12"
-                           Grid.Column="1"
-                           Style="{StaticResource LabelApps}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="End"
-                           Text="Attestation de déplacement" />
-
-                    <Label Grid.Row="13"
-                           Grid.Column="1"
-                           Style="{StaticResource TextHour}"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Text="Downloads" />
-
-                    <Label Grid.Row="12"
-                           Grid.Column="2"
-                           Style="{StaticResource TextHour}"
-                           HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Text="2d ago" />
-                </Grid>
-            </rv:MaterialFrame>
+            <!-- <rv:MaterialFrame StyleId="9999"> -->
+            <!--     <Grid> -->
+            <!--         <Grid.RowDefinitions> -->
+            <!--             <RowDefinition Height="20" /> -->
+            <!--             <RowDefinition Height="20" /> -->
+            <!--             <RowDefinition Height="10" /> -->
+            <!--             <RowDefinition Height="20" /> -->
+            <!--             <RowDefinition Height="20" /> -->
+            <!--             <RowDefinition Height="10" /> -->
+            <!--             <RowDefinition Height="20" /> -->
+            <!--             <RowDefinition Height="20" /> -->
+            <!--             <RowDefinition Height="10" /> -->
+            <!--             <RowDefinition Height="20" /> -->
+            <!--             <RowDefinition Height="20" /> -->
+            <!--             <RowDefinition Height="10" /> -->
+            <!--             <RowDefinition Height="20" /> -->
+            <!--             <RowDefinition Height="20" /> -->
+            <!--         </Grid.RowDefinitions> -->
+            <!--         <Grid.ColumnDefinitions> -->
+            <!--             <ColumnDefinition Width="50" /> -->
+            <!--             <ColumnDefinition Width="*" /> -->
+            <!--             <ColumnDefinition Width="40" /> -->
+            <!--         </Grid.ColumnDefinitions> -->
+            <!-- -->
+            <!--         <Image Grid.Row="0" -->
+            <!--                Grid.RowSpan="2" -->
+            <!--                Style="{StaticResource ImageRecent}" -->
+            <!--                Source="file_pdf.png" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="0" -->
+            <!--                Grid.Column="1" -->
+            <!--                Style="{StaticResource LabelApps}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="End" -->
+            <!--                Text="Attestation de déplacement" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="1" -->
+            <!--                Grid.Column="1" -->
+            <!--                Style="{StaticResource TextHour}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="Start" -->
+            <!--                Text="Downloads" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="0" -->
+            <!--                Grid.Column="2" -->
+            <!--                Style="{StaticResource TextHour}" -->
+            <!--                HorizontalOptions="End" -->
+            <!--                VerticalOptions="End" -->
+            <!--                Text="1h ago" /> -->
+            <!-- -->
+            <!-- -->
+            <!--         <Image Grid.Row="3" -->
+            <!--                Grid.RowSpan="2" -->
+            <!--                Style="{StaticResource ImageRecent}" -->
+            <!--                Source="file_gpx.png" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="3" -->
+            <!--                Grid.Column="1" -->
+            <!--                Style="{StaticResource LabelApps}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="End" -->
+            <!--                Text="Col de Joux Plane data" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="4" -->
+            <!--                Grid.Column="1" -->
+            <!--                Style="{StaticResource TextHour}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="Start" -->
+            <!--                Text="SkiaSharpnado" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="3" -->
+            <!--                Grid.Column="2" -->
+            <!--                Style="{StaticResource TextHour}" -->
+            <!--                HorizontalOptions="End" -->
+            <!--                VerticalOptions="End" -->
+            <!--                Text="5h ago" /> -->
+            <!-- -->
+            <!-- -->
+            <!--         <Image Grid.Row="6" -->
+            <!--                Grid.RowSpan="2" -->
+            <!--                Style="{StaticResource ImageRecent}" -->
+            <!--                Source="file_mp3.png" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="6" -->
+            <!--                Grid.Column="1" -->
+            <!--                Style="{StaticResource LabelApps}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="End" -->
+            <!--                Text="Don't Fear The Ripper" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="7" -->
+            <!--                Grid.Column="1" -->
+            <!--                Style="{StaticResource TextHour}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="Start" -->
+            <!--                Text="More Cowbell" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="6" -->
+            <!--                Grid.Column="2" -->
+            <!--                Style="{StaticResource TextHour}" -->
+            <!--                HorizontalOptions="End" -->
+            <!--                VerticalOptions="End" -->
+            <!--                Text="12h ago" /> -->
+            <!-- -->
+            <!-- -->
+            <!--         <Image Grid.Row="9" -->
+            <!--                Grid.RowSpan="2" -->
+            <!--                Style="{StaticResource ImageRecent}" -->
+            <!--                Source="file_pdf.png" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="9" -->
+            <!--                Grid.Column="1" -->
+            <!--                Style="{StaticResource LabelApps}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="End" -->
+            <!--                Text="Attestation de déplacement" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="10" -->
+            <!--                Grid.Column="1" -->
+            <!--                Style="{StaticResource TextHour}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="Start" -->
+            <!--                Text="Downloads" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="9" -->
+            <!--                Grid.Column="2" -->
+            <!--                Style="{StaticResource TextHour}" -->
+            <!--                HorizontalOptions="End" -->
+            <!--                VerticalOptions="End" -->
+            <!--                Text="1d ago" /> -->
+            <!-- -->
+            <!-- -->
+            <!--         <Image Grid.Row="12" -->
+            <!--                Grid.RowSpan="2" -->
+            <!--                Style="{StaticResource ImageRecent}" -->
+            <!--                Source="file_pdf.png" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="12" -->
+            <!--                Grid.Column="1" -->
+            <!--                Style="{StaticResource LabelApps}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="End" -->
+            <!--                Text="Attestation de déplacement" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="13" -->
+            <!--                Grid.Column="1" -->
+            <!--                Style="{StaticResource TextHour}" -->
+            <!--                HorizontalOptions="Start" -->
+            <!--                VerticalOptions="Start" -->
+            <!--                Text="Downloads" /> -->
+            <!-- -->
+            <!--         <Label Grid.Row="12" -->
+            <!--                Grid.Column="2" -->
+            <!--                Style="{StaticResource TextHour}" -->
+            <!--                HorizontalOptions="End" -->
+            <!--                VerticalOptions="End" -->
+            <!--                Text="2d ago" /> -->
+            <!--     </Grid> -->
+            <!-- </rv:MaterialFrame> -->
 
         </StackLayout>
     </ScrollView>

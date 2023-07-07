@@ -24,6 +24,8 @@ namespace Sharpnado.MaterialFrame.iOS
 
         private MaterialFrame MaterialFrame => (MaterialFrame)Element;
 
+        private UIView ActualView => Subviews[0];
+
         public override void LayoutSublayersOfLayer(CALayer layer)
         {
             base.LayoutSublayersOfLayer(layer);
@@ -46,6 +48,23 @@ namespace Sharpnado.MaterialFrame.iOS
             base.LayoutSubviews();
 
             InternalLogger.Debug(Tag, () => $"LayoutSubviews()");
+        }
+
+        public override void SetupLayer()
+        {
+            if (Element.BorderColor == null)
+            {
+                ActualView.Layer.BorderColor = UIColor.Clear.CGColor;
+                ActualView.Layer.BorderWidth = 0;
+            }
+            else
+            {
+                var borderWidth = (int)(Element is IBorderElement be ? be.BorderWidth : 1);
+                borderWidth = Math.Max(1, borderWidth);
+
+                ActualView.Layer.BorderColor = Element.BorderColor.ToCGColor();
+                ActualView.Layer.BorderWidth = borderWidth;
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -77,6 +96,7 @@ namespace Sharpnado.MaterialFrame.iOS
                 return;
             }
 
+            AutoPackage = true;
             InternalLogger.Debug(Tag, () => "OnElementChanged()");
 
             _intermediateLayer = new CALayer { BackgroundColor = Colors.Transparent.ToCGColor() };
@@ -315,8 +335,10 @@ namespace Sharpnado.MaterialFrame.iOS
 
             UpdateBlurViewBounds();
             var blurViewParent = new UIView();
-            blurViewParent.InsertSubview(_blurView, 0);
-            AddSubview(blurViewParent);
+            //blurViewParent.InsertSubview(_blurView, 0);
+            // InsertSubview(_blurView, 0);
+
+            ActualView.InsertSubview(_blurView, 0);
         }
 
         private void DisableBlur()
