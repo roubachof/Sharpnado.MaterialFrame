@@ -48,6 +48,11 @@ namespace Sharpnado.MaterialFrame.iOS
             base.LayoutSubviews();
 
             InternalLogger.Debug(Tag, () => $"LayoutSubviews()");
+
+            if (MaterialFrame.MaterialTheme == MaterialFrame.Theme.AcrylicBlur)
+            {
+                EnableBlur();
+            }
         }
 
         public override void SetupLayer()
@@ -99,8 +104,12 @@ namespace Sharpnado.MaterialFrame.iOS
             AutoPackage = true;
             InternalLogger.Debug(Tag, () => "OnElementChanged()");
 
-            _intermediateLayer = new CALayer { BackgroundColor = Colors.Transparent.ToCGColor() };
+            // if (Layer.Sublayers is { Length: > 0 })
+            // {
+            //     Layer.Sublayers[0].RemoveFromSuperLayer();
+            // }
 
+            _intermediateLayer = new CALayer { BackgroundColor = Colors.Transparent.ToCGColor() };
             Layer.InsertSublayer(_intermediateLayer, 0);
 
             UpdateMaterialTheme();
@@ -136,7 +145,7 @@ namespace Sharpnado.MaterialFrame.iOS
 
                 case nameof(MaterialFrame.Height):
                 case nameof(MaterialFrame.Width):
-                    UpdateBlurViewBounds();
+                    // UpdateBlurViewBounds();
                     UpdateLayerBounds();
                     break;
             }
@@ -323,22 +332,32 @@ namespace Sharpnado.MaterialFrame.iOS
 
             if (_blurView == null)
             {
-                _blurView = new UIVisualEffectView() { ClipsToBounds = true, BackgroundColor = UIColor.Clear };
+                _blurView = new UIVisualEffectView()
+                {
+                    ClipsToBounds = true,
+                    BackgroundColor = UIColor.Clear,
+                    TranslatesAutoresizingMaskIntoConstraints = false,
+                };
             }
 
-            UpdateMaterialBlurStyle();
-
-            if (Subviews.Length > 0 && ReferenceEquals(Subviews[0], _blurView))
+            if (ActualView.Subviews.Length > 0 && ReferenceEquals(ActualView.Subviews[0], _blurView))
             {
                 return;
             }
 
-            UpdateBlurViewBounds();
-            var blurViewParent = new UIView();
-            //blurViewParent.InsertSubview(_blurView, 0);
-            // InsertSubview(_blurView, 0);
+            UpdateMaterialBlurStyle();
+
+            // UpdateBlurViewBounds();
 
             ActualView.InsertSubview(_blurView, 0);
+
+            NSLayoutConstraint.ActivateConstraints(new[]
+            {
+                _blurView.LeadingAnchor.ConstraintEqualTo(ActualView.LeadingAnchor),
+                _blurView.TopAnchor.ConstraintEqualTo(ActualView.TopAnchor),
+                _blurView.WidthAnchor.ConstraintEqualTo(ActualView.WidthAnchor),
+                _blurView.HeightAnchor.ConstraintEqualTo(ActualView.HeightAnchor),
+            });
         }
 
         private void DisableBlur()

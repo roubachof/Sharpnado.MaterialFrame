@@ -21,6 +21,7 @@ namespace Sharpnado.MaterialFrame.Droid
         public AndroidMaterialFrameRenderer(Context context)
             : base(context)
         {
+            MaxCardElevation = Context.ToPixels(32);
         }
 
         private MaterialFrame MaterialFrame => (MaterialFrame)Element;
@@ -122,7 +123,7 @@ namespace Sharpnado.MaterialFrame.Droid
         {
             if (MaterialFrame.MaterialTheme == MaterialFrame.Theme.Dark || MaterialFrame.MaterialTheme == MaterialFrame.Theme.AcrylicBlur)
             {
-                ViewCompat.SetElevation(this, 0);
+                CardElevation = 0;
                 return;
             }
 
@@ -132,7 +133,7 @@ namespace Sharpnado.MaterialFrame.Droid
             StateListAnimator = new Android.Animation.StateListAnimator();
 
             // set the elevation manually
-            ViewCompat.SetElevation(this, isAcrylicTheme ? MaterialFrame.AcrylicElevation : MaterialFrame.Elevation);
+            CardElevation = isAcrylicTheme ? MaterialFrame.AcrylicElevation : MaterialFrame.Elevation;
         }
 
         private void UpdateLightThemeBackgroundColor()

@@ -25,10 +25,10 @@ namespace Sharpnado.Acrylic.Maui
 
             _blurStyleButtons = new[] { LightButton, DarkButton, ExtraLightButton };
 
-            SettingsFrame.IsVisible = _isSettingsShown;
-            SettingsFrame.Opacity = _isSettingsShown ? 1 : 0;
+            // SettingsFrame.IsVisible = _isSettingsShown;
+            // SettingsFrame.Opacity = _isSettingsShown ? 1 : 0;
 
-            BlurSwitch.IsToggled = true;
+            BlurSwitch.IsToggled = false;
             SwitchOnToggled(BlurSwitch, new ToggledEventArgs(false));
         }
 
@@ -55,20 +55,20 @@ namespace Sharpnado.Acrylic.Maui
             if (!_isSettingsShown)
             {
                 BlurStyleRow.Height = _isAcrylicBlurEnabled ? SettingsRowHeight : 0;
-                SettingsFrame.IsVisible = true;
-
-                TaskMonitor.Create(SettingsFrame.FadeTo(1));
+                // SettingsFrame.IsVisible = true;
+                //
+                // TaskMonitor.Create(SettingsFrame.FadeTo(1));
                 _isSettingsShown = true;
                 return;
             }
 
             // Hide
             _isSettingsShown = false;
-            TaskMonitor.Create( async() =>
-                {
-                    await SettingsFrame.FadeTo(0);
-                    SettingsFrame.IsVisible = false;
-                });
+            // TaskMonitor.Create( async() =>
+            //     {
+            //         await SettingsFrame.FadeTo(0);
+            //         SettingsFrame.IsVisible = false;
+            //     });
         }
 
         private void SwitchOnToggled(object sender, ToggledEventArgs e)
