@@ -1,30 +1,31 @@
 ﻿using System.ComponentModel;
 using System.Numerics;
-using Sharpnado.MaterialFrame;
-using Sharpnado.MaterialFrame.UWP;
-using Windows.UI.Composition;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Automation.Peers;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Shapes;
-using Xamarin.Forms.Internals;
-using Xamarin.Forms.Platform.UWP;
 
-using AcrylicBackgroundSource = Microsoft.UI.Xaml.Media.AcrylicBackgroundSource;
+using Microsoft.Maui.Controls.Compatibility.Platform.UWP;
+using Microsoft.Maui.Controls.Platform;
+using Microsoft.Maui.Controls.PlatformConfiguration;
+using Microsoft.Maui.Platform;
+using Microsoft.UI.Composition;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Automation.Peers;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Hosting;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Shapes;
+
 using AcrylicBrush = Microsoft.UI.Xaml.Media.AcrylicBrush;
-using Color = Xamarin.Forms.Color;
+using Brush = Microsoft.UI.Xaml.Media.Brush;
+using CornerRadius = Microsoft.UI.Xaml.CornerRadius;
+using Grid = Microsoft.UI.Xaml.Controls.Grid;
+using SolidColorBrush = Microsoft.UI.Xaml.Media.SolidColorBrush;
+using Thickness = Microsoft.UI.Xaml.Thickness;
 
-[assembly: ExportRenderer(typeof(MaterialFrame), typeof(UWPMaterialFrameRenderer))]
-
-namespace Sharpnado.MaterialFrame.UWP
+namespace Sharpnado.MaterialFrame.WinUI
 {
     /// <summary>
     ///     Renderer to update all frames with better shadows matching material design standards.
     /// </summary>
-    [Preserve]
-    public class UWPMaterialFrameRenderer : ViewRenderer<MaterialFrame, Grid>
+    public class WinUIMaterialFrameRenderer : Microsoft.Maui.Controls.Handlers.Compatibility.ViewRenderer<MaterialFrame, Grid>
     {
         private static readonly Color DarkBlurOverlayColor = Color.FromHex("#80000000");
         private static readonly Color DarkFallBackColor = Color.FromHex("#333333");
@@ -42,7 +43,7 @@ namespace Sharpnado.MaterialFrame.UWP
         private Compositor _compositor;
         private SpriteVisual _shadowVisual;
 
-        public UWPMaterialFrameRenderer()
+        public WinUIMaterialFrameRenderer()
         {
             AutoPackage = false;
         }
@@ -78,9 +79,15 @@ namespace Sharpnado.MaterialFrame.UWP
                 return;
             }
 
+            var grid = new Grid
+                {
+                    Margin = Element.Margin.ToPlatform(),
+                    Padding = Element.Padding.ToPlatform(),
+                };
+
             if (Control == null)
             {
-                SetNativeControl(new Grid());
+                SetNativeControl(grid);
             }
 
             PackChild();
@@ -93,6 +100,11 @@ namespace Sharpnado.MaterialFrame.UWP
         {
             switch (e.PropertyName)
             {
+                case nameof(MaterialFrame.Padding):
+                case nameof(MaterialFrame.Margin):
+                    //UpdateMarginAndPadding();
+                    break;
+
                 case nameof(MaterialFrame.BorderColor):
                     UpdateBorder();
                     break;
@@ -119,7 +131,7 @@ namespace Sharpnado.MaterialFrame.UWP
                     UpdateMaterialTheme();
                     break;
 
-                case nameof(MaterialFrame.UwpBlurOverlayColor):
+                case nameof(MaterialFrame.WinUIBlurOverlayColor):
                     UpdateBlur();
                     break;
 
@@ -127,6 +139,17 @@ namespace Sharpnado.MaterialFrame.UWP
                     UpdateMaterialBlurStyle();
                     break;
             }
+        }
+
+        private void UpdateMarginAndPadding()
+        {
+            if (Control == null || Element == null)
+            {
+                return;
+            }
+
+            Control.Margin = Element.Margin.ToPlatform();
+            Control.Padding = Element.Padding.ToPlatform();
         }
 
         private void PackChild()
@@ -140,7 +163,7 @@ namespace Sharpnado.MaterialFrame.UWP
             FrameworkElement frameworkElement = renderer.ContainerElement;
 
             _acrylicRectangle = new Rectangle();
-            _shadowHost = new Rectangle { Fill = Color.Transparent.ToBrush() };
+            _shadowHost = new Rectangle { Fill = Colors.Transparent.ToBrush() };
 
             _grid = new Grid();
             _grid.Children.Add(_acrylicRectangle);
@@ -155,7 +178,7 @@ namespace Sharpnado.MaterialFrame.UWP
             _acrylicRectangle.Margin = new Thickness(0, enable ? 2 : 0, 0, 0);
             if (!enable)
             {
-                _acrylicRectangle.Fill = Color.Transparent.ToBrush();
+                _acrylicRectangle.Fill = Colors.Transparent.ToBrush();
             }
         }
 
@@ -166,7 +189,7 @@ namespace Sharpnado.MaterialFrame.UWP
                 return;
             }
 
-            if (Element.BorderColor != Color.Default)
+            if (Element.BorderColor != null)
             {
                 _grid.BorderBrush = Element.BorderColor.ToBrush();
                 _grid.BorderThickness = new Thickness(1);
@@ -242,7 +265,7 @@ namespace Sharpnado.MaterialFrame.UWP
 
             if (!Element.IsShadowCompatible)
             {
-                _shadowHost.Fill = Color.Transparent.ToBrush();
+                _shadowHost.Fill = Colors.Transparent.ToBrush();
 
                 if (_shadowVisual != null)
                 {
@@ -274,7 +297,7 @@ namespace Sharpnado.MaterialFrame.UWP
             int width = (int)Element.Width;
             int height = (int)Element.Height;
 
-            _shadowHost.Fill = Color.White.ToBrush();
+            _shadowHost.Fill = Colors.White.ToBrush();
             _shadowHost.Width = width;
             _shadowHost.Height = height;
 
@@ -287,7 +310,7 @@ namespace Sharpnado.MaterialFrame.UWP
             var dropShadow = _compositor.CreateDropShadow();
             dropShadow.BlurRadius = blurRadius;
             dropShadow.Opacity = opacity;
-            dropShadow.Color = Color.Black.ToWindowsColor();
+            dropShadow.Color = Colors.Black.ToWindowsColor();
             dropShadow.Offset = new Vector3(0, elevation, 0);
             dropShadow.Mask = _shadowHost.GetAlphaMask();
 
@@ -363,7 +386,10 @@ namespace Sharpnado.MaterialFrame.UWP
                 return;
             }
 
-            var acrylicBrush = new AcrylicBrush { BackgroundSource = Element.UwpHostBackdropBlur ? AcrylicBackgroundSource.HostBackdrop : AcrylicBackgroundSource.Backdrop };
+            var acrylicBrush = new AcrylicBrush();
+
+            // Background acrylic isn't currently supported. The mentioned property was removed in .8 release: https://github.com/microsoft/microsoft-ui-xaml/issues/6618
+            // { BackgroundSource = Element.WinUIHostBackdropBlur ? AcrylicBackgroundSource.HostBackdrop : AcrylicBackgroundSource.Backdrop };
 
             switch (Element.MaterialBlurStyle)
             {
@@ -391,12 +417,13 @@ namespace Sharpnado.MaterialFrame.UWP
                 return;
             }
 
-            if (Element.UwpBlurOverlayColor != Color.Default)
+            if (Element.WinUIBlurOverlayColor != Colors.Transparent)
             {
                 var acrylicBrush = new AcrylicBrush
                 {
-                    BackgroundSource = Element.UwpHostBackdropBlur ? AcrylicBackgroundSource.HostBackdrop : AcrylicBackgroundSource.Backdrop,
-                    TintColor = Element.UwpBlurOverlayColor.ToWindowsColor(),
+                    // Background acrylic isn't currently supported.
+                    // BackgroundSource = Element.WinUIHostBackdropBlur ? AcrylicBackgroundSource.HostBackdrop : AcrylicBackgroundSource.Backdrop,
+                    TintColor = Element.WinUIBlurOverlayColor.ToWindowsColor(),
                 };
 
                 _grid.Background = acrylicBrush;
@@ -417,11 +444,6 @@ namespace Sharpnado.MaterialFrame.UWP
         public static Brush ToBrush(this Color color)
         {
             return new SolidColorBrush(color.ToWindowsColor());
-        }
-
-        public static Windows.UI.Color ToWindowsColor(this Color color)
-        {
-            return Windows.UI.Color.FromArgb((byte)(color.A * 255), (byte)(color.R * 255), (byte)(color.G * 255), (byte)(color.B * 255));
         }
     }
 }

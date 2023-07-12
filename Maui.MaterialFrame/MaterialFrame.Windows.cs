@@ -2,38 +2,38 @@
 {
     public partial class MaterialFrame
     {
-        public static readonly BindableProperty UwpBlurOverlayColorProperty = BindableProperty.Create(
-            nameof(UwpBlurOverlayColor),
+        public static readonly BindableProperty WinUIBlurOverlayColorProperty = BindableProperty.Create(
+            nameof(WinUIBlurOverlayColor),
             typeof(Color),
             typeof(MaterialFrame),
-            defaultValueCreator: _ => KnownColor.Transparent);
+            defaultValueCreator: _ => Colors.Transparent);
 
-        public static readonly BindableProperty UwpHostBackdropBlurProperty = BindableProperty.Create(
-            nameof(UwpHostBackdropBlur),
+        public static readonly BindableProperty WinUIHostBackdropBlurProperty = BindableProperty.Create(
+            nameof(WinUIHostBackdropBlur),
             typeof(bool),
             typeof(MaterialFrame),
             defaultValueCreator: _ => false);
 
         /// <summary>
-        /// UWP only.
+        /// WinUI only.
         /// Changes the overlay color over the blur (should be a transparent color, obviously).
         /// If not set, the different blur style styles take over.
         /// </summary>
-        public Color UwpBlurOverlayColor
+        public Color WinUIBlurOverlayColor
         {
-            get => (Color)GetValue(UwpBlurOverlayColorProperty);
-            set => SetValue(UwpBlurOverlayColorProperty, value);
+            get => (Color)GetValue(WinUIBlurOverlayColorProperty);
+            set => SetValue(WinUIBlurOverlayColorProperty, value);
         }
 
         /// <summary>
-        /// UWP only.
+        /// Not supported in WinUI 3: https://github.com/microsoft/microsoft-ui-xaml/issues/6618
         /// HostBackdropBlur reveals the desktop wallpaper and other windows that are behind the currently active app.
         /// If not set, the default in app BackdropBlur take over.
         /// </summary>
-        public bool UwpHostBackdropBlur
+        public bool WinUIHostBackdropBlur
         {
-            get => (bool)GetValue(UwpHostBackdropBlurProperty);
-            set => SetValue(UwpHostBackdropBlurProperty, value);
+            get => (bool)GetValue(WinUIHostBackdropBlurProperty);
+            set => SetValue(WinUIHostBackdropBlurProperty, value);
         }
     }
 }

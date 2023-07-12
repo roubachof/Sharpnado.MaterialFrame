@@ -126,8 +126,6 @@ public static MauiApp CreateMauiApp()
         <Compile Update="Platforms\MacCatalyst\MacCatalystMaterialFrameRenderer.cs">
           <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
         </Compile>
-        <Compile Remove="Platforms\Windows\UWPMaterialFrameRenderer.cs" />
-        <None Include="Platforms\Windows\UWPMaterialFrameRenderer.cs" />
     </ItemGroup>
 
     <ItemGroup>

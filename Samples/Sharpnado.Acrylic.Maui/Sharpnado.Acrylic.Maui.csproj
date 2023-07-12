@@ -11,11 +11,13 @@
         <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
 
+        <WindowsPackageType>None</WindowsPackageType>
+
         <!-- Display name -->
         <ApplicationTitle>Sharpnado.Acrylic.Maui</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.sharpnado.acrylic.maui</ApplicationId>
+        <ApplicationId>com.sharpnado.acrylic.maui</ApplicationId>
         <ApplicationIdGuid>B1A41931-864E-408A-A254-24879EB13F3F</ApplicationIdGuid>
 
         <!-- Versions -->
@@ -28,6 +30,7 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+        <DefaultLanguage>en</DefaultLanguage>
     </PropertyGroup>
 
     <ItemGroup>

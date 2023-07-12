@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpnado.Acrylic.Maui", "Sharpnado.Acrylic.Maui.csproj", "{8475C75D-C2D8-4C10-A054-46607B682499}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maui.MaterialFrame", "..\..\Maui.MaterialFrame\Maui.MaterialFrame.csproj", "{19F9C4C6-B64E-4292-91FF-EC9A2B43205A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{8475C75D-C2D8-4C10-A054-46607B682499}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8475C75D-C2D8-4C10-A054-46607B682499}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8475C75D-C2D8-4C10-A054-46607B682499}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{19F9C4C6-B64E-4292-91FF-EC9A2B43205A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F9C4C6-B64E-4292-91FF-EC9A2B43205A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F9C4C6-B64E-4292-91FF-EC9A2B43205A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F9C4C6-B64E-4292-91FF-EC9A2B43205A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

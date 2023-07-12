@@ -15,9 +15,12 @@
             <StackLayout.Padding>
                 <OnPlatform x:TypeArguments="Thickness">
                     <OnPlatform.Platforms>
-                        <On Platform="Android" Value="20,60,20,60" />
-                        <On Platform="iOS" Value="20,40,20,60" />
-                        <On Platform="WinUI" Value="20,60,20,20" />
+                        <On Platform="Android"
+                            Value="20,60,20,60" />
+                        <On Platform="iOS"
+                            Value="20,40,20,60" />
+                        <On Platform="WinUI"
+                            Value="20,60,20,20" />
                     </OnPlatform.Platforms>
                 </OnPlatform>
             </StackLayout.Padding>
@@ -28,8 +31,10 @@
                       ColumnSpacing="20"
                       RowSpacing="10">
                     <Grid.RowDefinitions>
-                        <RowDefinition x:Name="SwitchRow" Height="40" />
-                        <RowDefinition x:Name="BlurStyleRow" Height="40" />
+                        <RowDefinition x:Name="SwitchRow"
+                                       Height="40" />
+                        <RowDefinition x:Name="BlurStyleRow"
+                                       Height="40" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60" />
@@ -45,35 +50,35 @@
                     <Label Grid.Row="0"
                            Grid.Column="1"
                            Grid.ColumnSpan="2"
-                           Style="{StaticResource TextBody}"
                            HorizontalOptions="Start"
-                           VerticalOptions="Center"
-                           Text="Enable Acrylic Blur" />
+                           Style="{StaticResource TextBody}"
+                           Text="Enable Acrylic Blur"
+                           VerticalOptions="Center" />
 
                     <Button x:Name="LightButton"
                             Grid.Row="1"
                             Grid.Column="0"
-                            Style="{StaticResource RadioButton}"
-                            HorizontalOptions="Start"
-                            VerticalOptions="Center"
                             Clicked="BlurStyleButtonOnClicked"
-                            Text="Light" />
+                            HorizontalOptions="Start"
+                            Style="{StaticResource RadioButton}"
+                            Text="Light"
+                            VerticalOptions="Center" />
                     <Button x:Name="DarkButton"
                             Grid.Row="1"
                             Grid.Column="1"
-                            Style="{StaticResource RadioButton}"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
                             Clicked="BlurStyleButtonOnClicked"
-                            Text="Dark" />
+                            HorizontalOptions="Center"
+                            Style="{StaticResource RadioButton}"
+                            Text="Dark"
+                            VerticalOptions="Center" />
                     <Button x:Name="ExtraLightButton"
                             Grid.Row="1"
                             Grid.Column="2"
-                            Style="{StaticResource RadioButton}"
-                            HorizontalOptions="Start"
-                            VerticalOptions="Center"
                             Clicked="BlurStyleButtonOnClicked"
-                            Text="ExtraLight" />
+                            HorizontalOptions="Start"
+                            Style="{StaticResource RadioButton}"
+                            Text="ExtraLight"
+                            VerticalOptions="Center" />
                 </Grid>
             </rv:MaterialFrame>
 
@@ -92,14 +97,14 @@
                 <Frame x:Name="ImageFrame"
                        Grid.RowSpan="2"
                        Grid.Column="0"
-                       WidthRequest="40"
-                       HeightRequest="40"
                        Padding="0"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Center"
                        CornerRadius="20"
                        HasShadow="False"
-                       IsClippedToBounds="True">
+                       HeightRequest="40"
+                       HorizontalOptions="Start"
+                       IsClippedToBounds="True"
+                       VerticalOptions="Center"
+                       WidthRequest="40">
                     <Image Source="me.jpg" />
                 </Frame>
 
@@ -107,29 +112,29 @@
                        Grid.Column="1"
                        Grid.ColumnSpan="2"
                        Style="{StaticResource TextTitle}"
-                       VerticalOptions="End"
                        Text="Good Afternoon, JM"
-                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
+                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}"
+                       VerticalOptions="End" />
 
                 <Image Grid.Row="1"
                        Grid.Column="1"
-                       VerticalOptions="Center"
-                       Source="{StaticResource IconSun}" />
+                       Source="{StaticResource IconSun}"
+                       VerticalOptions="Center" />
 
                 <Label Grid.Row="1"
                        Grid.Column="2"
-                       Style="{StaticResource TextSubtitleSecondary}"
                        Margin="0,4.5,0,0"
-                       VerticalOptions="Start"
+                       Style="{StaticResource TextSubtitleSecondary}"
                        Text="   11°C  Paris"
-                       TextColor="{DynamicResource DynamicSecondaryOnBackgroundColor}" />
+                       TextColor="{DynamicResource DynamicSecondaryOnBackgroundColor}"
+                       VerticalOptions="Start" />
 
                 <Image Grid.Row="0"
                        Grid.RowSpan="2"
                        Grid.Column="3"
                        HorizontalOptions="End"
-                       VerticalOptions="Center"
-                       Source="{StaticResource IconCog}">
+                       Source="{StaticResource IconCog}"
+                       VerticalOptions="Center">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="SettingsButtonOnClicked" />
                     </Image.GestureRecognizers>
@@ -149,13 +154,14 @@
                         <ColumnDefinition Width="40" />
                     </Grid.ColumnDefinitions>
 
-                    <Image HorizontalOptions="Start" Source="{StaticResource IconSearch}" />
+                    <Image HorizontalOptions="Start"
+                           Source="{StaticResource IconSearch}" />
 
                     <Label Grid.Column="1"
-                           Style="{StaticResource TextBodyTernary}"
                            HorizontalOptions="Start"
-                           VerticalOptions="Center"
-                           Text="Type here to search" />
+                           Style="{StaticResource TextBodyTernary}"
+                           Text="Type here to search"
+                           VerticalOptions="Center" />
 
                     <Image Grid.Column="2"
                            HorizontalOptions="End"
@@ -175,8 +181,8 @@
                        TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
                 <Image Grid.Column="1"
                        HorizontalOptions="End"
-                       VerticalOptions="End"
-                       Source="{StaticResource IconDots}" />
+                       Source="{StaticResource IconDots}"
+                       VerticalOptions="End" />
             </Grid>
 
             <rv:MaterialFrame StyleId="3333">
@@ -191,14 +197,15 @@
                         <ColumnDefinition Width="40" />
                     </Grid.ColumnDefinitions>
 
-                    <Image HorizontalOptions="Start" Source="{StaticResource IconPlus}" />
+                    <Image HorizontalOptions="Start"
+                           Source="{StaticResource IconPlus}" />
 
                     <Label Grid.Row="0"
                            Grid.Column="1"
-                           Style="{StaticResource TextBodyTernary}"
                            HorizontalOptions="Start"
-                           VerticalOptions="Center"
-                           Text="Create a task" />
+                           Style="{StaticResource TextBodyTernary}"
+                           Text="Create a task"
+                           VerticalOptions="Center" />
 
                     <Image Grid.Row="0"
                            Grid.Column="2"
@@ -212,17 +219,17 @@
 
                     <Label Grid.Row="1"
                            Grid.Column="1"
-                           Style="{StaticResource TextBody}"
                            HorizontalOptions="Start"
-                           VerticalOptions="Center"
-                           Text="Dota 2 game at 21:30" />
+                           Style="{StaticResource TextBody}"
+                           Text="Dota 2 game at 21:30"
+                           VerticalOptions="Center" />
 
                     <Label Grid.Row="1"
                            Grid.Column="2"
-                           Style="{StaticResource TextHour}"
                            HorizontalOptions="End"
-                           VerticalOptions="Center"
-                           Text="in 3h" />
+                           Style="{StaticResource TextHour}"
+                           Text="in 3h"
+                           VerticalOptions="Center" />
                 </Grid>
             </rv:MaterialFrame>
 
@@ -238,11 +245,12 @@
                        TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
                 <Image Grid.Column="1"
                        HorizontalOptions="End"
-                       VerticalOptions="End"
-                       Source="{StaticResource IconDots}" />
+                       Source="{StaticResource IconDots}"
+                       VerticalOptions="End" />
             </Grid>
 
-            <rv:MaterialFrame Padding="10,20" StyleId="4444">
+            <rv:MaterialFrame Padding="10,20"
+                              StyleId="4444">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40" />
@@ -260,8 +268,8 @@
 
                     <Image Grid.Row="0"
                            Grid.Column="0"
-                           Style="{StaticResource ImageApps}"
-                           Source="dota.png" />
+                           Source="dota.png"
+                           Style="{StaticResource ImageApps}" />
                     <Label Grid.Row="1"
                            Grid.Column="0"
                            Style="{StaticResource LabelApps}"
@@ -269,8 +277,8 @@
 
                     <Image Grid.Row="0"
                            Grid.Column="1"
-                           Style="{StaticResource ImageApps}"
-                           Source="word.png" />
+                           Source="word.png"
+                           Style="{StaticResource ImageApps}" />
                     <Label Grid.Row="1"
                            Grid.Column="1"
                            Style="{StaticResource LabelApps}"
@@ -278,8 +286,8 @@
 
                     <Image Grid.Row="0"
                            Grid.Column="2"
-                           Style="{StaticResource ImageApps}"
-                           Source="powerpoint.png" />
+                           Source="powerpoint.png"
+                           Style="{StaticResource ImageApps}" />
                     <Label Grid.Row="1"
                            Grid.Column="2"
                            Style="{StaticResource LabelApps}"
@@ -287,8 +295,8 @@
 
                     <Image Grid.Row="0"
                            Grid.Column="3"
-                           Style="{StaticResource ImageApps}"
-                           Source="piedpiper.png" />
+                           Source="piedpiper.png"
+                           Style="{StaticResource ImageApps}" />
                     <Label Grid.Row="1"
                            Grid.Column="3"
                            Style="{StaticResource LabelApps}"
@@ -296,8 +304,8 @@
 
                     <Image Grid.Row="3"
                            Grid.Column="0"
-                           Style="{StaticResource ImageApps}"
-                           Source="ableton.png" />
+                           Source="ableton.png"
+                           Style="{StaticResource ImageApps}" />
                     <Label Grid.Row="4"
                            Grid.Column="0"
                            Style="{StaticResource LabelApps}"
@@ -305,8 +313,8 @@
 
                     <Image Grid.Row="3"
                            Grid.Column="1"
-                           Style="{StaticResource ImageApps}"
-                           Source="visualstudio.png" />
+                           Source="visualstudio.png"
+                           Style="{StaticResource ImageApps}" />
                     <Label Grid.Row="4"
                            Grid.Column="1"
                            Style="{StaticResource LabelApps}"
@@ -314,8 +322,8 @@
 
                     <Image Grid.Row="3"
                            Grid.Column="2"
-                           Style="{StaticResource ImageApps}"
-                           Source="duckduckgo.png" />
+                           Source="duckduckgo.png"
+                           Style="{StaticResource ImageApps}" />
                     <Label Grid.Row="4"
                            Grid.Column="2"
                            Style="{StaticResource LabelApps}"
@@ -323,8 +331,8 @@
 
                     <Image Grid.Row="3"
                            Grid.Column="3"
-                           Style="{StaticResource ImageApps}"
-                           Source="azure.png" />
+                           Source="azure.png"
+                           Style="{StaticResource ImageApps}" />
                     <Label Grid.Row="4"
                            Grid.Column="3"
                            Style="{StaticResource LabelApps}"
@@ -345,8 +353,8 @@
                        TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
                 <Image Grid.Column="1"
                        HorizontalOptions="End"
-                       VerticalOptions="End"
-                       Source="{StaticResource IconDots}" />
+                       Source="{StaticResource IconDots}"
+                       VerticalOptions="End" />
             </Grid>
 
             <rv:MaterialFrame StyleId="9999">
@@ -375,137 +383,137 @@
 
                     <Image Grid.Row="0"
                            Grid.RowSpan="2"
-                           Style="{StaticResource ImageRecent}"
-                           Source="file_pdf.png" />
+                           Source="file_pdf.png"
+                           Style="{StaticResource ImageRecent}" />
 
                     <Label Grid.Row="0"
                            Grid.Column="1"
-                           Style="{StaticResource LabelApps}"
                            HorizontalOptions="Start"
-                           VerticalOptions="End"
-                           Text="Attestation de déplacement" />
+                           Style="{StaticResource LabelApps}"
+                           Text="Attestation de déplacement"
+                           VerticalOptions="End" />
 
                     <Label Grid.Row="1"
                            Grid.Column="1"
-                           Style="{StaticResource TextHour}"
                            HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Text="Downloads" />
+                           Style="{StaticResource TextHour}"
+                           Text="Downloads"
+                           VerticalOptions="Start" />
 
                     <Label Grid.Row="0"
                            Grid.Column="2"
-                           Style="{StaticResource TextHour}"
                            HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Text="1h ago" />
+                           Style="{StaticResource TextHour}"
+                           Text="1h ago"
+                           VerticalOptions="End" />
 
 
                     <Image Grid.Row="3"
                            Grid.RowSpan="2"
-                           Style="{StaticResource ImageRecent}"
-                           Source="file_gpx.png" />
+                           Source="file_gpx.png"
+                           Style="{StaticResource ImageRecent}" />
 
                     <Label Grid.Row="3"
                            Grid.Column="1"
-                           Style="{StaticResource LabelApps}"
                            HorizontalOptions="Start"
-                           VerticalOptions="End"
-                           Text="Col de Joux Plane data" />
+                           Style="{StaticResource LabelApps}"
+                           Text="Col de Joux Plane data"
+                           VerticalOptions="End" />
 
                     <Label Grid.Row="4"
                            Grid.Column="1"
-                           Style="{StaticResource TextHour}"
                            HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Text="SkiaSharpnado" />
+                           Style="{StaticResource TextHour}"
+                           Text="SkiaSharpnado"
+                           VerticalOptions="Start" />
 
                     <Label Grid.Row="3"
                            Grid.Column="2"
-                           Style="{StaticResource TextHour}"
                            HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Text="5h ago" />
+                           Style="{StaticResource TextHour}"
+                           Text="5h ago"
+                           VerticalOptions="End" />
 
 
                     <Image Grid.Row="6"
                            Grid.RowSpan="2"
-                           Style="{StaticResource ImageRecent}"
-                           Source="file_mp3.png" />
+                           Source="file_mp3.png"
+                           Style="{StaticResource ImageRecent}" />
 
                     <Label Grid.Row="6"
                            Grid.Column="1"
-                           Style="{StaticResource LabelApps}"
                            HorizontalOptions="Start"
-                           VerticalOptions="End"
-                           Text="Don't Fear The Ripper" />
+                           Style="{StaticResource LabelApps}"
+                           Text="Don't Fear The Ripper"
+                           VerticalOptions="End" />
 
                     <Label Grid.Row="7"
                            Grid.Column="1"
-                           Style="{StaticResource TextHour}"
                            HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Text="More Cowbell" />
+                           Style="{StaticResource TextHour}"
+                           Text="More Cowbell"
+                           VerticalOptions="Start" />
 
                     <Label Grid.Row="6"
                            Grid.Column="2"
-                           Style="{StaticResource TextHour}"
                            HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Text="12h ago" />
+                           Style="{StaticResource TextHour}"
+                           Text="12h ago"
+                           VerticalOptions="End" />
 
 
                     <Image Grid.Row="9"
                            Grid.RowSpan="2"
-                           Style="{StaticResource ImageRecent}"
-                           Source="file_pdf.png" />
+                           Source="file_pdf.png"
+                           Style="{StaticResource ImageRecent}" />
 
                     <Label Grid.Row="9"
                            Grid.Column="1"
-                           Style="{StaticResource LabelApps}"
                            HorizontalOptions="Start"
-                           VerticalOptions="End"
-                           Text="Attestation de déplacement" />
+                           Style="{StaticResource LabelApps}"
+                           Text="Attestation de déplacement"
+                           VerticalOptions="End" />
 
                     <Label Grid.Row="10"
                            Grid.Column="1"
-                           Style="{StaticResource TextHour}"
                            HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Text="Downloads" />
+                           Style="{StaticResource TextHour}"
+                           Text="Downloads"
+                           VerticalOptions="Start" />
 
                     <Label Grid.Row="9"
                            Grid.Column="2"
-                           Style="{StaticResource TextHour}"
                            HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Text="1d ago" />
+                           Style="{StaticResource TextHour}"
+                           Text="1d ago"
+                           VerticalOptions="End" />
 
 
                     <Image Grid.Row="12"
                            Grid.RowSpan="2"
-                           Style="{StaticResource ImageRecent}"
-                           Source="file_pdf.png" />
+                           Source="file_pdf.png"
+                           Style="{StaticResource ImageRecent}" />
 
                     <Label Grid.Row="12"
                            Grid.Column="1"
-                           Style="{StaticResource LabelApps}"
                            HorizontalOptions="Start"
-                           VerticalOptions="End"
-                           Text="Attestation de déplacement" />
+                           Style="{StaticResource LabelApps}"
+                           Text="Attestation de déplacement"
+                           VerticalOptions="End" />
 
                     <Label Grid.Row="13"
                            Grid.Column="1"
-                           Style="{StaticResource TextHour}"
                            HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Text="Downloads" />
+                           Style="{StaticResource TextHour}"
+                           Text="Downloads"
+                           VerticalOptions="Start" />
 
                     <Label Grid.Row="12"
                            Grid.Column="2"
-                           Style="{StaticResource TextHour}"
                            HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Text="2d ago" />
+                           Style="{StaticResource TextHour}"
+                           Text="2d ago"
+                           VerticalOptions="End" />
                 </Grid>
             </rv:MaterialFrame>
 

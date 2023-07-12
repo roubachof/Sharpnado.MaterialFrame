@@ -21,8 +21,8 @@ public static class MauiAppBuilderExtensions
 #elif MACCATALYST
             handlers.AddHandler<MaterialFrame, Sharpnado.MaterialFrame.MacCatalyst.MacCatalystMaterialFrameRenderer>();
 #elif WINDOWS
-            // TODO
-            // handlers.AddHandler<MaterialFrame, Sharpnado.MaterialFrame.MacCatalyst.MacCatalystMaterialFrameRenderer>();
+            
+            handlers.AddHandler<MaterialFrame, Sharpnado.MaterialFrame.WinUI.WinUIMaterialFrameRenderer>();
 #endif
         });
 
