@@ -1,8 +1,16 @@
-﻿<maui:MauiWinUIApplication
-    x:Class="Sharpnado.Acrylic.Maui.WinUI.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:maui="using:Microsoft.Maui"
-    xmlns:local="using:Sharpnado.Acrylic.Maui.WinUI">
-
+﻿<maui:MauiWinUIApplication x:Class="Sharpnado.Acrylic.Maui.WinUI.App"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="using:Sharpnado.Acrylic.Maui.WinUI"
+                           xmlns:maui="using:Microsoft.Maui">
+    <maui:MauiWinUIApplication.Resources>
+        <ResourceDictionary>
+            <!--  ToggleSwitch : Turn off ON/OFF label  -->
+            <Style TargetType="ToggleSwitch">
+                <Setter Property="OffContent" Value=" " />
+                <Setter Property="OnContent" Value=" " />
+                <Setter Property="Margin" Value="0,0,-110,0" />
+            </Style>
+        </ResourceDictionary>
+    </maui:MauiWinUIApplication.Resources>
 </maui:MauiWinUIApplication>

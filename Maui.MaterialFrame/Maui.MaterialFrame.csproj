@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFrameworks>net7.0;net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
@@ -62,13 +62,15 @@
         <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
 
         <LangVersion>latest</LangVersion>
+
+	    <EnableSourceControlManagerQueries>true</EnableSourceControlManagerQueries>
     </PropertyGroup>
 
     <PropertyGroup>
         <PackageId>Sharpnado.MaterialFrame.Maui</PackageId>
         <PackageProjectUrl>https://github.com/roubachof/Sharpnado.MaterialFrame</PackageProjectUrl>
         <RepositoryUrl>https://github.com/roubachof/Sharpnado.MaterialFrame</RepositoryUrl>
-        <PackageIcon>images/material_frame.png</PackageIcon>
+        <PackageIcon>images/material_frame_maui.png</PackageIcon>
         <PackageReadmeFile>docs/ReadMe.md</PackageReadmeFile>
         <PackageTags>maui android ios uwp netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background AcrylicBrush</PackageTags>
         <PackageReleaseNotes>
@@ -107,7 +109,7 @@ public static MauiApp CreateMauiApp()
 
         <Owners>Jean-Marie Alfonsi</Owners>
         <Authors>Jean-Marie Alfonsi</Authors>
-        <Copyright>Copyright 2023 Sharpnado</Copyright>
+        <Copyright>Copyright 2024 Sharpnado</Copyright>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
 
@@ -119,7 +121,7 @@ public static MauiApp CreateMauiApp()
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="../Docs/material_frame.png" Pack="true" PackagePath="/images/" />
+        <None Include="../Docs/material_frame_maui.png" Pack="true" PackagePath="/images/" />
         <None Include="ReadMe.md" Pack="true" PackagePath="/docs/" />
         <Compile Remove="Platforms\MacCatalyst\macOSMaterialFrameRenderer.cs" />
         <None Include="Platforms\MacCatalyst\macOSMaterialFrameRenderer.cs" />

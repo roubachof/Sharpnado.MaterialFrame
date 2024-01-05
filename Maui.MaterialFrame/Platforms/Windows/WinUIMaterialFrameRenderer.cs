@@ -3,14 +3,11 @@ using System.Numerics;
 
 using Microsoft.Maui.Controls.Compatibility.Platform.UWP;
 using Microsoft.Maui.Controls.Platform;
-using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Platform;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Automation.Peers;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Hosting;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Shapes;
 
 using AcrylicBrush = Microsoft.UI.Xaml.Media.AcrylicBrush;
@@ -38,7 +35,9 @@ namespace Sharpnado.MaterialFrame.WinUI
 
         private Rectangle _acrylicRectangle;
         private Rectangle _shadowHost;
-        private Grid _grid;
+        private Grid _acrylicGrid;
+        private Grid _rootGrid;
+        private FrameworkElement _content;
 
         private Compositor _compositor;
         private SpriteVisual _shadowVisual;
@@ -79,21 +78,26 @@ namespace Sharpnado.MaterialFrame.WinUI
                 return;
             }
 
-            var grid = new Grid
-                {
-                    Margin = Element.Margin.ToPlatform(),
-                    Padding = Element.Padding.ToPlatform(),
-                };
+            _rootGrid = new Grid();
 
             if (Control == null)
             {
-                SetNativeControl(grid);
+                SetNativeControl(_rootGrid);
             }
 
             PackChild();
             UpdateBorder();
             UpdateCornerRadius();
+            UpdateMarginAndPadding();
             UpdateMaterialTheme();
+
+            _rootGrid.SizeChanged += OnSizeChanged;
+        }
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            InternalLogger.Debug($"OnSizeChanged: w: {e.NewSize.Width}, h: {e.NewSize.Height}");
+            UpdateElevation();
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -102,7 +106,7 @@ namespace Sharpnado.MaterialFrame.WinUI
             {
                 case nameof(MaterialFrame.Padding):
                 case nameof(MaterialFrame.Margin):
-                    //UpdateMarginAndPadding();
+                    UpdateMarginAndPadding();
                     break;
 
                 case nameof(MaterialFrame.BorderColor):
@@ -113,9 +117,8 @@ namespace Sharpnado.MaterialFrame.WinUI
                     UpdateCornerRadius();
                     break;
 
-                case nameof(MaterialFrame.Width):
-                case nameof(MaterialFrame.Height):
                 case nameof(MaterialFrame.Elevation):
+                    InternalLogger.Debug($"OnElementPropertyChanged: {e.PropertyName}, w: {Element.Width}, h: {Element.Height}, ele: {Element.Elevation}");
                     UpdateElevation();
                     break;
 
@@ -143,13 +146,12 @@ namespace Sharpnado.MaterialFrame.WinUI
 
         private void UpdateMarginAndPadding()
         {
-            if (Control == null || Element == null)
+            if (_content == null || Element == null)
             {
                 return;
             }
 
-            Control.Margin = Element.Margin.ToPlatform();
-            Control.Padding = Element.Padding.ToPlatform();
+            _content.Margin = Element.Padding.ToPlatform();
         }
 
         private void PackChild()
@@ -160,17 +162,22 @@ namespace Sharpnado.MaterialFrame.WinUI
             }
 
             IVisualElementRenderer renderer = Element.Content.GetOrCreateRenderer();
-            FrameworkElement frameworkElement = renderer.ContainerElement;
+            _content = renderer.ContainerElement;
 
             _acrylicRectangle = new Rectangle();
-            _shadowHost = new Rectangle { Fill = Colors.Transparent.ToBrush() };
+            _shadowHost = new Rectangle
+            {
+                Fill = Colors.Transparent.ToBrush(),
+            };
 
-            _grid = new Grid();
-            _grid.Children.Add(_acrylicRectangle);
-            _grid.Children.Add(frameworkElement);
+            _acrylicGrid = new Grid();
+            _acrylicGrid.Children.Add(_acrylicRectangle);
+
+            _content.Margin = Element.Margin.ToPlatform();
 
             Control.Children.Add(_shadowHost);
-            Control.Children.Add(_grid);
+            Control.Children.Add(_acrylicGrid);
+            Control.Children.Add(_content);
         }
 
         private void ToggleAcrylicRectangle(bool enable)
@@ -184,25 +191,25 @@ namespace Sharpnado.MaterialFrame.WinUI
 
         private void UpdateBorder()
         {
-            if (_grid == null)
+            if (_acrylicGrid == null)
             {
                 return;
             }
 
-            if (Element.BorderColor != null)
+            if (Element?.BorderColor != null)
             {
-                _grid.BorderBrush = Element.BorderColor.ToBrush();
-                _grid.BorderThickness = new Thickness(1);
+                _acrylicGrid.BorderBrush = Element.BorderColor.ToBrush();
+                _acrylicGrid.BorderThickness = new Thickness(1);
             }
             else
             {
-                _grid.BorderBrush = new Color(0, 0, 0, 0).ToBrush();
+                _acrylicGrid.BorderBrush = new Color(0, 0, 0, 0).ToBrush();
             }
         }
 
         private void UpdateCornerRadius()
         {
-            if (_grid == null)
+            if (_acrylicGrid == null)
             {
                 return;
             }
@@ -214,7 +221,7 @@ namespace Sharpnado.MaterialFrame.WinUI
                 cornerRadius = 5f; // default corner radius
             }
 
-            _grid.CornerRadius = new CornerRadius(cornerRadius);
+            _acrylicGrid.CornerRadius = new CornerRadius(cornerRadius);
 
             _shadowHost.RadiusX = cornerRadius;
             _shadowHost.RadiusY = cornerRadius;
@@ -225,7 +232,7 @@ namespace Sharpnado.MaterialFrame.WinUI
 
         private void UpdateLightThemeBackgroundColor()
         {
-            if (_grid == null)
+            if (_acrylicGrid == null)
             {
                 return;
             }
@@ -241,24 +248,24 @@ namespace Sharpnado.MaterialFrame.WinUI
                     return;
 
                 case MaterialFrame.Theme.Light:
-                    _grid.Background = Element.LightThemeBackgroundColor.ToBrush();
+                    _acrylicGrid.Background = Element.LightThemeBackgroundColor.ToBrush();
                     break;
             }
         }
 
         private void UpdateAcrylicGlowColor()
         {
-            if (_grid == null || Element.MaterialTheme != MaterialFrame.Theme.Acrylic)
+            if (_acrylicGrid == null || Element.MaterialTheme != MaterialFrame.Theme.Acrylic)
             {
                 return;
             }
 
-            _grid.Background = Element.AcrylicGlowColor.ToBrush();
+            _acrylicGrid.Background = Element.AcrylicGlowColor.ToBrush();
         }
 
         private void UpdateElevation()
         {
-            if (_grid == null)
+            if (_acrylicGrid == null)
             {
                 return;
             }
@@ -276,7 +283,7 @@ namespace Sharpnado.MaterialFrame.WinUI
 
                 if (Element.MaterialTheme == MaterialFrame.Theme.Dark)
                 {
-                    _grid.Background = Element.ElevationToColor().ToBrush();
+                    _acrylicGrid.Background = Element.ElevationToColor().ToBrush();
                 }
 
                 return;
@@ -303,7 +310,7 @@ namespace Sharpnado.MaterialFrame.WinUI
 
             if (_compositor == null)
             {
-                Visual hostVisual = ElementCompositionPreview.GetElementVisual(_grid);
+                Visual hostVisual = ElementCompositionPreview.GetElementVisual(_acrylicGrid);
                 _compositor = hostVisual.Compositor;
             }
 
@@ -323,7 +330,7 @@ namespace Sharpnado.MaterialFrame.WinUI
 
         private void UpdateMaterialTheme()
         {
-            if (_grid == null)
+            if (_acrylicGrid == null)
             {
                 return;
             }
@@ -381,7 +388,7 @@ namespace Sharpnado.MaterialFrame.WinUI
 
         private void UpdateMaterialBlurStyle()
         {
-            if (_grid == null || Element.MaterialTheme != MaterialFrame.Theme.AcrylicBlur)
+            if (_acrylicGrid == null || Element.MaterialTheme != MaterialFrame.Theme.AcrylicBlur)
             {
                 return;
             }
@@ -407,12 +414,12 @@ namespace Sharpnado.MaterialFrame.WinUI
                     break;
             }
 
-            _grid.Background = acrylicBrush;
+            _acrylicGrid.Background = acrylicBrush;
         }
 
         private void UpdateBlur()
         {
-            if (_grid == null)
+            if (_acrylicGrid == null)
             {
                 return;
             }
@@ -426,7 +433,7 @@ namespace Sharpnado.MaterialFrame.WinUI
                     TintColor = Element.WinUIBlurOverlayColor.ToWindowsColor(),
                 };
 
-                _grid.Background = acrylicBrush;
+                _acrylicGrid.Background = acrylicBrush;
                 return;
             }
 

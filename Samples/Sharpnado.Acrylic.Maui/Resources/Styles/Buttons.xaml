@@ -12,7 +12,7 @@
                     <On Platform="Android" Value="0.8" />
                     <On Platform="iOS" Value="0.8" />
                     <On Platform="MacCatalyst" Value="0.8" />
-                    <On Platform="WinUI" Value="1" />
+                    <On Platform="WinUI" Value="1.2" />
                 </OnPlatform.Platforms>
             </OnPlatform>
         </Setter>
@@ -26,7 +26,7 @@
                     <On Platform="Android" Value="-5" />
                     <On Platform="iOS" Value="-5" />
                     <On Platform="MacCatalyst" Value="-5" />
-                    <On Platform="WinUI" Value="0" />
+                    <On Platform="WinUI" Value="20" />
                 </OnPlatform.Platforms>
             </OnPlatform>
         </Setter>

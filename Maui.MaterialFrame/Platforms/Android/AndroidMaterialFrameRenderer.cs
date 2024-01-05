@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using Android.Content;
 using Android.Graphics.Drawables;
+using AndroidX.ConstraintLayout.Helper.Widget;
 using AndroidX.Core.View;
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 using Microsoft.Maui.Controls.Handlers.Compatibility;
@@ -94,7 +95,11 @@ namespace Sharpnado.MaterialFrame.Droid
 
             _mainDrawable = (GradientDrawable)Background;
 
-            UpdateMaterialTheme();
+            SetCardBackgroundColor(global::Android.Graphics.Color.Transparent);
+            SetBackgroundColor(global::Android.Graphics.Color.Transparent);
+            this.SetBackground(new ColorDrawable(global::Android.Graphics.Color.Transparent));
+
+            Post(UpdateMaterialTheme);
         }
 
         private void Destroy()
@@ -216,6 +221,8 @@ namespace Sharpnado.MaterialFrame.Droid
 
         private void SetAcrylicTheme()
         {
+            DisableBlur();
+
             if (_acrylicLayer == null)
             {
                 _acrylicLayer = new GradientDrawable();

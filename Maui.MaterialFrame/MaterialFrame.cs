@@ -4,7 +4,7 @@ namespace Sharpnado.MaterialFrame
 {
     public partial class MaterialFrame : Frame
     {
-        public const int AcrylicElevation = 20;
+        public const int AcrylicElevation = 16;
 
         public static readonly BindableProperty MaterialThemeProperty = BindableProperty.Create(
             nameof(MaterialTheme),

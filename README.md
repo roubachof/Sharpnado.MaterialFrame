@@ -1,21 +1,37 @@
 # Sharpnado.MaterialFrame
 
-<p align="left"><img src="Docs/material_frame.png" height="180"/>
+| MAUI                                                                                                                                     | Xamarin.Forms                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| ![](Docs/material_frame_maui.png)                                                                                                        | ![](Docs/material_frame.png)                                                                                                   |
+| [![Nuget](https://img.shields.io/nuget/v/Sharpnado.MaterialFrame.Maui.svg)](https://www.nuget.org/packages/Sharpnado.MaterialFrame.Maui) | [![Nuget](https://img.shields.io/nuget/v/Sharpnado.MaterialFrame.svg)](https://www.nuget.org/packages/Sharpnado.MaterialFrame) |
+| :heavy_check_mark: Android                                                                                                               | :heavy_check_mark: Android                                                                                                     |
+| :heavy_check_mark: iOS                                                                                                                   | :heavy_check_mark: iOS                                                                                                         |
+| :question: macOS                                                                                                                         | :heavy_check_mark: macOS                                                                                                       |
+| :heavy_check_mark: WinUI                                                                                                                              | :heavy_check_mark: UWP                                                                                                         |
+|                                                                                                                                          |                                                                                                                                |
 
-Get it from NuGet:
 
-[![Nuget](https://img.shields.io/nuget/v/Sharpnado.MaterialFrame.svg)](https://www.nuget.org/packages/Sharpnado.MaterialFrame)
-
-| Supported platforms        |
-|----------------------------|
-| :heavy_check_mark: Android | 
-| :heavy_check_mark: iOS     |
-| :heavy_check_mark: macOS   |
-| :heavy_check_mark: UWP     |
 
 ![Presentation](Docs/github_banner.png)
 
 ## Initialization
+
+### MAUI
+
+* In `MauiProgram.cs`:
+
+```csharp
+public static MauiApp CreateMauiApp()
+{
+    var builder = MauiApp.CreateBuilder();
+    builder
+        .UseMauiApp<App>()
+        .UseSharpnadoMaterialFrame(loggerEnable: false)
+        ...
+}
+```
+
+### Xamarin.Forms
 
 * On Core project in `App.xaml.cs`:
 
@@ -104,16 +120,23 @@ You can set the `BlurStyle` property for both `Android` and `iOS`.
 <img src="Docs/frame_blur_dark.png" width="460" />
 
 
-#### UWP specific properties
+#### WinUI/UWP specific properties
 
 UWP is the home of the `Acrylic` effect \o/
 
-##### UwpBlurOverlayColor
+##### (WinUI/Uwp)BlurOverlayColor
 
-UWP only.
+WinUI/UWP only.
 
 Changes the overlay color over the blur (should be a transparent color, obviously).
 If not set, the different blur style styles take over.
+
+##### UwpHostBackdropBlurProperty
+
+UWP only (Not supported in WinUI 3: https://github.com/microsoft/microsoft-ui-xaml/issues/6618).
+
+HostBackdropBlur reveals the desktop wallpaper and other windows that are behind the currently active app.
+If not set, the default in app BackdropBlur take over.
 
 #### Android specific properties
 

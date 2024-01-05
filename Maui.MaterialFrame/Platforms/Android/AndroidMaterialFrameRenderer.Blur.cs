@@ -231,7 +231,7 @@ namespace Sharpnado.MaterialFrame.Droid
                 return;
             }
 
-            InternalLogger.Info(FormsId, "Renderer::EnableBlur() => adding pre draw listener");
+            InternalLogger.Info(FormsId, $"Renderer::EnableBlur() => adding realtimeview (w{Width}, h{Height})");
             AddView(
                 _realtimeBlurView,
                 0,
@@ -240,7 +240,7 @@ namespace Sharpnado.MaterialFrame.Droid
                     ViewGroup.LayoutParams.MatchParent,
                     GravityFlags.NoGravity));
 
-            LayoutBlurView(MeasuredWidth, MeasuredHeight);
+            LayoutBlurView(Width, Height);
         }
 
         private void DisableBlur()

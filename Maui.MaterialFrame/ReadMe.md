@@ -1,61 +1,48 @@
-# Sharpnado's CollectionView
-* Performance oriented
-* Horizontal, Grid, Carousel or Vertical layout
-* Header, Footer and GroupHeader
-* Reveal custom animations
-* Drag and Drop
-* Column count
-* Infinite loading with Paginator component
-* Snapping on first or middle element
-* Padding and item spacing
-* Handles NotifyCollectionChangedAction Add, Remove and Reset actions
-* View and data template recycling
-* RecyclerView on Android
-* UICollectionView on iOS
+# Sharpnado.MaterialFrame
 
-## Installation
 
-* In Core project, in `MauiProgram.cs`:
+| Supported platforms        |
+|----------------------------|
+| :heavy_check_mark: Android | 
+| :heavy_check_mark: iOS     |
+| :question: macOS   |
+| :heavy_check_mark: UWP     |
+
+## Initialization
+
+* In `MauiProgram.cs`:
 
 ```csharp
 public static MauiApp CreateMauiApp()
 {
     var builder = MauiApp.CreateBuilder();
     builder
-        .UseMauiApp()
-        .UseSharpnadoCollectionView(loggerEnabled: false);
+        .UseMauiApp<App>()
+        .UseSharpnadoMaterialFrame(loggerEnable: false)
+        ...
 }
 ```
 
-## Usage
+## Mac Catalyst has not been tested yet
 
-```xml
-<!--  As a Grid  -->
-<sho:GridView
-    x:Name="HorizontalListView"
-    CollectionPadding="30"
-    ColumnCount="3"
-    EnableDragAndDrop="True"
-    HeightRequest="390"
-    HorizontalOptions="Fill"
-    ItemHeight="110"
-    ItemsSource="{Binding Logo, Mode=OneTime}" />
+But it should be working :) ?
 
-<!--  As a List with groups  -->
-<sho:CollectionView
-    CollectionLayout="Vertical"
-    CollectionPadding="0,30,0,30"
-    CurrentIndex="{Binding CurrentIndex}"
-    ItemHeight="120"
-    ItemTemplate="{StaticResource HeaderFooterGroupingTemplateSelector}"
-    ItemsSource="{Binding SillyPeople}"
-    ScrollBeganCommand="{Binding OnScrollBeginCommand}"
-    ScrollEndedCommand="{Binding OnScrollEndCommand}"
-    TapCommand="{Binding TapCommand}" />
+## Android Compatibility issues
 
-<!--  As a carousel -->
-<sho:CarouselView />
+Warning, because of `LayerDrawable` the `Acrylic` glow effect (the white glow on the top of the `MaterialFrame` is only available on API 23+ (since Marshmallow).
 
-<!--  As a HorizontalListView -->
-<sho:HorizontalListView />
-```
+## iOS limitations
+
+For some yet to be discovered reasons, `AcrylicBlur` value doesn't work in a dynamic context on iOS.
+
+You can change the BlurStyle dynamically, but a dynamic change from a not blurry theme to the `AcrylicBlur` theme will result in a transparent frame.
+
+## Presentation
+
+The Xamarin.Forms `MaterialFrame` aims at delivering out of the box modern popular theming such as:
+  * Light
+  * Dark
+  * Acrylic
+  * AcrylicBlur
+
+You can switch from one theme to another thanks to the `MaterialFrame` property.
