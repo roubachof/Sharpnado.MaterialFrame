@@ -126,6 +126,8 @@
                 <Image Grid.Row="0"
                        Grid.RowSpan="2"
                        Grid.Column="3"
+                       WidthRequest="{StaticResource SizeMediumSmallIcon}"
+                       HeightRequest="{StaticResource SizeMediumSmallIcon}"
                        HorizontalOptions="End"
                        VerticalOptions="Center"
                        Source="{StaticResource IconCog}">
@@ -148,7 +150,10 @@
                         <ColumnDefinition Width="40" />
                     </Grid.ColumnDefinitions>
 
-                    <Image HorizontalOptions="Start" Source="{StaticResource IconSearch}" />
+                    <Image WidthRequest="{StaticResource SizeSmallIcon}"
+                           HeightRequest="{StaticResource SizeSmallIcon}"
+                           HorizontalOptions="Start"
+                           Source="{StaticResource IconSearch}" />
 
                     <Label Grid.Column="1"
                            Style="{StaticResource TextBodyTernary}"
@@ -157,6 +162,8 @@
                            Text="Type here to search" />
 
                     <Image Grid.Column="2"
+                           WidthRequest="{StaticResource SizeSmallIcon}"
+                           HeightRequest="{StaticResource SizeSmallIcon}"
                            HorizontalOptions="End"
                            Source="{StaticResource IconMic}" />
                 </Grid>
@@ -173,6 +180,8 @@
                        Text="Tasks"
                        TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
                 <Image Grid.Column="1"
+                       WidthRequest="{StaticResource SizeMediumSmallIcon}"
+                       HeightRequest="{StaticResource SizeMediumSmallIcon}"
                        HorizontalOptions="End"
                        VerticalOptions="End"
                        Source="{StaticResource IconDots}" />
@@ -190,7 +199,10 @@
                         <ColumnDefinition Width="40" />
                     </Grid.ColumnDefinitions>
 
-                    <Image HorizontalOptions="Start" Source="{StaticResource IconPlus}" />
+                    <Image WidthRequest="{StaticResource SizeSmallIcon}"
+                           HeightRequest="{StaticResource SizeSmallIcon}"
+                           HorizontalOptions="Start"
+                           Source="{StaticResource IconPlus}" />
 
                     <Label Grid.Row="0"
                            Grid.Column="1"
@@ -201,11 +213,15 @@
 
                     <Image Grid.Row="0"
                            Grid.Column="2"
+                           WidthRequest="{StaticResource SizeSmallIcon}"
+                           HeightRequest="{StaticResource SizeSmallIcon}"
                            HorizontalOptions="End"
                            Source="{StaticResource IconMic}" />
 
                     <Image Grid.Row="1"
                            Grid.Column="0"
+                           WidthRequest="{StaticResource SizeSmallIcon}"
+                           HeightRequest="{StaticResource SizeSmallIcon}"
                            HorizontalOptions="Start"
                            Source="{StaticResource IconSquare}" />
 
@@ -236,6 +252,8 @@
                        Text="Pinned"
                        TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
                 <Image Grid.Column="1"
+                       WidthRequest="{StaticResource SizeMediumSmallIcon}"
+                       HeightRequest="{StaticResource SizeMediumSmallIcon}"
                        HorizontalOptions="End"
                        VerticalOptions="End"
                        Source="{StaticResource IconDots}" />
@@ -343,6 +361,8 @@
                        Text="Recent"
                        TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
                 <Image Grid.Column="1"
+                       WidthRequest="{StaticResource SizeMediumSmallIcon}"
+                       HeightRequest="{StaticResource SizeMediumSmallIcon}"
                        HorizontalOptions="End"
                        VerticalOptions="End"
                        Source="{StaticResource IconDots}" />

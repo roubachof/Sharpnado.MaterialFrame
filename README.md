@@ -7,8 +7,7 @@
 | :heavy_check_mark: Android                                                                                                               | :heavy_check_mark: Android                                                                                                     |
 | :heavy_check_mark: iOS                                                                                                                   | :heavy_check_mark: iOS                                                                                                         |
 | :question: macOS                                                                                                                         | :heavy_check_mark: macOS                                                                                                       |
-| :heavy_check_mark: WinUI                                                                                                                              | :heavy_check_mark: UWP                                                                                                         |
-|                                                                                                                                          |                                                                                                                                |
+| :heavy_check_mark: WinUI                                                                                                                 | :heavy_check_mark: UWP                                                                                                         |
 
 
 

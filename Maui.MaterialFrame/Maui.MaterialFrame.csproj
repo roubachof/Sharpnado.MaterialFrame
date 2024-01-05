@@ -72,7 +72,7 @@
         <RepositoryUrl>https://github.com/roubachof/Sharpnado.MaterialFrame</RepositoryUrl>
         <PackageIcon>images/material_frame_maui.png</PackageIcon>
         <PackageReadmeFile>docs/ReadMe.md</PackageReadmeFile>
-        <PackageTags>maui android ios uwp netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background AcrylicBrush</PackageTags>
+        <PackageTags>maui android ios winUI netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background AcrylicBrush</PackageTags>
         <PackageReleaseNotes>
             First MAUI release \o/
         </PackageReleaseNotes>

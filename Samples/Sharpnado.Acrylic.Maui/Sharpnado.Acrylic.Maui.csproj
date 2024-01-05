@@ -11,8 +11,6 @@
         <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
 
-        <WindowsPackageType>None</WindowsPackageType>
-
         <!-- Display name -->
         <ApplicationTitle>Sharpnado.Acrylic.Maui</ApplicationTitle>
 
