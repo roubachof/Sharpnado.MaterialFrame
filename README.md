@@ -11,7 +11,7 @@
 
 
 
-![Presentation](Docs/github_banner.png)
+![Presentation](Docs/banner.png)
 
 ## Initialization
 
