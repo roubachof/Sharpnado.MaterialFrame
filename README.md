@@ -11,7 +11,7 @@
 
 
 
-![Presentation](Docs/banner.png)
+![Presentation](Docs/Banner.png)
 
 ## Initialization
 
