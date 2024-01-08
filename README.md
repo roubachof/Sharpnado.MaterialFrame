@@ -1,17 +1,17 @@
 # Sharpnado.MaterialFrame
 
+![Presentation](Docs/Banner.png)
+
+## Supported platforms
+
 | MAUI                                                                                                                                     | Xamarin.Forms                                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| ![](Docs/material_frame_maui.png)                                                                                                        | ![](Docs/material_frame.png)                                                                                                   |
-| [![Nuget](https://img.shields.io/nuget/v/Sharpnado.MaterialFrame.Maui.svg)](https://www.nuget.org/packages/Sharpnado.MaterialFrame.Maui) | [![Nuget](https://img.shields.io/nuget/v/Sharpnado.MaterialFrame.svg)](https://www.nuget.org/packages/Sharpnado.MaterialFrame) |
+|  <img src="Docs/material_frame_maui.png" height="150">                                                                                   | <img src="Docs/material_frame.png" height="150">                                                                               | | [![Nuget](https://img.shields.io/nuget/v/Sharpnado.MaterialFrame.Maui.svg)](https://www.nuget.org/packages/Sharpnado.MaterialFrame.Maui) | [![Nuget](https://img.shields.io/nuget/v/Sharpnado.MaterialFrame.svg)](https://www.nuget.org/packages/Sharpnado.MaterialFrame) |
 | :heavy_check_mark: Android                                                                                                               | :heavy_check_mark: Android                                                                                                     |
 | :heavy_check_mark: iOS                                                                                                                   | :heavy_check_mark: iOS                                                                                                         |
 | :question: macOS                                                                                                                         | :heavy_check_mark: macOS                                                                                                       |
 | :heavy_check_mark: WinUI                                                                                                                 | :heavy_check_mark: UWP                                                                                                         |
 
-
-
-![Presentation](Docs/Banner.png)
 
 ## Initialization
 
