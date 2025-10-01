@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Controls.Compatibility.Hosting;
-
-namespace Sharpnado.MaterialFrame;
+﻿namespace Sharpnado.MaterialFrame;
 
 public static class MauiAppBuilderExtensions
 {
@@ -11,7 +9,6 @@ public static class MauiAppBuilderExtensions
     {
         Initializer.Initialize(loggerEnable, debugLogEnable);
 
-        builder.UseMauiCompatibility();
         builder.ConfigureMauiHandlers(handlers =>
         {
 #if ANDROID

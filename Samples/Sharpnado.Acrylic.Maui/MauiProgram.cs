@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Handlers;
 using Microsoft.Maui.LifecycleEvents;
 using Sharpnado.MaterialFrame;
 
@@ -47,6 +48,8 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
+        BorderHandler
+        
         return builder.Build();
     }
 }

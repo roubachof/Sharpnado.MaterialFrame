@@ -1,8 +1,6 @@
 ﻿using Android.Views;
 using Android.Widget;
-using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 using Microsoft.Maui.Platform;
-using Platform = Microsoft.Maui.Controls.Compatibility.Platform.Android.Platform;
 using View = Android.Views.View;
 
 namespace Sharpnado.MaterialFrame.Droid
