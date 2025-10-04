@@ -16,7 +16,7 @@ public static class MauiAppBuilderExtensions
 #elif IOS || MACCATALYST
             handlers.AddHandler<MaterialFrame, iOS.iOSMaterialFrameHandler>();
 #elif WINDOWS
-            handlers.AddHandler<MaterialFrame, WinUI.WinUIMaterialFrameRenderer>();
+            handlers.AddHandler<MaterialFrame, WinUI.WinUIMaterialFrameHandler>();
 #endif
         });
 
