@@ -1,4 +1,4 @@
-﻿namespace Sharpnado.MaterialFrame;
+namespace Sharpnado.MaterialFrame;
 
 public static class MauiAppBuilderExtensions
 {
@@ -13,10 +13,8 @@ public static class MauiAppBuilderExtensions
         {
 #if ANDROID
             handlers.AddHandler<MaterialFrame, Droid.AndroidMaterialFrameHandler>();
-#elif IOS
+#elif IOS || MACCATALYST
             handlers.AddHandler<MaterialFrame, iOS.iOSMaterialFrameHandler>();
-#elif MACCATALYST
-            handlers.AddHandler<MaterialFrame, MacCatalyst.MacCatalystMaterialFrameRenderer>();
 #elif WINDOWS
             handlers.AddHandler<MaterialFrame, WinUI.WinUIMaterialFrameRenderer>();
 #endif

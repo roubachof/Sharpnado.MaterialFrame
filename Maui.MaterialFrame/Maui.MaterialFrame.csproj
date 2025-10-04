@@ -104,4 +104,10 @@ public static MauiApp CreateMauiApp()
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Platforms\MacCatalyst\iOSMaterialFrameHandler.cs">
+        <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
+      </Compile>
+    </ItemGroup>
+
 </Project>
