@@ -18,6 +18,14 @@ namespace Sharpnado.Acrylic.Maui
 
         private readonly Button[] _blurStyleButtons;
 
+        private static int _pageCounter = 0;
+        private static readonly MaterialFrame.MaterialFrame.BlurStyle[] BlurStyles = new[]
+        {
+            MaterialFrame.MaterialFrame.BlurStyle.Light,
+            MaterialFrame.MaterialFrame.BlurStyle.Dark,
+            MaterialFrame.MaterialFrame.BlurStyle.ExtraLight
+        };
+
         public MainPage()
         {
             SetValue(NavigationPage.HasNavigationBarProperty, false);
@@ -30,6 +38,8 @@ namespace Sharpnado.Acrylic.Maui
 
             BlurSwitch.IsToggled = false;
             SwitchOnToggled(BlurSwitch, new ToggledEventArgs(BlurSwitch.IsToggled));
+
+            // ResourcesHelper.SetDarkMode();
         }
 
         protected override void OnAppearing()
@@ -131,6 +141,37 @@ namespace Sharpnado.Acrylic.Maui
                                        : ResourcesHelper.GetResourceColor("TextPrimaryColor" );
                 button.BackgroundColor = Colors.Transparent;
             }
+        }
+
+        private async void OpenNewPageButtonOnClicked(object sender, EventArgs e)
+        {
+            // Increment page counter and cycle through blur styles
+            _pageCounter++;
+            var blurStyleIndex = _pageCounter % BlurStyles.Length;
+            var nextBlurStyle = BlurStyles[blurStyleIndex];
+
+            // Create a new MainPage with blur enabled and the next blur style
+            var newPage = new MainPage();
+            
+            // Enable blur on the new page
+            newPage.BlurSwitch.IsToggled = true;
+            
+            // Set the blur style based on the cycle
+            switch (nextBlurStyle)
+            {
+                case MaterialFrame.MaterialFrame.BlurStyle.Light:
+                    newPage.BlurStyleButtonOnClicked(newPage.LightButton, EventArgs.Empty);
+                    break;
+                case MaterialFrame.MaterialFrame.BlurStyle.Dark:
+                    newPage.BlurStyleButtonOnClicked(newPage.DarkButton, EventArgs.Empty);
+                    break;
+                case MaterialFrame.MaterialFrame.BlurStyle.ExtraLight:
+                    newPage.BlurStyleButtonOnClicked(newPage.ExtraLightButton, EventArgs.Empty);
+                    break;
+            }
+
+            // Navigate to the new page
+            await Navigation.PushAsync(newPage);
         }
     }
 }

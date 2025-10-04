@@ -12,14 +12,13 @@ public static class MauiAppBuilderExtensions
         builder.ConfigureMauiHandlers(handlers =>
         {
 #if ANDROID
-            handlers.AddHandler<MaterialFrame, Sharpnado.MaterialFrame.Droid.AndroidMaterialFrameRenderer>();
+            handlers.AddHandler<MaterialFrame, Droid.AndroidMaterialFrameHandler>();
 #elif IOS
-            handlers.AddHandler<MaterialFrame, Sharpnado.MaterialFrame.iOS.iOSMaterialFrameRenderer>();
+            handlers.AddHandler<MaterialFrame, iOS.iOSMaterialFrameHandler>();
 #elif MACCATALYST
-            handlers.AddHandler<MaterialFrame, Sharpnado.MaterialFrame.MacCatalyst.MacCatalystMaterialFrameRenderer>();
+            handlers.AddHandler<MaterialFrame, MacCatalyst.MacCatalystMaterialFrameRenderer>();
 #elif WINDOWS
-            
-            handlers.AddHandler<MaterialFrame, Sharpnado.MaterialFrame.WinUI.WinUIMaterialFrameRenderer>();
+            handlers.AddHandler<MaterialFrame, WinUI.WinUIMaterialFrameRenderer>();
 #endif
         });
 

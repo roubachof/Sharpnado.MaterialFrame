@@ -24,11 +24,12 @@
 
             <rv:MaterialFrame x:Name="SettingsFrame" StyleId="1111">
                 <Grid x:Name="SettingsGrid"
-                      ColumnSpacing="20"
-                      RowSpacing="10">
+                      RowSpacing="10"
+                      ColumnSpacing="20">
                     <Grid.RowDefinitions>
                         <RowDefinition x:Name="SwitchRow" Height="40" />
                         <RowDefinition x:Name="BlurStyleRow" Height="40" />
+                        <RowDefinition x:Name="OpenPageRow" Height="40" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60" />
@@ -73,6 +74,16 @@
                             VerticalOptions="Center"
                             Clicked="BlurStyleButtonOnClicked"
                             Text="ExtraLight" />
+
+                    <Button x:Name="OpenNewPageButton"
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Style="{StaticResource RadioButton}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="Center"
+                            Clicked="OpenNewPageButtonOnClicked"
+                            Text="Open New Page" />
                 </Grid>
             </rv:MaterialFrame>
 
@@ -107,8 +118,8 @@
                        Grid.ColumnSpan="2"
                        Style="{StaticResource TextTitle}"
                        VerticalOptions="End"
-                       Text="Good Afternoon, JM"
-                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
+                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}"
+                       Text="Good Afternoon, JM" />
 
                 <Image Grid.Row="1"
                        Grid.Column="1"
@@ -120,8 +131,8 @@
                        Style="{StaticResource TextSubtitleSecondary}"
                        Margin="0,4.5,0,0"
                        VerticalOptions="Start"
-                       Text="   11°C  Paris"
-                       TextColor="{DynamicResource DynamicSecondaryOnBackgroundColor}" />
+                       TextColor="{DynamicResource DynamicSecondaryOnBackgroundColor}"
+                       Text="   11°C  Paris" />
 
                 <Image Grid.Row="0"
                        Grid.RowSpan="2"
@@ -177,8 +188,8 @@
 
                 <Label Grid.Column="0"
                        Style="{StaticResource TextHeadline}"
-                       Text="Tasks"
-                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
+                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}"
+                       Text="Tasks" />
                 <Image Grid.Column="1"
                        WidthRequest="{StaticResource SizeMediumSmallIcon}"
                        HeightRequest="{StaticResource SizeMediumSmallIcon}"
@@ -249,8 +260,8 @@
 
                 <Label Grid.Column="0"
                        Style="{StaticResource TextHeadline}"
-                       Text="Pinned"
-                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
+                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}"
+                       Text="Pinned" />
                 <Image Grid.Column="1"
                        WidthRequest="{StaticResource SizeMediumSmallIcon}"
                        HeightRequest="{StaticResource SizeMediumSmallIcon}"
@@ -358,8 +369,8 @@
 
                 <Label Grid.Column="0"
                        Style="{StaticResource TextHeadline}"
-                       Text="Recent"
-                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}" />
+                       TextColor="{DynamicResource DynamicPrimaryOnBackgroundColor}"
+                       Text="Recent" />
                 <Image Grid.Column="1"
                        WidthRequest="{StaticResource SizeMediumSmallIcon}"
                        HeightRequest="{StaticResource SizeMediumSmallIcon}"

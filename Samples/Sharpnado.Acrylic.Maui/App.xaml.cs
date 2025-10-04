@@ -6,6 +6,10 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        MainPage = new MainPage();
+        MainPage = new NavigationPage(new MainPage())
+        {
+            BarBackgroundColor = Colors.Transparent,
+            BarTextColor = Colors.Transparent
+        };
     }
 }
