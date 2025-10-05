@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net7.0;net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
-        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+        <TargetFrameworks>net9.0;net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
+        <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
         <UseMaui>true</UseMaui>
         <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
 
         <RootNamespace>Sharpnado.MaterialFrame</RootNamespace>
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
-        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
@@ -21,41 +22,11 @@
         <CodeAnalysisRuleSet>StyleCopRules.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
-    <!-- Android -->
-    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-android')) != true">
-        <Compile Remove="**\**\*.Android.cs" />
-        <None Include="**\**\*.Android.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
-    </ItemGroup>
-
-    <!-- Both iOS and Mac Catalyst -->
-    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-ios')) != true AND $(TargetFramework.StartsWith('net7.0-maccatalyst')) != true">
-        <Compile Remove="**\**\*.MaciOS.cs" />
-        <None Include="**\**\*.MaciOS.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
-    </ItemGroup>
-
-    <!-- iOS -->
-    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-ios')) != true">
-        <Compile Remove="**\**\*.iOS.cs" />
-        <None Include="**\**\*.iOS.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
-    </ItemGroup>
-
-    <!-- Mac Catalyst -->
-    <ItemGroup Condition="$(TargetFramework.StartsWith('net7.0-maccatalyst')) != true">
-        <Compile Remove="**\**\*.MacCatalyst.cs" />
-        <None Include="**\**\*.MacCatalyst.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
-    </ItemGroup>
-
-    <!-- Windows -->
-    <ItemGroup Condition="$(TargetFramework.Contains('-windows')) != true">
-        <Compile Remove="**\*.Windows.cs" />
-        <None Include="**\*.Windows.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
-    </ItemGroup>
-
     <PropertyGroup>
         <Product>$(AssemblyName) ($(TargetFramework))</Product>
-        <AssemblyVersion>2.0.0</AssemblyVersion>
-        <AssemblyFileVersion>2.0.0</AssemblyFileVersion>
-        <Version>2.0.0</Version>
+        <AssemblyVersion>3.0.0</AssemblyVersion>
+        <AssemblyFileVersion>3.0.0</AssemblyFileVersion>
+        <Version>3.0.0</Version>
         <PackOnBuild>true</PackOnBuild>
         <NeutralLanguage>en</NeutralLanguage>
 
@@ -74,11 +45,30 @@
         <PackageReadmeFile>docs/ReadMe.md</PackageReadmeFile>
         <PackageTags>maui android ios winUI netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background AcrylicBrush</PackageTags>
         <PackageReleaseNotes>
-            First MAUI release \o/
+            v3.0.0 - Handler Migration and Android Blur Overhaul
+            
+            BREAKING CHANGES:
+            * Migrated all platforms from Renderers to modern MAUI Handlers
+            * Android: Replaced RenderScript with StackBlur algorithm (fixes Android 15+ crashes)
+            
+            NEW FEATURES:
+            * Android: Pure C# StackBlur implementation - works on all Android versions including 15+
+            * Android: Async background blur processing with double buffering (60 FPS)
+            * Android: Change detection to skip unnecessary blur processing (0% CPU when static)
+            * MacCatalyst: Full support with shared iOS handler
+            
+            IMPROVEMENTS:
+            * All platforms: Modern handler pattern with PropertyMapper
+            * Android: UI thread blocking reduced from 22ms to 3ms
+            * Android: Smooth 60 FPS scrolling with blur
+            * Better memory management and resource cleanup
+            * Cleaner, more maintainable codebase
+            
+            See full migration guide: https://github.com/roubachof/Sharpnado.MaterialFrame
         </PackageReleaseNotes>
 
         <Title>A modern MAUI Frame component supporting blur, acrylic, dark mode.</Title>
-        <Summary>A modern .Net MAUI Frame component supporting blur, acrylic, dark mode. Implemented with RealtimeBlurView on Android (custom blurview), UIVisualEffectView on iOS and AcrylicBrush on WinUI.</Summary>
+        <Summary>A modern .Net MAUI Frame component supporting blur, acrylic, dark mode. Implemented with StackBlur on Android, UIVisualEffectView on iOS and AcrylicBrush on WinUI.</Summary>
         <Description>
 The MAUI MaterialFrame aims at delivering out of the box modern popular theming such as:
 * Light
@@ -91,7 +81,7 @@ The AcrylicBlur theme also provides three different blur styles inherited from t
 * ExtraLight
 * Dark
 
-On Android, the blur is implemented thanks to the RealtimeBlurView from Tu Yimin (mmin18).
+On Android, the blur is implemented with StackBlur algorithm - a pure C# implementation that works on all Android versions including 15+ with 16KB page size.
 ## Installation
 
 * In Core project, in `MauiProgram.cs`:
@@ -109,7 +99,7 @@ public static MauiApp CreateMauiApp()
 
         <Owners>Jean-Marie Alfonsi</Owners>
         <Authors>Jean-Marie Alfonsi</Authors>
-        <Copyright>Copyright 2024 Sharpnado</Copyright>
+        <Copyright>Copyright 2025 Sharpnado</Copyright>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
 
@@ -117,25 +107,26 @@ public static MauiApp CreateMauiApp()
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <FileVersion>2.0.0</FileVersion>
+        <FileVersion>3.0.0</FileVersion>
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="../Docs/material_frame_maui.png" Pack="true" PackagePath="/images/" />
         <None Include="ReadMe.md" Pack="true" PackagePath="/docs/" />
-        <Compile Remove="Platforms\MacCatalyst\macOSMaterialFrameRenderer.cs" />
-        <None Include="Platforms\MacCatalyst\macOSMaterialFrameRenderer.cs" />
-        <Compile Update="Platforms\MacCatalyst\MacCatalystMaterialFrameRenderer.cs">
-          <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
-        </Compile>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Sharpnado.TaskMonitor" Version="1.0.2" />
+        <PackageReference Include="Sharpnado.TaskMonitor" Version="1.1.0" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
         </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Platforms\MacCatalyst\iOSMaterialFrameHandler.cs">
+        <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
+      </Compile>
     </ItemGroup>
 
 </Project>

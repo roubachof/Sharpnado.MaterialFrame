@@ -16,6 +16,16 @@ namespace Sharpnado.MaterialFrame
 
         public static bool EnableDebug { get; set; } = false;
 
+        public static void DebugIf(bool condition, string tag, Func<string> message)
+        {
+            if (!EnableDebug || !condition)
+            {
+                return;
+            }
+
+            Debug(tag, message());
+        }
+
         public static void Debug(string tag, Func<string> message)
         {
             if (!EnableDebug)
@@ -66,6 +76,16 @@ namespace Sharpnado.MaterialFrame
             DiagnosticLog("ERRO | " + format, parameters);
         }
 
+        public static void Error(string tag, Exception exception)
+        {
+            DiagnosticLog(tag + " | " + "ERRO | " + $"{exception.Message}{Environment.NewLine}{exception}");
+        }
+
+        public static void Error(string tag, string message)
+        {
+            DiagnosticLog(tag + " | " + "ERRO | " + " | " + message);
+        }
+
         public static void Error(Exception exception)
         {
             Error($"{exception.Message}{Environment.NewLine}{exception}");
@@ -79,9 +99,9 @@ namespace Sharpnado.MaterialFrame
             }
 
 #if DEBUG
-            System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString("MM-dd H:mm:ss.fff") + " | SharpnadoInternals | " + format, parameters);
+            System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString("MM-dd H:mm:ss.fff") + " | Sharpnado | " + format, parameters);
 #else
-            Console.WriteLine(DateTime.Now.ToString("MM-dd H:mm:ss.fff") + " | SharpnadoInternals | " + format, parameters);
+            Console.WriteLine(DateTime.Now.ToString("MM-dd H:mm:ss.fff") + " | Sharpnado | " + format, parameters);
 #endif
         }
     }

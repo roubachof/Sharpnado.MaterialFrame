@@ -1,5 +1,3 @@
-﻿using Microsoft.Maui.Controls.Compatibility.Hosting;
-
 namespace Sharpnado.MaterialFrame;
 
 public static class MauiAppBuilderExtensions
@@ -11,18 +9,14 @@ public static class MauiAppBuilderExtensions
     {
         Initializer.Initialize(loggerEnable, debugLogEnable);
 
-        builder.UseMauiCompatibility();
         builder.ConfigureMauiHandlers(handlers =>
         {
 #if ANDROID
-            handlers.AddHandler<MaterialFrame, Sharpnado.MaterialFrame.Droid.AndroidMaterialFrameRenderer>();
-#elif IOS
-            handlers.AddHandler<MaterialFrame, Sharpnado.MaterialFrame.iOS.iOSMaterialFrameRenderer>();
-#elif MACCATALYST
-            handlers.AddHandler<MaterialFrame, Sharpnado.MaterialFrame.MacCatalyst.MacCatalystMaterialFrameRenderer>();
+            handlers.AddHandler<MaterialFrame, Droid.AndroidMaterialFrameHandler>();
+#elif IOS || MACCATALYST
+            handlers.AddHandler<MaterialFrame, iOS.iOSMaterialFrameHandler>();
 #elif WINDOWS
-            
-            handlers.AddHandler<MaterialFrame, Sharpnado.MaterialFrame.WinUI.WinUIMaterialFrameRenderer>();
+            handlers.AddHandler<MaterialFrame, WinUI.WinUIMaterialFrameHandler>();
 #endif
         });
 

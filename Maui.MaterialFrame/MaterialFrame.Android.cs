@@ -25,7 +25,7 @@
         /// root element to be blurred (most of the time the element displaying the underlying image) to the blur frame.
         /// The shorter the path, the better the performance. If no root element is set, the activity decor view is used.
         /// </summary>
-        public Layout AndroidBlurRootElement
+        public Layout? AndroidBlurRootElement
         {
             get => (Layout)GetValue(AndroidBlurRootElementProperty);
             set => SetValue(AndroidBlurRootElementProperty, value);
