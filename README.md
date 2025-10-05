@@ -28,6 +28,10 @@ public static MauiApp CreateMauiApp()
 
 Version 3.0 brings a complete overhaul of the MaterialFrame architecture with major improvements:
 
+
+https://github.com/user-attachments/assets/cd1bdeda-9c55-484a-938f-88ef2acbf26a
+
+
 ### Handler Migration
 
 All platforms have been migrated from the old Renderer pattern to modern MAUI Handlers:
