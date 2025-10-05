@@ -7,10 +7,8 @@ using Microsoft.UI.Xaml.Hosting;
 using Microsoft.UI.Xaml.Shapes;
 
 using AcrylicBrush = Microsoft.UI.Xaml.Media.AcrylicBrush;
-using Brush = Microsoft.UI.Xaml.Media.Brush;
 using CornerRadius = Microsoft.UI.Xaml.CornerRadius;
 using Grid = Microsoft.UI.Xaml.Controls.Grid;
-using SolidColorBrush = Microsoft.UI.Xaml.Media.SolidColorBrush;
 using Thickness = Microsoft.UI.Xaml.Thickness;
 
 namespace Sharpnado.MaterialFrame.WinUI;
@@ -25,7 +23,6 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
         [nameof(MaterialFrame.AcrylicGlowColor)] = MapAcrylicGlowColor,
         [nameof(MaterialFrame.MaterialTheme)] = MapMaterialTheme,
         [nameof(MaterialFrame.MaterialBlurStyle)] = MapMaterialBlurStyle,
-        [nameof(MaterialFrame.BorderColor)] = MapBorder,
         [nameof(MaterialFrame.Padding)] = MapMarginAndPadding,
         [nameof(MaterialFrame.Margin)] = MapMarginAndPadding,
         [nameof(MaterialFrame.WinUIBlurOverlayColor)] = MapBlur,
@@ -61,7 +58,6 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
     public static void MapAcrylicGlowColor(WinUIMaterialFrameHandler handler, MaterialFrame view) => handler.UpdateAcrylicGlowColor();
     public static void MapMaterialTheme(WinUIMaterialFrameHandler handler, MaterialFrame view) => handler.UpdateMaterialTheme();
     public static void MapMaterialBlurStyle(WinUIMaterialFrameHandler handler, MaterialFrame view) => handler.UpdateMaterialBlurStyle();
-    public static void MapBorder(WinUIMaterialFrameHandler handler, MaterialFrame view) => handler.UpdateBorder();
     public static void MapMarginAndPadding(WinUIMaterialFrameHandler handler, MaterialFrame view) => handler.UpdateMarginAndPadding();
     public static void MapBlur(WinUIMaterialFrameHandler handler, MaterialFrame view) => handler.UpdateBlur();
 
@@ -74,7 +70,7 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
         _acrylicRectangle = new Rectangle();
         _shadowHost = new Rectangle
         {
-            Fill = Colors.Transparent.ToBrush(),
+            Fill = Colors.Transparent.ToPlatform(),
         };
 
         _acrylicGrid = new Grid();
@@ -104,7 +100,6 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
             }
         }
 
-        UpdateBorder();
         UpdateCornerRadius();
         UpdateMarginAndPadding();
         UpdateMaterialTheme();
@@ -114,16 +109,13 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
     {
         InternalLogger.Debug(Tag, () => "DisconnectHandler()");
 
-        VirtualView?.Unsubscribe();
+        VirtualView.Unsubscribe();
 
-        if (platformView != null)
-        {
-            platformView.SizeChanged -= OnSizeChanged;
+        platformView.SizeChanged -= OnSizeChanged;
             
-            if (_contentElement != null)
-            {
-                platformView.Children.Remove(_contentElement);
-            }
+        if (_contentElement != null)
+        {
+            platformView.Children.Remove(_contentElement);
         }
 
         if (_shadowVisual != null)
@@ -132,6 +124,7 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
             {
                 ElementCompositionPreview.SetElementChildVisual(_shadowHost, null);
             }
+
             _shadowVisual.Dispose();
             _shadowVisual = null;
         }
@@ -153,7 +146,7 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
 
     private void UpdateMarginAndPadding()
     {
-        if (_contentElement == null || VirtualView == null)
+        if (_contentElement == null)
         {
             return;
         }
@@ -171,31 +164,13 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
         _acrylicRectangle.Margin = new Thickness(0, enable ? 2 : 0, 0, 0);
         if (!enable)
         {
-            _acrylicRectangle.Fill = Colors.Transparent.ToBrush();
-        }
-    }
-
-    private void UpdateBorder()
-    {
-        if (_acrylicGrid == null || VirtualView == null)
-        {
-            return;
-        }
-
-        if (VirtualView.BorderColor != null)
-        {
-            _acrylicGrid.BorderBrush = VirtualView.BorderColor.ToBrush();
-            _acrylicGrid.BorderThickness = new Thickness(1);
-        }
-        else
-        {
-            _acrylicGrid.BorderBrush = new Color(0, 0, 0, 0).ToBrush();
+            _acrylicRectangle.Fill = Colors.Transparent.ToPlatform();
         }
     }
 
     private void UpdateCornerRadius()
     {
-        if (_acrylicGrid == null || _shadowHost == null || _acrylicRectangle == null || VirtualView == null)
+        if (_acrylicGrid == null || _shadowHost == null || _acrylicRectangle == null)
         {
             return;
         }
@@ -216,7 +191,7 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
 
     private void UpdateLightThemeBackgroundColor()
     {
-        if (_acrylicGrid == null || _acrylicRectangle == null || VirtualView == null)
+        if (_acrylicGrid == null || _acrylicRectangle == null)
         {
             return;
         }
@@ -224,7 +199,7 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
         switch (VirtualView.MaterialTheme)
         {
             case MaterialFrame.Theme.Acrylic:
-                _acrylicRectangle.Fill = VirtualView.LightThemeBackgroundColor.ToBrush();
+                _acrylicRectangle.Fill = VirtualView.LightThemeBackgroundColor.ToPlatform();
                 break;
 
             case MaterialFrame.Theme.AcrylicBlur:
@@ -232,31 +207,31 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
                 return;
 
             case MaterialFrame.Theme.Light:
-                _acrylicGrid.Background = VirtualView.LightThemeBackgroundColor.ToBrush();
+                _acrylicGrid.Background = VirtualView.LightThemeBackgroundColor.ToPlatform();
                 break;
         }
     }
 
     private void UpdateAcrylicGlowColor()
     {
-        if (_acrylicGrid == null || VirtualView == null || VirtualView.MaterialTheme != MaterialFrame.Theme.Acrylic)
+        if (_acrylicGrid == null || VirtualView.MaterialTheme != MaterialFrame.Theme.Acrylic)
         {
             return;
         }
 
-        _acrylicGrid.Background = VirtualView.AcrylicGlowColor.ToBrush();
+        _acrylicGrid.Background = VirtualView.AcrylicGlowColor.ToPlatform();
     }
 
     private void UpdateElevation()
     {
-        if (_acrylicGrid == null || _shadowHost == null || VirtualView == null)
+        if (_acrylicGrid == null || _shadowHost == null)
         {
             return;
         }
 
         if (!VirtualView.IsShadowCompatible)
         {
-            _shadowHost.Fill = Colors.Transparent.ToBrush();
+            _shadowHost.Fill = Colors.Transparent.ToPlatform();
 
             if (_shadowVisual != null)
             {
@@ -267,7 +242,7 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
 
             if (VirtualView.MaterialTheme == MaterialFrame.Theme.Dark)
             {
-                _acrylicGrid.Background = VirtualView.ElevationToColor().ToBrush();
+                _acrylicGrid.Background = VirtualView.ElevationToColor().ToPlatform();
             }
 
             return;
@@ -281,14 +256,14 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
         // https://docs.microsoft.com/en-US/windows/uwp/composition/using-the-visual-layer-with-xaml
         bool isAcrylicTheme = VirtualView.MaterialTheme == MaterialFrame.Theme.Acrylic;
 
-        float blurRadius = isAcrylicTheme ? VirtualView.AcrylicElevation : VirtualView.Elevation;
-        int elevation = isAcrylicTheme ? VirtualView.AcrylicElevation / 3 : VirtualView.Elevation / 2;
+        float blurRadius = isAcrylicTheme ? MaterialFrame.AcrylicElevation : VirtualView.Elevation;
+        int elevation = isAcrylicTheme ? MaterialFrame.AcrylicElevation / 3 : VirtualView.Elevation / 2;
         float opacity = isAcrylicTheme ? 0.12f : 0.16f;
 
         int width = (int)VirtualView.Width;
         int height = (int)VirtualView.Height;
 
-        _shadowHost.Fill = Colors.White.ToBrush();
+        _shadowHost.Fill = Colors.White.ToPlatform();
         _shadowHost.Width = width;
         _shadowHost.Height = height;
 
@@ -314,7 +289,7 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
 
     private void UpdateMaterialTheme()
     {
-        if (_acrylicGrid == null || VirtualView == null)
+        if (_acrylicGrid == null)
         {
             return;
         }
@@ -338,7 +313,6 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
                 break;
         }
 
-        UpdateBorder();
         UpdateCornerRadius();
         UpdateElevation();
     }
@@ -369,7 +343,7 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
 
     private void UpdateMaterialBlurStyle()
     {
-        if (_acrylicGrid == null || VirtualView == null || VirtualView.MaterialTheme != MaterialFrame.Theme.AcrylicBlur)
+        if (_acrylicGrid == null || VirtualView.MaterialTheme != MaterialFrame.Theme.AcrylicBlur)
         {
             return;
         }
@@ -400,7 +374,7 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
 
     private void UpdateBlur()
     {
-        if (_acrylicGrid == null || VirtualView == null)
+        if (_acrylicGrid == null)
         {
             return;
         }
@@ -419,13 +393,5 @@ public class WinUIMaterialFrameHandler : ViewHandler<MaterialFrame, Grid>
         }
 
         UpdateMaterialBlurStyle();
-    }
-}
-
-internal static class ColorExtensions
-{
-    public static Brush ToBrush(this Color color)
-    {
-        return new SolidColorBrush(color.ToWindowsColor());
     }
 }

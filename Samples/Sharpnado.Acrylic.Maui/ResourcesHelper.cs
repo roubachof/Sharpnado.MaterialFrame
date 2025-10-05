@@ -102,7 +102,7 @@ namespace Sharpnado.Acrylic
                             wallpaper = "bing_dark.jpg";
                             break;
                         default:
-                            wallpaper = "bliss_portrait.jpg";
+                            wallpaper = "bing_dark.jpg";
                             break;
                     }
 
