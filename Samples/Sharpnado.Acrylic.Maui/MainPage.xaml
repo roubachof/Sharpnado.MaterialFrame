@@ -82,6 +82,7 @@
                             Style="{StaticResource RadioButton}"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="Center"
+                            BackgroundColor="White"
                             Clicked="OpenNewPageButtonOnClicked"
                             Text="Open New Page" />
                 </Grid>

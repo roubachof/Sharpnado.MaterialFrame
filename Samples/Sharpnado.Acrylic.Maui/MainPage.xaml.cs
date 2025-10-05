@@ -31,7 +31,7 @@ namespace Sharpnado.Acrylic.Maui
             SetValue(NavigationPage.HasNavigationBarProperty, false);
             InitializeComponent();
 
-            _blurStyleButtons = new[] { LightButton, DarkButton, ExtraLightButton };
+            _blurStyleButtons = new[] { LightButton, DarkButton, ExtraLightButton, OpenNewPageButton };
 
             SettingsFrame.IsVisible = _isSettingsShown;
             SettingsFrame.Opacity = _isSettingsShown ? 1 : 0;

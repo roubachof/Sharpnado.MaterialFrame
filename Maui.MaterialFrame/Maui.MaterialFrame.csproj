@@ -24,9 +24,9 @@
 
     <PropertyGroup>
         <Product>$(AssemblyName) ($(TargetFramework))</Product>
-        <AssemblyVersion>2.0.0</AssemblyVersion>
-        <AssemblyFileVersion>2.0.0</AssemblyFileVersion>
-        <Version>2.0.0</Version>
+        <AssemblyVersion>3.0.0</AssemblyVersion>
+        <AssemblyFileVersion>3.0.0</AssemblyFileVersion>
+        <Version>3.0.0</Version>
         <PackOnBuild>true</PackOnBuild>
         <NeutralLanguage>en</NeutralLanguage>
 
@@ -45,11 +45,30 @@
         <PackageReadmeFile>docs/ReadMe.md</PackageReadmeFile>
         <PackageTags>maui android ios winUI netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background AcrylicBrush</PackageTags>
         <PackageReleaseNotes>
-            First MAUI release \o/
+            v3.0.0 - Handler Migration and Android Blur Overhaul
+            
+            BREAKING CHANGES:
+            * Migrated all platforms from Renderers to modern MAUI Handlers
+            * Android: Replaced RenderScript with StackBlur algorithm (fixes Android 15+ crashes)
+            
+            NEW FEATURES:
+            * Android: Pure C# StackBlur implementation - works on all Android versions including 15+
+            * Android: Async background blur processing with double buffering (60 FPS)
+            * Android: Change detection to skip unnecessary blur processing (0% CPU when static)
+            * MacCatalyst: Full support with shared iOS handler
+            
+            IMPROVEMENTS:
+            * All platforms: Modern handler pattern with PropertyMapper
+            * Android: UI thread blocking reduced from 22ms to 3ms
+            * Android: Smooth 60 FPS scrolling with blur
+            * Better memory management and resource cleanup
+            * Cleaner, more maintainable codebase
+            
+            See full migration guide: https://github.com/roubachof/Sharpnado.MaterialFrame
         </PackageReleaseNotes>
 
         <Title>A modern MAUI Frame component supporting blur, acrylic, dark mode.</Title>
-        <Summary>A modern .Net MAUI Frame component supporting blur, acrylic, dark mode. Implemented with RealtimeBlurView on Android (custom blurview), UIVisualEffectView on iOS and AcrylicBrush on WinUI.</Summary>
+        <Summary>A modern .Net MAUI Frame component supporting blur, acrylic, dark mode. Implemented with StackBlur on Android, UIVisualEffectView on iOS and AcrylicBrush on WinUI.</Summary>
         <Description>
 The MAUI MaterialFrame aims at delivering out of the box modern popular theming such as:
 * Light
@@ -62,7 +81,7 @@ The AcrylicBlur theme also provides three different blur styles inherited from t
 * ExtraLight
 * Dark
 
-On Android, the blur is implemented thanks to the RealtimeBlurView from Tu Yimin (mmin18).
+On Android, the blur is implemented with StackBlur algorithm - a pure C# implementation that works on all Android versions including 15+ with 16KB page size.
 ## Installation
 
 * In Core project, in `MauiProgram.cs`:
@@ -88,7 +107,7 @@ public static MauiApp CreateMauiApp()
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <FileVersion>2.0.0</FileVersion>
+        <FileVersion>3.0.0</FileVersion>
     </PropertyGroup>
 
     <ItemGroup>
