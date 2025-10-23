@@ -9,14 +9,14 @@ public partial class AndroidMaterialFrameHandler
 {
     private const double StyledBlurRadius = 64;
 
-    private static readonly Color DarkBlurOverlayColor = Color.FromArgb("#80000000");
+    private static readonly Color DarkBlurOverlayColor = Color.FromArgb("#20444444");
 
     private static readonly Color LightBlurOverlayColor = Color.FromArgb("#40FFFFFF");
 
-    private static readonly Color ExtraLightBlurOverlayColor = Color.FromArgb("#B0FFFFFF");
+    private static readonly Color ExtraLightBlurOverlayColor = Color.FromArgb("#60FFFFFF");
 
-    private static int _blurAutoUpdateDelayMilliseconds = 20;
-    private static int _blurProcessingDelayMilliseconds = 10;
+    private static int _blurAutoUpdateDelayMilliseconds = 16;
+    private static int _blurProcessingDelayMilliseconds = 4;
 
     private RealtimeBlurView? _realtimeBlurView;
 
@@ -68,6 +68,30 @@ public partial class AndroidMaterialFrameHandler
     /// A suggestion would be to set it to false for debug, and to true for releases.
     /// </summary>
     public static bool ThrowStopExceptionOnDraw { get; set; } = false;
+
+    private static int _blurUpdateIntervalMs = 32;
+
+    /// <summary>
+    /// Minimum interval in milliseconds between blur updates.
+    /// This throttles blur processing to prevent infinite loops and reduce CPU usage.
+    /// Default is 32ms (~30fps). Lower values = smoother but more CPU intensive.
+    /// Higher values = better battery life but less smooth updates.
+    /// </summary>
+    public static int BlurUpdateIntervalMs
+    {
+        get => _blurUpdateIntervalMs;
+        set
+        {
+            if (value < 0)
+            {
+                throw new ArgumentException(
+                    "The blur update interval cannot be negative",
+                    nameof(BlurUpdateIntervalMs));
+            }
+
+            _blurUpdateIntervalMs = value;
+        }
+    }
 
     private bool IsAndroidBlurPropertySet => MaterialFrame.AndroidBlurRadius > 0;
 

@@ -20,6 +20,19 @@ public class AndroidStackBlur : IBlurImpl
 
     public void Blur(Bitmap input, Bitmap output)
     {
+        // Validate bitmaps are not recycled
+        if (input == null || input.IsNullOrDisposed() || input.IsRecycled)
+        {
+            InternalLogger.Error("AndroidStackBlur", "Input bitmap is null or recycled");
+            return;
+        }
+        
+        if (output == null || output.IsNullOrDisposed() || output.IsRecycled)
+        {
+            InternalLogger.Error("AndroidStackBlur", "Output bitmap is null or recycled");
+            return;
+        }
+        
         if (input.Width != output.Width || input.Height != output.Height)
         {
             InternalLogger.Error("AndroidStackBlur", "Input and output bitmaps must have the same dimensions");
@@ -284,6 +297,13 @@ public class AndroidStackBlur : IBlurImpl
             }
         }
 
+        // Final validation before setting pixels
+        if (output.IsRecycled)
+        {
+            InternalLogger.Error("AndroidStackBlur", "Output bitmap was recycled during blur processing");
+            return;
+        }
+        
         output.SetPixels(outputPixels, 0, width, 0, 0, width, height);
     }
 }

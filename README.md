@@ -177,15 +177,37 @@ The shorter the path, the better the performance. If no root element is set, the
 
 #### Android handler configuration
 
-You can configure the `Android` handler with the `BlurProcessingDelayMilliseconds` property on the `MaterialFrame` element.
+You can configure the `Android` handler with static properties:
 
-Sometimes the computation of the background can take some time (svg images for example).
-Setting a bigger delay ensures that the background is rendered first and can fix some glitches.
+##### BlurUpdateIntervalMs
+
+Minimum interval in milliseconds between blur updates. This throttles blur processing to prevent infinite loops and reduce CPU usage.
+
+```csharp
+#if ANDROID
+// In MauiProgram.cs or App.xaml.cs
+AndroidMaterialFrameHandler.BlurUpdateIntervalMs = 16;  // 60fps - smoother
+AndroidMaterialFrameHandler.BlurUpdateIntervalMs = 32;  // 30fps - default (balanced)
+AndroidMaterialFrameHandler.BlurUpdateIntervalMs = 50;  // 20fps - battery saver
+#endif
+```
+
+**Default:** 32ms (~30fps) - Good balance between smoothness and battery life
+
+**Use cases:**
+* **16ms (60fps)**: Smooth animations, gaming scenarios
+* **32ms (30fps)**: General UI, recommended default
+* **50ms+ (20fps)**: Static content, battery-critical apps
+
+##### BlurProcessingDelayMilliseconds
+
+Delay before starting blur processing after view attachment. Sometimes the computation of the background can take some time (svg images for example). Setting a bigger delay ensures that the background is rendered first and can fix some glitches.
 
 The Android implementation includes:
 * **StackBlur**: Pure C# blur algorithm (no native dependencies)
 * **Async processing**: Blur runs on background thread with double buffering
 * **Change detection**: Skips blur when content hasn't changed (0% CPU when static)
+* **Time throttling**: Configurable update interval prevents infinite loops
 * **Performance**: UI thread blocking reduced from ~22ms to ~3ms
 
 ### LightThemeBackgroundColor

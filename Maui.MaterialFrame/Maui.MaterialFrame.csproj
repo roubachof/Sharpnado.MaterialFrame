@@ -24,9 +24,9 @@
 
     <PropertyGroup>
         <Product>$(AssemblyName) ($(TargetFramework))</Product>
-        <AssemblyVersion>3.0.0</AssemblyVersion>
-        <AssemblyFileVersion>3.0.0</AssemblyFileVersion>
-        <Version>3.0.0</Version>
+        <AssemblyVersion>3.0.1</AssemblyVersion>
+        <AssemblyFileVersion>3.0.1</AssemblyFileVersion>
+        <Version>3.0.1</Version>
         <PackOnBuild>true</PackOnBuild>
         <NeutralLanguage>en</NeutralLanguage>
 
@@ -45,26 +45,22 @@
         <PackageReadmeFile>docs/ReadMe.md</PackageReadmeFile>
         <PackageTags>maui android ios winUI netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background AcrylicBrush</PackageTags>
         <PackageReleaseNotes>
-            v3.0.0 - Handler Migration and Android Blur Overhaul
+            v3.0.1 - Android: CollectionView Blur Support and Performance
             
-            BREAKING CHANGES:
-            * Migrated all platforms from Renderers to modern MAUI Handlers
-            * Android: Replaced RenderScript with StackBlur algorithm (fixes Android 15+ crashes)
+            ANDROID FIXES:
+            * Fixed blur not working when MaterialFrame is inside CollectionView/RecyclerView items
+            * Fixed navigation back issues losing blur root view reference
+            * Fixed infinite predraw loops with time-based throttling
             
-            NEW FEATURES:
-            * Android: Pure C# StackBlur implementation - works on all Android versions including 15+
-            * Android: Async background blur processing with double buffering (60 FPS)
-            * Android: Change detection to skip unnecessary blur processing (0% CPU when static)
-            * MacCatalyst: Full support with shared iOS handler
+            NEW ANDROID FEATURES:
+            * Configurable blur update interval via BlurUpdateIntervalMs static property
+            * Default 32ms update interval (~30fps) for better battery life
+            * Users can adjust BlurUpdateIntervalMs for smoothness vs performance tradeoff
+            * More efficient blur capture using alpha transparency
             
-            IMPROVEMENTS:
-            * All platforms: Modern handler pattern with PropertyMapper
-            * Android: UI thread blocking reduced from 22ms to 3ms
-            * Android: Smooth 60 FPS scrolling with blur
-            * Better memory management and resource cleanup
-            * Cleaner, more maintainable codebase
+            Note: This is an Android-only bug fix release. iOS, MacCatalyst, and Windows are unchanged.
             
-            See full migration guide: https://github.com/roubachof/Sharpnado.MaterialFrame
+            See documentation: https://github.com/roubachof/Sharpnado.MaterialFrame
         </PackageReleaseNotes>
 
         <Title>A modern MAUI Frame component supporting blur, acrylic, dark mode.</Title>
@@ -107,7 +103,7 @@ public static MauiApp CreateMauiApp()
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <FileVersion>3.0.0</FileVersion>
+        <FileVersion>3.0.1</FileVersion>
     </PropertyGroup>
 
     <ItemGroup>
