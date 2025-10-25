@@ -24,9 +24,9 @@
 
     <PropertyGroup>
         <Product>$(AssemblyName) ($(TargetFramework))</Product>
-        <AssemblyVersion>3.0.1</AssemblyVersion>
-        <AssemblyFileVersion>3.0.1</AssemblyFileVersion>
-        <Version>3.0.1</Version>
+        <AssemblyVersion>3.0.2</AssemblyVersion>
+        <AssemblyFileVersion>3.0.2</AssemblyFileVersion>
+        <Version>3.0.2</Version>
         <PackOnBuild>true</PackOnBuild>
         <NeutralLanguage>en</NeutralLanguage>
 
@@ -45,20 +45,13 @@
         <PackageReadmeFile>docs/ReadMe.md</PackageReadmeFile>
         <PackageTags>maui android ios winUI netstandard blurview blur UIVisualEffectView acrylic dark mode frame blurred background AcrylicBrush</PackageTags>
         <PackageReleaseNotes>
-            v3.0.1 - Android: CollectionView Blur Support and Performance
+            v3.0.2 - Windows Platform Inclusion
             
-            ANDROID FIXES:
-            * Fixed blur not working when MaterialFrame is inside CollectionView/RecyclerView items
-            * Fixed navigation back issues losing blur root view reference
-            * Fixed infinite predraw loops with time-based throttling
+            PACKAGING FIX:
+            * Re-release to include Windows platform binaries (net9.0-windows10.0.19041.0)
+            * Previous 3.0.1 release was missing Windows support due to being packaged on macOS
             
-            NEW ANDROID FEATURES:
-            * Configurable blur update interval via BlurUpdateIntervalMs static property
-            * Default 32ms update interval (~30fps) for better battery life
-            * Users can adjust BlurUpdateIntervalMs for smoothness vs performance tradeoff
-            * More efficient blur capture using alpha transparency
-            
-            Note: This is an Android-only bug fix release. iOS, MacCatalyst, and Windows are unchanged.
+            No code changes from v3.0.1.
             
             See documentation: https://github.com/roubachof/Sharpnado.MaterialFrame
         </PackageReleaseNotes>
@@ -103,7 +96,7 @@ public static MauiApp CreateMauiApp()
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <FileVersion>3.0.1</FileVersion>
+        <FileVersion>3.0.2</FileVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -112,6 +105,7 @@ public static MauiApp CreateMauiApp()
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.82" />
         <PackageReference Include="Sharpnado.TaskMonitor" Version="1.1.0" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
             <PrivateAssets>all</PrivateAssets>
